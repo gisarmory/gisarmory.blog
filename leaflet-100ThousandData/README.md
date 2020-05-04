@@ -1,4 +1,4 @@
-# leaflet如何加载10万数据
+# leaflet加载10万数据
 
 **标签**：leaflet、svg、Canvas、插件、海量点、海量数据、Canvas-Markers、Leaflet.Canvas-Markers、性能
 
@@ -62,6 +62,7 @@ ciLayer.addMarker(marker);
 不过已经有人对这个问题提出了解决方案，并且解决了（[链接](https://github.com/eJuke/Leaflet.Canvas-Markers/pull/21)），只是代码一直没有被合并。不过这都没有关系，我们可以去用那份儿已经解决的代码（[链接](https://github.com/corg/Leaflet.Canvas-Markers)）
 
 **解决以后的效果：**
+
 ![](http://q9qtw0qww.bkt.clouddn.com/20200504151120.gif)
 
 

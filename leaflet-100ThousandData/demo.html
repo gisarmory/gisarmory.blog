@@ -5,10 +5,10 @@
     <title>leaflet-canvas-marker</title>
     <meta charset="utf-8" />
     <!-- 引入leafletapi -->
-    <link rel="stylesheet" href="lib/leaflet.css" />
-    <script src="lib/leaflet.js"></script>
+    <link rel="stylesheet" href="../lib/leaflet.css" />
+    <script src="../lib/leaflet.js"></script>
     <!-- 引入leaflet-canvas-marker插件,已解决了缩放时飘的问题 -->
-    <script src="lib/leaflet.canvas-markers.js"></script>
+    <script src="../lib/plugins/leaflet.canvas-markers.js"></script>
     <style>
         body {
             margin: 0;
@@ -51,7 +51,7 @@
         //使用canvas模式渲染marker
         var ciLayer = L.canvasIconLayer({}).addTo(map);
         var icon = L.icon({
-            iconUrl: 'img/pothole.png',
+            iconUrl: '../img/pothole.png',
             iconSize: [20, 18],
             iconAnchor: [10, 9]
         });

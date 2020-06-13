@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>GIS兵器库</title>
+    <script src="lib/markdown/marked.min.js"></script>
+    <script src="lib/markdown/highlight.min.js"></script>
+    <link href="lib/markdown/atom-one-dark.css" rel="stylesheet">
+
+    <script src="config_blog.js"></script>
+    <script src="config_demo.js"></script>
+
+</head>
+
+<body>
+    <div id="content"></div>
+</body>
+
+<script>
+    //配置marked插件
+    configMarked();
+    init();
+
+    //初始化
+    function init() {
+        var urlArg = getUrlArgObject();
+        if (urlArg && urlArg.blog) {
+            loadMarkdown(urlArg.blog)
+        } else if (urlArg && urlArg.demo) {
+            loadDemo(urlArg.demo)
+        } else {
+            loadMarkdown("home")
+        }
+    }
+
+    //加载demo示例
+    function loadDemo(demoId){
+        var demoObj = getDemoConfigById(demoId);
+        if(demoObj){
+            window.location.href=demoObj.url; 
+        }
+    }
+
+    //配置marked插件
+    function configMarked() {
+        hljs.initHighlightingOnLoad();
+        var rendererMD = new marked.Renderer();
+        marked.setOptions({
+            renderer: rendererMD,
+            gfm: true,
+            tables: true,
+            breaks: false,
+            pedantic: false,
+            sanitize: false,
+            smartLists: true,
+            smartypants: false
+        });
+        marked.setOptions({
+            highlight: function (code) {
+                return hljs.highlightAuto(code).value;
+            }
+        });
+    }
+
+    //加载markdown文件
+    function loadMarkdown(blogid) {
+        var blogObj = getBlogConfigById(blogid);
+        if (blogObj) {
+            xhr = new XMLHttpRequest();
+            xhr.open('get', blogObj.url);
+            xhr.send('')
+            xhr.onload = function () {
+                var mdText = xhr.responseText;
+                var mdContent = document.getElementById('content');
+                //replace是解决代码不显示黑色背景的问题
+                mdContent.innerHTML = marked(mdText).replace(/<pre>/g, "<pre class='hljs'>");
+            }
+        }
+    }
+
+    //根据blogid获取blog配置
+    function getBlogConfigById(blogId) {
+        for (var i = 0; i < blogList.length; i++) {
+            var blogObj = blogList[i];
+            if (blogObj.id == blogId) {
+                return blogObj;
+            }
+        }
+    }
+
+    //根据demoid获取demo配置
+    function getDemoConfigById(demoId) {
+        for (var i = 0; i < demoList.length; i++) {
+            var demoObj = demoList[i];
+            if (demoObj.id == demoId) {
+                return demoObj;
+            }
+        }
+    }
+
+    //返回的是对象形式的参数
+    function getUrlArgObject() {
+        var args = new Object();
+        var query = location.search.substring(1); //获取查询串
+        var pairs = query.split(","); //在逗号处断开
+        for (var i = 0; i < pairs.length; i++) {
+            var pos = pairs[i].indexOf('='); //查找name=value
+            if (pos == -1) { //如果没有找到就跳过
+                continue;
+            }
+            var argname = pairs[i].substring(0, pos); //提取name
+            var value = pairs[i].substring(pos + 1); //提取value
+            args[argname] = unescape(value); //存为属性
+        }
+        return args; //返回对象
+    }
+</script>
+
+</html>

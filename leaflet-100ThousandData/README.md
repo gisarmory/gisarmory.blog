@@ -1,9 +1,4 @@
-# leaflet加载10万数据
-
-**标签**：leaflet、svg、Canvas、插件、海量点、海量数据、Canvas-Markers、Leaflet.Canvas-Markers、性能
-
-* * *
-
+# leaflet如何加载10万数据
 
 
 作为一名GIS开发者，你工作中一定遇到过这种问题，根据业务设计，需要在地图上添加1万+条数据，数据或是点、或是线、或是面。但不管哪种，当你添加到5000条时，地图操作就会出现明显的卡顿。当你添加超过1万条时，数据加载就会卡顿，浏览器出现卡死的状态，地图加载后，每挪动一下地图，都要耐心的等待上几秒钟。
@@ -26,10 +21,10 @@ var map = L.map('map', {
 ```
 
 这个设置只针对继承了Path类的矢量图层有效，包括圆点（CircleMarker）、线（Polyline）、面（Polygon）、圆（Circle）、矩形（Rectangle）。针对图片标记（Marker）没有作用。
-![](http://q9qtw0qww.bkt.clouddn.com/20200503152339.png)
+![](http://blogimage.gisarmory.xyz/20200622164634.png)
 
 二、借助插件 Leaflet.Canvas-Markers，提升Marker的显示性能。插件git地址：[https://github.com/eJuke/Leaflet.Canvas-Markers](https://github.com/eJuke/Leaflet.Canvas-Markers)
-![](http://q9qtw0qww.bkt.clouddn.com/20200504135302.png)
+![](http://blogimage.gisarmory.xyz/20200622173838.png)
 
 ## Leaflet.Canvas-Markers 插件
 
@@ -56,69 +51,24 @@ ciLayer.addMarker(marker);
 ### 注意
 
 这个插件有个问题，就是地图缩放时，添加的数据不跟着同步缩放，而是等到缩放完成后，再去缩放。这样感觉缩放时，数据在飘着。
-![](http://q9qtw0qww.bkt.clouddn.com/20200504145945.gif)
+![](http://blogimage.gisarmory.xyz/20200622174009.gif)
 
 
 不过已经有人对这个问题提出了解决方案，并且解决了（[链接](https://github.com/eJuke/Leaflet.Canvas-Markers/pull/21)），只是代码一直没有被合并。不过这都没有关系，我们可以去用那份儿已经解决的代码（[链接](https://github.com/corg/Leaflet.Canvas-Markers)）
 
 **解决以后的效果：**
-
-![](http://q9qtw0qww.bkt.clouddn.com/20200504151120.gif)
+![](http://blogimage.gisarmory.xyz/20200622174107.gif)
 
 
 
 
 ## 完整代码
 
-注意：这份代码因为是引用的在线地址，所以存在上文中说的缩放地图时感觉飘的问题，
-```html
+[在线示例](
+http://gisarmory.xyz/blog/index.html?demo=leaflet100ThousandData)
 
-<!DOCTYPE html>
-<html>
-<head>
-  <title>leaflet-canvas-marker</title>
-  <meta charset="utf-8" />
-  <!-- 引入leafletapi -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
-  <!-- 引入leaflet-canvas-marker插件 -->
-  <script src="https://unpkg.com/leaflet-canvas-marker@0.2.0"></script>
-  <style>
-    body { margin: 0; }
-    .map {position: absolute; height: 100%; right: 0; left: 0; }
-  </style>
-</head>
-<body>
-  <div class="map" id="map"></div>
-  <script>
-    var map = L.map('map',{
-      center: [39.905963, 116.390813],
-      zoom: 14,
-      preferCanvas: true    //使用canvas模式渲染矢量图形 
-    });
-    //添加底图
-    var tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
-    //使用canvas模式渲染marker
-    var ciLayer = L.canvasIconLayer({}).addTo(map);
-    var icon = L.icon({
-      iconUrl: 'https://ejuke.github.io/Leaflet.Canvas-Markers/examples/img/pothole.png',
-      iconSize: [20, 18],
-      iconAnchor: [10, 9]
-    });
-    for (var i = 0; i < 10000; i++) {
-      var lat = 39.905963 + (Math.random()-Math.random()) * 3;
-      var lng = 116.390813 + (Math.random()-Math.random()) * 3;
-      var marker = L.marker([lat, lng], { icon: icon })
-        .bindPopup("I Am " + i);    //绑定气泡窗口
-      ciLayer.addLayer(marker);
-    }
-    
-  </script>
-</body>
-</html>
-
-
-```
+[完整代码](
+http://gisarmory.xyz/blog/index.html?source=leaflet100ThousandData)
 
 ## 总结
 
@@ -128,6 +78,14 @@ ciLayer.addMarker(marker);
 4. 渲染方式设置成canvas后，加载矢量图形性能会提升，加载图片标记的效率仍然低。
 5. 通过Leaflet.Canvas-Markers插件来提升图片标记的显示效率。
 6. Leaflet.Canvas-Markers插件在缩放地图时有bug，需要在github上找已经解决此bug的版本。
+
+* * *
+本文会经常更新，请阅读原文：[http://gisarmory.xyz/blog/index.html?blog=leaflet100ThousandData](http://gisarmory.xyz/blog/index.html?blog=leaflet100ThousandData)，以避免被陈旧、错误的知识误导。
+
+关注《GIS兵器库》的公众号， 可以第一时间获得更多GIS文章
+![](http://blogimage.gisarmory.xyz/20200622192420.jpg)
+
+本文章采用 [知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议 ](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)进行许可。欢迎转载、使用、重新发布，但务必保留文章署名《GIS兵器库》（包含链接：  [http://gisarmory.xyz/blog/](http://gisarmory.xyz/blog/)），不得用于商业目的，基于本文修改后的作品务必以相同的许可发布。
 
 
 

@@ -10,6 +10,7 @@
 
     <script src="config_blog.js"></script>
     <script src="config_demo.js"></script>
+    <script src="config_source.js"></script>
 
 </head>
 
@@ -29,6 +30,8 @@
             loadMarkdown(urlArg.blog)
         } else if (urlArg && urlArg.demo) {
             loadDemo(urlArg.demo)
+        } else if (urlArg && urlArg.source) {
+            loadSource(urlArg.source)
         } else {
             loadMarkdown("home")
         }
@@ -41,6 +44,16 @@
             window.location.href=demoObj.url; 
         }
     }
+
+    //加载loadSource示例
+    function loadSource(sourceId){
+        var sourceObj = getSourceConfigById(sourceId);
+        if(sourceObj){
+            window.location.href=sourceObj.url; 
+        }
+    }
+
+    
 
     //配置marked插件
     function configMarked() {
@@ -95,6 +108,16 @@
             var demoObj = demoList[i];
             if (demoObj.id == demoId) {
                 return demoObj;
+            }
+        }
+    }
+
+    //根据sourceid获取source配置
+    function getSourceConfigById(sourceId) {
+        for (var i = 0; i < sourceList.length; i++) {
+            var sourceObj = sourceList[i];
+            if (sourceObj.id == sourceId) {
+                return sourceObj;
             }
         }
     }

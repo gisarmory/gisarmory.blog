@@ -1,3 +1,3 @@
 # GIS兵器库
 
-[leaflet-如何加载10万数据](http://gisarmory.xyz/blog/index.html?blog=leaflet100ThousandData)
+获取更多相关GIS文章，请访问[GIS兵器库](http://gisarmory.xyz/blog/index.html)

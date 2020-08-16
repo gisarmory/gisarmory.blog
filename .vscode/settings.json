@@ -1,0 +1,12 @@
+{
+  "liveServer.settings.port": 5501,
+  "editor.detectIndentation": false, // 控制是否在打开文件时，基于文件内容自动检测 `editor.tabSize#` 和 `#editor.insertSpaces`。
+  "editor.insertSpaces": true, // 按 `Tab` 键时插入空格。该设置在 `editor.detectIndentation` 启用时根据文件内容可能会被覆盖。
+  "editor.tabSize": 2, // 一个制表符等于的空格数。在 `editor.detectIndentation` 启用时，根据文件内容，该设置可能会被覆盖。
+  "beautify.config": {
+    "indent_size": 2, // 缩进空格数
+    "indent_with_tabs": false,
+    "newline_between_rules": false,
+    "selector_separator_newline": false
+  }
+}

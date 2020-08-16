@@ -1,0 +1,124 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background: #f5f5f5;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+body {
+  min-width: 996px;
+}
+ul,
+li {
+  list-style: none;
+}
+.zs_navbar {
+  position: relative;
+  background-color: #222;
+  border: none;
+  display: block;
+  height: 50px;
+  line-height: 40px;
+  margin-bottom: 0;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+}
+.zs_navbar .container {
+  margin-left: 0px;
+  margin-right: 0;
+}
+.zs_navbar .container .navbar-header {
+  margin-right: 100px !important;
+}
+.zs_navbar .container .navbar-header .navbar-brand {
+  float: left;
+  height: 50px;
+  padding: 15px 15px;
+  font-size: 18px;
+  line-height: 20px;
+}
+.zs_navbar .container .navbar-header .zs_logo {
+  display: block;
+  padding: 0 15px;
+  line-height: 50px;
+}
+.zs_navbar .container .navbar-header .zs_logo img {
+  width: 28px;
+  float: left;
+  margin-top: 11px;
+}
+.zs_navbar .container .navbar-header .zs_logo span {
+  font-size: 26px;
+  color: #FFFFFF;
+  text-align: center;
+  line-height: 50px;
+  float: left;
+  margin-left: 15px;
+}
+.zs_navbar .container .navbar-collapse {
+  border-color: #e7e7e7;
+}
+.zs_navbar .container .navbar-collapse .navbar-nav {
+  float: left;
+  margin: 0;
+}
+.zs_navbar .container .navbar-collapse .navbar-nav li {
+  position: relative;
+  transition: all 0.5s;
+  float: left;
+}
+.zs_navbar .container .navbar-collapse .navbar-nav li.active a {
+  color: #fff;
+  background-color: #2c9d49;
+}
+.zs_navbar .container .navbar-collapse .navbar-nav li.active a:hover,
+.zs_navbar .container .navbar-collapse .navbar-nav li.active a:focus {
+  color: #fff;
+  background-color: #2c9d49;
+}
+.zs_navbar .container .navbar-collapse .navbar-nav li a {
+  position: relative;
+  display: block;
+  color: #fff;
+  padding-left: 23px;
+  padding-right: 23px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin-left: 13px;
+  font-size: 14px;
+  line-height: 20px;
+  border-radius: 4px;
+}
+.zs_navbar .container .navbar-collapse .navbar-nav li a:hover,
+.zs_navbar .container .navbar-collapse .navbar-nav li a:focus {
+  color: #fff;
+  background-color: #313546;
+}
+.zs_navbar .container .navbar-collapse .navbar-nav li:first-child a {
+  margin-left: 0;
+}
+#content {
+  margin: 0 auto;
+  height: calc(100% - 60px);
+}
+#content #mainContent {
+  max-width: 1000px;
+  min-height: calc(100% - 160px);
+  padding: 0 160px;
+  margin: 0 auto;
+}
+#content #bottomContent {
+  max-width: 900px;
+  padding: 50px 60px 10px 60px;
+  margin: 0 auto;
+  text-align: center;
+}
+#content #bottomContent span {
+  color: #3F3F3F;
+}
+#content #bottomContent .aboutus-span {
+  cursor: pointer;
+}

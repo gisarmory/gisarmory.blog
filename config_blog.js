@@ -1,8 +1,4 @@
-var blogList = [{
-  id: "leaflet100ThousandData",
-  label: "leaflet加载10万数据",
-  url: "leaflet-100ThousandData/README.md"
-}, {
+var blogList = [ {
   id: "blogList",
   label: "博客列表",
   url: "README.md"
@@ -18,4 +14,12 @@ var blogList = [{
   id: "aboutUs",
   label: "关于我们",
   url: "menu/aboutUs.md"
+},{
+  id: "leaflet100ThousandData",
+  label: "leaflet加载10万数据",
+  url: "leaflet-100ThousandData/README.md"
+},{
+  id: "leafletMapCorrection",
+  label: "leaflet互联网地图纠偏插件",
+  url: "leaflet-MapCorrection/README.md"
 }];

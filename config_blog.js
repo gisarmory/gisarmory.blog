@@ -5,17 +5,17 @@ var blogList = [{
 }, {
   id: "blogList",
   label: "博客列表",
-  url: "markdown/blogList.md"
+  url: "README.md"
 }, {
   id: "wechat",
   label: "公众号",
-  url: "markdown/wechat.md"
+  url: "menu/wechat.md"
 }, {
   id: "github",
   label: "github",
-  url: "markdown/github.md"
+  href:"https://github.com/gisarmory",
 }, {
   id: "aboutUs",
   label: "关于我们",
-  url: "markdown/aboutUs.md"
+  url: "menu/aboutUs.md"
 }];

@@ -21,6 +21,7 @@
         纠偏后的坐标为WGS84
     -->
     <script src="../lib/leaflet/plugins/leaflet.mapCorrection.js"></script>
+
     <style>
         body {
             margin: 0;
@@ -81,6 +82,7 @@
         var baiduMap = L.tileLayer.chinaProvider('Baidu.Normal.Map').addTo(bdmap);
         var gaodeMap = L.tileLayer.chinaProvider('GaoDe.Normal.Map').addTo(map);
         var tdtMap = L.tileLayer.chinaProvider('TianDiTu.Normal.Map',{key:'fb258b4c0bbf60ff7a0205b519ad9a96'}).addTo(map);
+        var tdtMapLabel = L.tileLayer.chinaProvider('TianDiTu.Normal.Annotion',{key:'fb258b4c0bbf60ff7a0205b519ad9a96'}).addTo(map);
         var googleMap = L.tileLayer.chinaProvider('Google.Normal.Map').addTo(map);
         var geoqMap = L.tileLayer.chinaProvider('Geoq.Normal.Map').addTo(map);
         var osmMap = L.tileLayer.chinaProvider('OSM.Normal.Map').addTo(map);
@@ -100,6 +102,7 @@
         function showTiandituMap(){
             clear()
             tdtMap.setOpacity(1)
+            tdtMapLabel.setOpacity(1)
             document.getElementById('map').style.visibility = ''
         }
         
@@ -125,6 +128,7 @@
             baiduMap.setOpacity(0)
             gaodeMap.setOpacity(0)
             tdtMap.setOpacity(0)
+            tdtMapLabel.setOpacity(0)
             googleMap.setOpacity(0)
             geoqMap.setOpacity(0)
             osmMap.setOpacity(0)

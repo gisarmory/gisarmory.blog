@@ -2,7 +2,7 @@
 
 话不多说，先上效果图
 
-（最终事例效果GIF图）
+![](http://blogimage.gisarmory.xyz/20200917075946.gif)
 
 
 

@@ -63,7 +63,7 @@ TileLayer继承了GridLayer
 
 第三步：在获取瓦片和地图缩放的方法中，调用纠偏算法
 
-![image-20200920211118437](C:\Users\xiaolei\AppData\Roaming\Typora\typora-user-images\image-20200920211118437.png)
+![image-20200920211118437](http://blogimage.gisarmory.xyz/20200920211557.png)
 
 
 

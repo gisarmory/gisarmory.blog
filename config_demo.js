@@ -5,5 +5,5 @@ var demoList = [{
 },{
   id: "leafletMapCorrection",
   label: "leaflet互联网地图纠偏插件",
-  url: "leaflet-MapCorrectio/demo.html"
+  url: "leaflet-MapCorrection/demo.html"
 }];

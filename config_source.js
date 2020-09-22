@@ -5,5 +5,5 @@ var sourceList = [{
 },{
   id: "leafletMapCorrection",
   label: "leaflet互联网地图纠偏插件",
-  url: "https://github.com/gisarmory/Leaflet.InternetMapCorrection/blob/master/src/leaflet.mapCorrection.js"
+  url: "https://github.com/gisarmory/Leaflet.InternetMapCorrection"
 }];

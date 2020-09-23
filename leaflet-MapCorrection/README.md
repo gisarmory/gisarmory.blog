@@ -80,7 +80,7 @@ TileLayer继承了GridLayer
 >
 > 通过例子了解一下：比如leaflet源码中 Polygon.toGeoJSON() 方法不是在 Polygon.js 文件中写的，而是用 include 方式写在了GeoJSON.js文件中。Polygon类本来是没有toGeoJSON()方法的，这样就增加了这个方法。如果Polygon类中已经有了toGeoJSON()方法，这样写会根据执行的顺序，后执行的会把先加载的重写。
 >
-> ![](http://blogimage.gisarmory.xyz/20200818073542.png)
+> ![image-20200923122647117](http://blogimage.gisarmory.xyz/20200923122649.png)
 
 最后，我们把上面的代码封装成一个js插件，大家引用这个插件，就能实现了对地图的纠偏，不需要写一行js代码，这才是我心目中真正的优雅。
 

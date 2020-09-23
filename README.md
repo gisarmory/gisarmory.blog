@@ -14,7 +14,7 @@
 
 [leaflet-如何加载10万数据](http://gisarmory.xyz/blog/index.html?blog=leaflet100ThousandData)
 
-[leaflet互联网地图纠偏插件](http://gisarmory.xyz/blog/index.html?blog=leafletMapCorrection)
+[leaflet-互联网地图纠偏插件](http://gisarmory.xyz/blog/index.html?blog=leafletMapCorrection)
 
 
 

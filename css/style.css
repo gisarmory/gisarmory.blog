@@ -27,11 +27,15 @@ li {
   left: 0px;
 }
 .zs_navbar .container {
-  margin-left: 0px;
-  margin-right: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 1000px;
+  padding: 0 160px;
+  margin: 0 auto;
 }
 .zs_navbar .container .navbar-header {
   margin-right: 100px !important;
+  margin-left: -60px;
 }
 .zs_navbar .container .navbar-header .navbar-brand {
   float: left;
@@ -106,7 +110,7 @@ li {
 }
 #content #mainContent {
   max-width: 1000px;
-  min-height: calc(100% - 160px);
+  min-height: calc(100% - 100px);
   padding: 0 160px;
   margin: 0 auto;
 }

@@ -13,13 +13,27 @@ Maputnik 目前的1.7版本加载geoserver发布的矢量瓦片时有问题，�
 
 
 
-一直想搞一个类似百度、高德地图那样的专题图配图工具，
+一直想搞一个类似百度、高德地图那样的地图配图工具，
 
 （图）
 
 在网上找过几次，都没有找到。
 
-无意中从这个[博客]( https://blog.csdn.net/wclwksn2019/article/details/105572485)了解到了Maputnik，看到的第一眼就感觉相见恨晚，对！就是我要找的东西。
+无意中从这个[博客]( https://blog.csdn.net/wclwksn2019/article/details/105572485)了解到了Maputnik，一阵摆弄后，感觉相见恨晚。对！就是我要找的东西。
+
+Maputnik是啥？有什么用？
+
+Maputnik是Mapbox样式规范的开源可视化编辑器，它和Mapbox的mapbox studio、百度地图的个性化地图编辑器、高德地图的自定义地图编辑器干的是一个事，都是用来编辑矢量地图样式，配图用的。
+
+有了Maputnik就可以这样来发布地图，
+
+1. 用geoserver发布矢量瓦片
+2. 用Maputnik调用矢量瓦片服务，配置图层样式，得到json格式样式配置代码
+3. 用openlayers、leaflet或mapbox来调用矢量瓦片服务，并使用样式配置代码来渲染图层。
+
+和mapbox studio相比，Maputnik开源，可以免费在本地使用，不需要把自己的数据上传到图商的服务器，也没有对地图调用次数的限制。
+
+
 
 > Maputnik github地址：https://github.com/maputnik/editor
 >
@@ -75,3 +89,13 @@ geoserver是否支持发布xyz格式的矢量瓦片呢，找一圈没找到
 
 
 参考：https://www.kickstarter.com/projects/174808720/maputnik-visual-map-editor-for-mapbox-gl/description
+
+
+
+
+
+
+
+
+
+这里多用一分钟，简单对比一下上面提到的四个地图配图工具，百度地图和高德地图的配图工具，

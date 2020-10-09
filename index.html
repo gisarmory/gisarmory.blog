@@ -15,6 +15,7 @@
   <script src="config_blog.js"></script>
   <script src="config_demo.js"></script>
   <script src="config_source.js"></script>
+  <script src="config_download.js"></script>
 
 </head>
 
@@ -71,6 +72,8 @@
       loadDemo(urlArg.demo)
     } else if (urlArg && urlArg.source) {
       loadSource(urlArg.source)
+    } else if (urlArg && urlArg.download) {
+      downloadFile(urlArg.download)
     } else {
       loadMarkdown("blogList")
     }
@@ -83,21 +86,20 @@
   function changeSelect() {
     $(".navbar-nav li").click(function() {
       doChangeSelect(this)
-      // $(this).siblings('li').removeClass('active'); // 删除其他兄弟元素的样式
-      // $(this).addClass('active'); // 添加当前元素的样式
-      // loadMarkdown($(this).attr("data-id"))
-
-      // setTimeout(function(){
-      //   $("#content").niceScroll();
-      //   $("#content").getNiceScroll().resize();
-      // },200)
     });
   }
 
   function doChangeSelect(_this){
     $(_this).siblings('li').removeClass('active'); // 删除其他兄弟元素的样式
     $(_this).addClass('active'); // 添加当前元素的样式
-    loadMarkdown($(_this).attr("data-id"))
+    var blogid = $(_this).attr("data-id");
+    var blogObj = getBlogConfigById(blogid);
+    if(blogObj.href){
+      window.open(blogObj.href,"_blank"); 
+    }else if(blogObj.url){
+      loadMarkdown(blogid);
+    }
+    
 
     setTimeout(function(){
       $("#content").niceScroll();
@@ -120,6 +122,16 @@
       window.location.href = sourceObj.url;
     }
   }
+
+  //加载download示例
+  function downloadFile(downloadId) {
+    var downloadObj = getDownloadConfigById(downloadId);
+    if (downloadObj) {
+      window.location.href = downloadObj.url;
+    }
+  }
+
+  
 
 
 
@@ -189,6 +201,16 @@
       }
     }
   }
+
+//根据downloadId获取download配置
+function getDownloadConfigById(downloadId) {
+  for (var i = 0; i < downloadList.length; i++) {
+    var downloadObj = downloadList[i];
+    if (downloadObj.id == downloadId) {
+      return downloadObj;
+    }
+  }
+}
 
   //返回的是对象形式的参数
   function getUrlArgObject() {

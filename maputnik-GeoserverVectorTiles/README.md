@@ -129,7 +129,7 @@ Maputnik地图的api使用的是mapboxgl，那直接用mapboxgl调用一下发�
 
 查看mapboxgl的api，关于[scheme](http://www.mapbox.cn/mapbox-gl-js/style-spec/#sources-vector-scheme)的解释如下：
 
-![image-20201011142510634](C:\Users\xiaolei\AppData\Roaming\Typora\typora-user-images\image-20201011142510634.png)
+![image-20201011142510634](http://blogimage.gisarmory.xyz/20201012073727.png)
 
 这个 `xyz`和`tms`分别是啥意思呢？
 

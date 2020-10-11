@@ -6,4 +6,8 @@ var sourceList = [{
   id: "leafletMapCorrection",
   label: "leaflet互联网地图纠偏插件",
   url: "https://github.com/gisarmory/Leaflet.InternetMapCorrection"
+},{
+  id: "maputnikGeoserverVectorTiles",
+  label: "maputnik加载geoserver发布的tms矢量瓦片",
+  url: "https://github.com/gisarmory/editor"
 }];

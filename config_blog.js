@@ -22,4 +22,8 @@ var blogList = [ {
   id: "leafletMapCorrection",
   label: "leaflet互联网地图纠偏插件",
   url: "leaflet-MapCorrection/README.md"
+},{
+  id: "maputnikGeoserverVectorTiles",
+  label: "maputnik加载geoserver发布的tms矢量瓦片",
+  url: "maputnik-GeoserverVectorTiles"
 }];

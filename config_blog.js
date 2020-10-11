@@ -25,5 +25,5 @@ var blogList = [ {
 },{
   id: "maputnikGeoserverVectorTiles",
   label: "maputnik加载geoserver发布的tms矢量瓦片",
-  url: "maputnik-GeoserverVectorTiles"
+  url: "maputnik-GeoserverVectorTiles/README.md"
 }];

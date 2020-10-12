@@ -46,12 +46,13 @@
 </body>
 
 <script>
+    // 初始化地图
     var map = L.map('map', {
         center: [39.905963, 116.320813],
         zoom: 12,
-        preferCanvas: true //使用canvas模式渲染矢量图形 
+        preferCanvas: true // 使用canvas模式渲染矢量图形 
     });
-    //添加底图
+    // 添加底图
     var tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
 
     var myLayerGroup = L.layerGroup().addTo(map)
@@ -107,7 +108,7 @@
         myMarkerLayerGroup.addLayer(marker2)
     };
 
-    //添加线
+    // 添加线
     function addPolyline() {
         var polyline = L.polyline([
             [39.83, 116.34],
@@ -120,7 +121,7 @@
         myVectorLayerGroup.addLayer(polyline)
     };
 
-    //添加面
+    // 添加面
     function addPolygon() {
         var polygon = L.polygon([
             [39.83, 116.24],

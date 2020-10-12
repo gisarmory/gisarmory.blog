@@ -24,6 +24,8 @@ http://gisarmory.xyz/blog/index.html?source=LeafletPathDashFlow)
 [官方示例](
 https://ivansanchez.gitlab.io/Leaflet.Path.DashFlow/demo.html)
 
+[LeafletPathDashFlow插件](http://gisarmory.xyz/blog/index.html?source=LeafletPathDashFlow)
+
 * * *
 
 原文地址：[http://gisarmory.xyz/blog/index.html?blog=LeafletPathDashFlow](http://gisarmory.xyz/blog/index.html?blog=LeafletPathDashFlow)。

@@ -1,13 +1,25 @@
 var sourceList = [{
-  id: "leaflet100ThousandData",
-  label: "leaflet加载10万数据",
-  url: "https://github.com/gisarmory/gisarmory.blog/blob/master/leaflet-100ThousandData/demo.html"
-},{
-  id: "leafletMapCorrection",
-  label: "leaflet互联网地图纠偏插件",
-  url: "https://github.com/gisarmory/Leaflet.InternetMapCorrection"
-},{
-  id: "maputnikGeoserverVectorTiles",
-  label: "maputnik加载geoserver发布的tms矢量瓦片",
-  url: "https://github.com/gisarmory/editor"
+    id: "leaflet100ThousandData",
+    label: "leaflet加载10万数据",
+    url: "https://github.com/gisarmory/gisarmory.blog/blob/master/leaflet-100ThousandData/demo.html"
+}, {
+    id: "leafletMapCorrection",
+    label: "leaflet互联网地图纠偏插件",
+    url: "https://github.com/gisarmory/Leaflet.InternetMapCorrection"
+}, {
+    id: "LeafletShowHideLayerGroup",
+    label: "Leaflet LayerGroup图层组控制显示隐藏",
+    url: "https://github.com/gisarmory/Leaflet.ShowHideLayerGroup"
+}, {
+    id: "LeafletPathDashFlow",
+    label: "Leaflet 动态流向线",
+    url: "https://github.com/gisarmory/Leaflet.PathDashFlow"
+}, {
+    id: "LeafletPolylineDecorator",
+    label: "Leaflet 带箭头的线",
+    url: "https://github.com/gisarmory/Leaflet.PolylineDecorator"
+}, {
+    id: "maputnikGeoserverVectorTiles",
+    label: "maputnik加载geoserver发布的tms矢量瓦片",
+    url: "https://github.com/gisarmory/editor"
 }];

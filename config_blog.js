@@ -24,15 +24,15 @@ var blogList = [{
     url: "leaflet-MapCorrection/README.md"
 }, {
     id: "LeafletShowHideLayerGroup",
-    label: "leaflet LayerGroup图层组控制显示隐藏",
+    label: "LeafletLayerGroup图层组控制显示隐藏",
     url: "leaflet-ShowHideLayerGroup/README.md"
 }, {
     id: "LeafletPathDashFlow",
-    label: "Leaflet 动态流向线",
+    label: "Leaflet动态流向线",
     url: "leaflet-PathDashFlow/README.md"
 }, {
     id: "LeafletPolylineDecorator",
-    label: "Leaflet 带箭头的线",
+    label: "Leaflet带箭头的线",
     url: "leaflet-PolylineDecorator/README.md"
 }, {
     id: "maputnikGeoserverVectorTiles",

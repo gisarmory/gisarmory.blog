@@ -8,15 +8,15 @@ var sourceList = [{
     url: "https://github.com/gisarmory/Leaflet.InternetMapCorrection"
 }, {
     id: "LeafletShowHideLayerGroup",
-    label: "Leaflet LayerGroup图层组控制显示隐藏",
+    label: "LeafletLayerGroup图层组控制显示隐藏",
     url: "https://github.com/gisarmory/Leaflet.ShowHideLayerGroup"
 }, {
     id: "LeafletPathDashFlow",
-    label: "Leaflet 动态流向线",
+    label: "Leaflet动态流向线",
     url: "https://github.com/gisarmory/Leaflet.PathDashFlow"
 }, {
     id: "LeafletPolylineDecorator",
-    label: "Leaflet 带箭头的线",
+    label: "Leaflet带箭头的线",
     url: "https://github.com/gisarmory/Leaflet.PolylineDecorator"
 }, {
     id: "maputnikGeoserverVectorTiles",

@@ -16,7 +16,7 @@
 
 [leaflet-互联网地图纠偏插件](http://gisarmory.xyz/blog/index.html?blog=leafletMapCorrection)
 
-
+[maputnik-如何让矢量瓦片配图神器maputnik支持 geoserver](http://gisarmory.xyz/blog/index.html?blog=maputnikGeoserverVectorTiles)
 
 
 

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Leaflet.LayerGroup</title>
+    <meta charset="utf-8" />
+    <!-- 引入leafletapi -->
+    <link rel="stylesheet" href="../lib/leaflet/leaflet.css" />
+    <script src="../lib/leaflet/leaflet.js"></script>
+
+    <!-- 引入L.Path.DashFlow插件 -->
+    <script src="../lib/leaflet/plugins/leaflet.ShowHideLayerGroup.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .map {
+            position: absolute;
+            height: 100%;
+            right: 0;
+            left: 0;
+        }
+
+        .menuBar {
+            position: relative;
+            text-align: center;
+            top: 10px;
+            margin: 0 50px;
+            padding: 5px;
+            border-radius: 3px;
+            z-index: 999;
+            color: #ffffff;
+            background-color: rgba(0, 168, 0, 1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="map" id="map"></div>
+    <div class="menuBar">
+        <input type="button" value="显示" onclick="showLayer()" />
+        <input type="button" value="隐藏" onclick="hideLayer()" />
+    </div>
+</body>
+
+<script>
+    var map = L.map('map', {
+        center: [39.905963, 116.320813],
+        zoom: 12,
+        preferCanvas: true //使用canvas模式渲染矢量图形 
+    });
+    //添加底图
+    var tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
+
+    var myLayerGroup = L.layerGroup().addTo(map)
+    var myMarkerLayerGroup = L.layerGroup().addTo(map)
+    var myVectorLayerGroup = L.layerGroup().addTo(map)
+    addPoint()
+    addPolyline()
+    addPolygon()
+
+    // 图层显示
+    function showLayer() {
+        myLayerGroup.showLayer()
+    }
+
+    // 图层隐藏
+    function hideLayer() {
+        myLayerGroup.hideLayer()
+    }
+
+    // // 图层显示
+    // function showLayer() {
+    //     myMarkerLayerGroup.eachLayer(function(item) {
+    //         item.setOpacity(1)
+    //     })
+    //     myVectorLayerGroup.eachLayer(function(item) {
+    //         item.setStyle({
+    //             opacity: 1,
+    //             fillOpacity: 0.3
+    //         })
+    //     })
+    // }
+
+    // // 图层隐藏
+    // function hideLayer() {
+    //     myMarkerLayerGroup.eachLayer(function(item) {
+    //         item.setOpacity(0)
+    //     })
+    //     myVectorLayerGroup.eachLayer(function(item) {
+    //         item.setStyle({
+    //             opacity: 0,
+    //             fillOpacity: 0
+    //         })
+    //     })
+    // }
+
+    //添加点
+    function addPoint() {
+        var marker1 = L.marker([39.905963, 116.340813]);
+        var marker2 = L.circleMarker([39.905963, 116.430813]);
+        myLayerGroup.addLayer(marker1)
+        myLayerGroup.addLayer(marker2)
+        myVectorLayerGroup.addLayer(marker1)
+        myMarkerLayerGroup.addLayer(marker2)
+    };
+
+    //添加线
+    function addPolyline() {
+        var polyline = L.polyline([
+            [39.83, 116.34],
+            [39.93, 116.39],
+            [39.93, 116.32]
+        ], {
+            color: 'red'
+        });
+        myLayerGroup.addLayer(polyline)
+        myVectorLayerGroup.addLayer(polyline)
+    };
+
+    //添加面
+    function addPolygon() {
+        var polygon = L.polygon([
+            [39.83, 116.24],
+            [39.93, 116.29],
+            [39.93, 116.22]
+        ], {
+            color: 'red',
+            fillOpacity: 0.3
+        });
+        myLayerGroup.addLayer(polygon)
+        myVectorLayerGroup.addLayer(polygon)
+    };
+</script>
+
+</html>

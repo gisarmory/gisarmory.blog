@@ -16,9 +16,9 @@
 
 [leaflet-互联网地图纠偏插件](http://gisarmory.xyz/blog/index.html?blog=leafletMapCorrection)
 
-[LeafletLayerGroup图层组控制显示隐藏](http://gisarmory.xyz/blog/index.html?blog=LeafletShowHideLayerGroup)
+[leaflet-LayerGroup图层组控制显示隐藏](http://gisarmory.xyz/blog/index.html?blog=LeafletShowHideLayerGroup)
 
-[Leaflet动态流向线](http://gisarmory.xyz/blog/index.html?blog=LeafletPathDashFlow)
+[leaflet-动态流向线](http://gisarmory.xyz/blog/index.html?blog=LeafletPathDashFlow)
 
 [Leaflet带箭头的线](http://gisarmory.xyz/blog/index.html?blog=LeafletPolylineDecorator)
 

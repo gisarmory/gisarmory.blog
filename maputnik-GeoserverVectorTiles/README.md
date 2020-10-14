@@ -32,7 +32,7 @@ Maputnik是Mapbox样式规范的开源可视化编辑器，它和Mapbox的mapbox
 
 1. 用geoserver发布矢量瓦片
 2. 用Maputnik为上面的矢量瓦片配置地图样式
-3. 用openlayers、leaflet或mapbox调用矢量瓦片，并应用上面的地图样式，在前台渲染地图展示
+3. 用mapbox调用矢量瓦片，并应用上面的地图样式，在前台渲染地图展示
 
 和 mapbox studio 相比，Maputnik开源，可以免费在本地使用，不再需要把自己的地图数据上传到mapbox的服务器，相应的也就不用受制于mapbox免费账号对每月上传数据量的限制，和对地图调用次数的限制。
 
@@ -71,30 +71,30 @@ Maputnik地图的api使用的是mapboxgl，那直接用mapboxgl调用一下发�
 代码：
 
 ``` js
-	var map = new mapboxgl.Map({
-		container: 'map',
-		style: 'mapbox://styles/mapbox/light-v10',
-		zoom: 3,
-		center: [108.34942054748535,37.83543237333567]
-	});
+var map = new mapboxgl.Map({
+	container: 'map',
+	style: 'mapbox://styles/mapbox/light-v10',
+	zoom: 3,
+	center: [108.34942054748535,37.83543237333567]
+});
 
-	map.on('load', function() {
-		map.addLayer({
-			"id": "mapillary",
-			"type": "line",
-			"source": {
-				"type": "vector",
-				'scheme':'tms',
-				"tiles": ["http://192.168.50.198:7000/geoserver/gwc/service/tms/1.0.0/china%3Acity_region@EPSG%3A900913@pbf/{z}/{x}/{y}.pbf"],
-			},
-			"source-layer": "city_region",
-			"paint": {
-				"line-opacity": 0.6,
-				"line-color": "rgb(53, 175, 109)",
-				"line-width": 2
-			}
-		}, 'waterway-label');
-	});
+map.on('load', function() {
+	map.addLayer({
+		"id": "mapillary",
+		"type": "line",
+		"source": {
+			"type": "vector",
+			'scheme':'tms',
+			"tiles": ["http://192.168.50.198:7000/geoserver/gwc/service/tms/1.0.0/china%3Acity_region@EPSG%3A900913@pbf/{z}/{x}/{y}.pbf"],
+		},
+		"source-layer": "city_region",
+		"paint": {
+			"line-opacity": 0.6,
+			"line-color": "rgb(53, 175, 109)",
+			"line-width": 2
+		}
+	}, 'waterway-label');
+});
 ```
 
 效果：
@@ -118,11 +118,11 @@ Maputnik地图的api使用的是mapboxgl，那直接用mapboxgl调用一下发�
 上面示例的代码中，数据源是通过source来配置的
 
 ~~~ js
-	"source": {
-				"type": "vector",
-				'scheme':'tms',
-				"tiles": ["http://192.168.50.198:7000/geoserver/gwc/service/tms/1.0.0/china%3Acity_region@EPSG%3A900913@pbf/{z}/{x}/{y}.pbf"],
-			},
+"source": {
+	"type": "vector",
+	'scheme':'tms',
+	"tiles": ["http://192.168.50.198:7000/geoserver/gwc/service/tms/1.0.0/china%3Acity_region@EPSG%3A900913@pbf/{z}/{x}/{y}.pbf"],
+},
 ~~~
 
 这里面有三个参数，`type`和`tiles`的意思好理解，`scheme`是什么意思呢？
@@ -202,7 +202,7 @@ ok，来，走两步
 
 原文地址：[http://gisarmory.xyz/blog/index.html?blog=maputnikGeoserverVectorTiles](http://gisarmory.xyz/blog/index.html?blog=maputnikGeoserverVectorTiles)
 
-关注[GIS兵器库公众号](http://gisarmory.xyz/blog/index.html?blog=wechat)， 获得更多高质量GIS文章更新。
+关注《[GIS兵器库](http://gisarmory.xyz/blog/index.html?blog=wechat)》公众号， 第一时间获得更多高质量GIS文章。
 
 ![](http://blogimage.gisarmory.xyz/20200923063756.png)
 

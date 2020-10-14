@@ -8,14 +8,14 @@ var demoList = [{
     url: "leaflet-MapCorrection/demo.html"
 }, {
     id: "LeafletShowHideLayerGroup",
-    label: "Leaflet LayerGroup图层组控制显示隐藏",
+    label: "LeafletLayerGroup图层组控制显示隐藏",
     url: "leaflet-ShowHideLayerGroup/demo.html"
 }, {
     id: "LeafletPathDashFlow",
-    label: "Leaflet 动态流向线",
+    label: "Leaflet动态流向线",
     url: "leaflet-PathDashFlow/demo.html"
 }, {
     id: "LeafletPolylineDecorator",
-    label: "Leaflet 带箭头的线",
+    label: "Leaflet带箭头的线",
     url: "leaflet-PolylineDecorator/demo.html"
 }];

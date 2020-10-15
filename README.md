@@ -20,8 +20,6 @@
 
 [leaflet-动态流向线](http://gisarmory.xyz/blog/index.html?blog=LeafletPathDashFlow)
 
-[leaflet-带箭头的线](http://gisarmory.xyz/blog/index.html?blog=LeafletPolylineDecorator)
-
 [maputnik-如何让矢量瓦片配图神器maputnik支持 geoserver](http://gisarmory.xyz/blog/index.html?blog=maputnikGeoserverVectorTiles)
 
 

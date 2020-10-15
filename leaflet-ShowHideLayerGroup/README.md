@@ -1,11 +1,9 @@
-# Leaflet LayerGroup图层组控制显示隐藏
-使用leaflet添加点、线、面等图层时，添加到L.layerGroup()中，可方便同层统一管理，在控制图层显示隐藏时，有两种思路：
+# Leaflet通过LayerGroup控制大量、多种图层显示隐藏
+在使用leaflet进行点、线、面等图层管理时，经常会遇到对图层显示隐藏控制的需求，对于单个图层好说，只需要对图层样式重新编辑即可。但是当遇到需要对大量、多种图层同时控制时，再逐个图层编辑样式就有些繁琐了，这时候就用到了LayerGroup了。如何通过LayerGroup来控制多个图层的显示隐藏呢，通常有如下两种思路：
 
-第一种，隐藏时清除图层，显示时重新添加图层，但这种方式会增加对浏览器的压力，且当数据量较大时会有卡顿现象，不可取。
+第一种，隐藏时清除图层，显示时重新添加图层，当数据量较小时或者不会频繁切换显示隐藏时，使用这种方式较为方便，但是，当数据量较大或者需要频繁切换显示隐藏时，这种方式会增加对浏览器的压力，出现卡顿现象。
 
-第二种，通过‘layergroup.eachLayer()’方法循环遍历控制图层显示隐藏，此方式通过修改图层样式直接控制图层显示隐藏，效果较好（由于maker图层 和 vector图层样式控制方式不同，需放在两个图层组来控制）。
-
-效果如下：
+接下来我们重点说说第二种思路，通过‘layergroup.eachLayer()’方法循环遍历控制图层显示隐藏，此方式通过修改图层样式直接控制图层显示隐藏，在数据量较大和频繁切换显示隐藏时，都比较流畅，效果如下：
 
 
 
@@ -19,13 +17,35 @@
 
 ![202010100301](http://blogimage.gisarmory.xyz/202010100301.png)
 
+从上面代码中我们可以看出，由于maker图层 和 vector图层样式控制方式不同，需放在两个图层组来控制，这样感觉写起来还是有些繁琐，而且没有考虑图层初始化时样式。
+
+通过对leaflet源码研究，了解到leaflet可以使用 include 方式对方法进行重写来做到修改源码。
+
+> include方式
+>
+> 通过例子了解一下：比如leaflet源码中 Polygon.toGeoJSON() 方法不是在 Polygon.js 文件中写的，而是用 include 方式写在了GeoJSON.js文件中。Polygon类本来是没有toGeoJSON()方法的，这样就增加了这个方法。如果Polygon类中已经有了toGeoJSON()方法，这样写会根据执行的顺序，后执行的会把先加载的重写。
+>
+> ![](http://blogimage.gisarmory.xyz/20200923122649.png)
 
 
-为方便使用，我们把上面的代码封装成[leaflet.ShowHideLayerGroup.js](http://gisarmory.xyz/blog/index.html?source=LeafletShowHideLayerGroup)插件，大家引用这个插件，调用“showLayer()”、“hideLayer()”就能实现对layergroup显示隐藏控制。
+
+接下来，就采用include方式对LayerGroup添加显示隐藏方法，代码如下：
+
+![202010150301](F:\myself\gisarmory\Leaflet.ShowHideLayerGroup\202010150301.png)
+
+在这里，我们不止控制了图层的显示隐藏，还记录了图层的默认透明度样式，以保证重新显示时样式一致。
+
+为方便使用，我们将上述代码封装成leaflet.ShowHideLayerGroup.js插件，你只需引用这个插件，调用“showLayer()”、“hideLayer()”就能实现对layergroup显示隐藏控制，是不是感觉用着很方便，代码很清爽。
 
 
 
 ![202010100302](http://blogimage.gisarmory.xyz/202010100302.png)
+
+## 总结
+
+1. Leaflet通过LayerGroup控制大量、多种图层的显示隐藏，采用‘layergroup.eachLayer()’方法循环遍历图层，通过修改样式实现显示隐藏。
+2. 把显示隐藏方法通过include方式封装成插件，一次引用，无限使用，方便快捷。
+
 
 
 ## 在线示例

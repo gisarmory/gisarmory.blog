@@ -56,8 +56,6 @@
     var tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
 
     var myLayerGroup = L.layerGroup().addTo(map)
-    var myMarkerLayerGroup = L.layerGroup().addTo(map)
-    var myVectorLayerGroup = L.layerGroup().addTo(map)
     addPoint()
     addPolyline()
     addPolygon()
@@ -72,40 +70,14 @@
         myLayerGroup.hideLayer()
     }
 
-    // // 图层显示
-    // function showLayer() {
-    //     myMarkerLayerGroup.eachLayer(function(item) {
-    //         item.setOpacity(1)
-    //     })
-    //     myVectorLayerGroup.eachLayer(function(item) {
-    //         item.setStyle({
-    //             opacity: 1,
-    //             fillOpacity: 0.3
-    //         })
-    //     })
-    // }
-
-    // // 图层隐藏
-    // function hideLayer() {
-    //     myMarkerLayerGroup.eachLayer(function(item) {
-    //         item.setOpacity(0)
-    //     })
-    //     myVectorLayerGroup.eachLayer(function(item) {
-    //         item.setStyle({
-    //             opacity: 0,
-    //             fillOpacity: 0
-    //         })
-    //     })
-    // }
-
     //添加点
     function addPoint() {
-        var marker1 = L.marker([39.905963, 116.340813]);
+        var marker1 = L.marker([39.905963, 116.340813],{
+            opacity: 0.7
+        });
         var marker2 = L.circleMarker([39.905963, 116.430813]);
         myLayerGroup.addLayer(marker1)
         myLayerGroup.addLayer(marker2)
-        myVectorLayerGroup.addLayer(marker1)
-        myMarkerLayerGroup.addLayer(marker2)
     };
 
     // 添加线
@@ -115,10 +87,10 @@
             [39.93, 116.39],
             [39.93, 116.32]
         ], {
+            opacity: 0.6,
             color: 'red'
         });
         myLayerGroup.addLayer(polyline)
-        myVectorLayerGroup.addLayer(polyline)
     };
 
     // 添加面
@@ -132,7 +104,6 @@
             fillOpacity: 0.3
         });
         myLayerGroup.addLayer(polygon)
-        myVectorLayerGroup.addLayer(polygon)
     };
 </script>
 

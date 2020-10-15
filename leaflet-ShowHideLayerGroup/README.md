@@ -1,9 +1,9 @@
-# leaflet LayerGroup图层组控制显示隐藏
+# Leaflet LayerGroup图层组控制显示隐藏
 使用leaflet添加点、线、面等图层时，添加到L.layerGroup()中，可方便同层统一管理，在控制图层显示隐藏时，有两种思路：
 
-第一种，通常处理方式是清除后添加图层，这种方式会增加对浏览器的压力，且数据量较大时会有卡顿现象，不可取。
+第一种，隐藏时清除图层，显示时重新添加图层，但这种方式会增加对浏览器的压力，且当数据量较大时会有卡顿现象，不可取。
 
-第二种，通过‘layergroup.eachLayer()’方法循环遍历控制图层显示隐藏，此方式通过对图层样式直接控制显示隐藏，效果较好（由于maker图层 和 vector图层样式控制方式不同，需放在两个图层组来控制）。
+第二种，通过‘layergroup.eachLayer()’方法循环遍历控制图层显示隐藏，此方式通过修改图层样式直接控制图层显示隐藏，效果较好（由于maker图层 和 vector图层样式控制方式不同，需放在两个图层组来控制）。
 
 效果如下：
 
@@ -21,7 +21,7 @@
 
 
 
-为方便使用，我们把上面的代码封装成[leaflet.ShowHideLayerGroup.js](http://gisarmory.xyz/blog/index.html?source=leafletMapCorrection)插件，大家引用这个插件，调用“showLayer()”、“hideLayer()”就能实现对layergroup显示隐藏控制。
+为方便使用，我们把上面的代码封装成[leaflet.ShowHideLayerGroup.js](http://gisarmory.xyz/blog/index.html?source=LeafletShowHideLayerGroup)插件，大家引用这个插件，调用“showLayer()”、“hideLayer()”就能实现对layergroup显示隐藏控制。
 
 
 
@@ -34,7 +34,7 @@
 
 [ShowHideLayerGroup插件](http://gisarmory.xyz/blog/index.html?source=LeafletShowHideLayerGroup)
 
-不熟悉github的童鞋，可以微信搜索《GIS兵器库》或扫描下面的二维码，回复 “ShowHideLayerGroup” 获得ShowHideLayerGroup插件的下载链接。
+不熟悉github的童鞋，可以微信搜索《GIS兵器库》或扫描下面的二维码，回复 “layergroup” 获得ShowHideLayerGroup插件的下载链接。
 
 ![](http://blogimage.gisarmory.xyz/20200923063756.png)
 

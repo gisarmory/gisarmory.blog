@@ -10,7 +10,7 @@
 
 ![202010100101](http://blogimage.gisarmory.xyz/202010100101.png)
 
-注意，在“dashSpeed”为负时，线的方向时正向流动。
+注意，在“dashSpeed”为负时，线的方向是正向流动。
 
 使用此插件的时候，当初始化地图“ preferCanvas”参数为“true”时，及使用“Canvas”方式绘制时，效果不可用，需要在“leaflet\layer\vector\Canvas.js”中“_updateDashArray”和“_fillStroke”两个方法中添加如下代码：
 

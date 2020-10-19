@@ -72,12 +72,13 @@
 
     //添加点
     function addPoint() {
-        var marker1 = L.marker([39.905963, 116.340813],{
+        var marker = L.marker([39.905963, 116.340813],{
             opacity: 0.7
         });
-        var marker2 = L.circleMarker([39.905963, 116.430813]);
-        myLayerGroup.addLayer(marker1)
-        myLayerGroup.addLayer(marker2)
+        myLayerGroup.addLayer(marker)
+        
+        var circleMarker = L.circleMarker([39.905963, 116.430813]);
+        myLayerGroup.addLayer(circleMarker)
     };
 
     // 添加线

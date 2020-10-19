@@ -1,23 +1,42 @@
-# Leaflet 动态流向线
-使用Leaflet.Path.DashFlow扩展可实现轨迹动态展示、管道流向动态展示、河流流向动态展示等，增强可视化展示效果。
-使用方式也很简单，只需引入插件在正常添加线、面的时候，加入“ dashSpeed”参数即可。
+# 支持“Canvas”的Leaflet.Path.DashFlow动态流向线
+通过对Leaflet插件的学习，我们了解到使用“Leaflet.Path.DashFlow”插件可实现轨迹动态展示、管道流向动态展示、河流流向动态展示等，增强可视化展示效果。
 
 效果如下：
 
 ![202010100101](http://blogimage.gisarmory.xyz/202010100101.gif)
 
-核心代码如下：
+但是该插件有个弊端，就是当初始化地图“ preferCanvas”参数为“true”时，及使用“Canvas”方式绘制时，效果不可用。要如何解决这个问题呢？通过对“Leaflet.Path.DashFlow.js”以及“Leaflet”源码的研究，发现动态线的效果主要通过“dashOffset”属性加动态刷新线的样式来实现，然而“L.SVG”在“updateStyle”的时候，更新了“dashOffset”属性，但是“L.Canvas”在“updateStyle”的时候，并没有更新“dashOffset”属性。
+
+Leaflet.Path.DashFlow.js：
+
+![202010190101](F:\myself\gisarmory\Leaflet.Path.DashFlow\202010190101.png)
+
+L.SVG：
+
+![202010190102](F:\myself\gisarmory\Leaflet.Path.DashFlow\202010190102.png)
+
+L.Canvas：
+
+![202010190103](F:\myself\gisarmory\Leaflet.Path.DashFlow\202010190103.png)
+
+由此，我们找到了解决思路，及在“L.Canvas”在“updateStyle”的时候，添加对“dashOffset”属性的控制即可，核心代码如下：
+
+![202010190104](F:\myself\gisarmory\Leaflet.Path.DashFlow\202010190104.png)
+
+## 如何使用
+
+为方便使用，我们将“L.Path.DashFlow”插件重新封装，大家引用这个插件，即可在“Canvas”和“SVG”两种方式下使用此插件。
+
+该插件使用方式非常简单，只需在正常添加线的时候，加入“dashSpeed”属性即可，核心代码如下：
 
 ![202010100101](http://blogimage.gisarmory.xyz/202010100101.png)
 
 注意，在“dashSpeed”为负时，线的方向是正向流动。
 
-使用此插件的时候，当初始化地图“ preferCanvas”参数为“true”时，及使用“Canvas”方式绘制时，效果不可用，需要在“leaflet\layer\vector\Canvas.js”中“_updateDashArray”和“_fillStroke”两个方法中添加如下代码：
+## 总结
 
-![202010100102](http://blogimage.gisarmory.xyz/202010100102.png)
-![202010100103](http://blogimage.gisarmory.xyz/202010100103.png)
-
-为方便使用，我们将“L.Path.DashFlow”插件重新封装，大家引用这个插件，即可在“Canvas”和“SVG”两种方式下使用此插件。
+1. 通过修改“L.Canvas”中代码，即可在初始化地图“ preferCanvas”参数为“true”时使用“Leaflet.Path.DashFlow”动态流向线效果。
+2. 将“L.Path.DashFlow”插件重新封装，引用插件，即可在“Canvas”和“SVG”两种方式下实现动态流向线效果。
 
 ## 在线示例
 
@@ -26,11 +45,6 @@ http://gisarmory.xyz/blog/index.html?demo=LeafletPathDashFlow)
 
 [完整代码](
 http://gisarmory.xyz/blog/index.html?source=LeafletPathDashFlow)
-
-[官方示例](
-https://ivansanchez.gitlab.io/Leaflet.Path.DashFlow/demo.html)
-
-[LeafletPathDashFlow插件](http://gisarmory.xyz/blog/index.html?source=LeafletPathDashFlow)
 
 * * *
 

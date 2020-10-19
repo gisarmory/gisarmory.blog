@@ -12,7 +12,7 @@ var demoList = [{
     url: "leaflet-ShowHideLayerGroup/demo.html"
 }, {
     id: "LeafletPathDashFlow",
-    label: "Leaflet-支持“Canvas”的Leaflet.Path.DashFlow动态流向线",
+    label: "Leaflet-支持Canvas的Leaflet.Path.DashFlow动态流向线",
     url: "leaflet-PathDashFlow/demo.html"
 }, {
     id: "LeafletPolylineDecorator",

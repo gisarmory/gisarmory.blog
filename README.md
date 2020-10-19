@@ -16,9 +16,9 @@
 
 [leaflet-互联网地图纠偏插件](http://gisarmory.xyz/blog/index.html?blog=leafletMapCorrection)
 
-[leaflet-LayerGroup图层组控制显示隐藏](http://gisarmory.xyz/blog/index.html?blog=LeafletShowHideLayerGroup)
+[Leaflet-通过LayerGroup控制大量、多种图层显示隐藏](http://gisarmory.xyz/blog/index.html?blog=LeafletShowHideLayerGroup)
 
-[leaflet-动态流向线](http://gisarmory.xyz/blog/index.html?blog=LeafletPathDashFlow)
+[Leaflet-支持“Canvas”的Leaflet.Path.DashFlow动态流向线](http://gisarmory.xyz/blog/index.html?blog=LeafletPathDashFlow)
 
 [maputnik-如何让矢量瓦片配图神器maputnik支持 geoserver](http://gisarmory.xyz/blog/index.html?blog=maputnikGeoserverVectorTiles)
 

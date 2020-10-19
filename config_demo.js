@@ -8,11 +8,11 @@ var demoList = [{
     url: "leaflet-MapCorrection/demo.html"
 }, {
     id: "LeafletShowHideLayerGroup",
-    label: "LeafletLayerGroup图层组控制显示隐藏",
+    label: "Leaflet-通过LayerGroup控制大量、多种图层显示隐藏",
     url: "leaflet-ShowHideLayerGroup/demo.html"
 }, {
     id: "LeafletPathDashFlow",
-    label: "Leaflet动态流向线",
+    label: "Leaflet-支持“Canvas”的Leaflet.Path.DashFlow动态流向线",
     url: "leaflet-PathDashFlow/demo.html"
 }, {
     id: "LeafletPolylineDecorator",

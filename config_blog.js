@@ -24,11 +24,11 @@ var blogList = [{
     url: "leaflet-MapCorrection/README.md"
 }, {
     id: "LeafletShowHideLayerGroup",
-    label: "LeafletLayerGroup图层组控制显示隐藏",
+    label: "Leaflet-通过LayerGroup控制大量、多种图层显示隐藏",
     url: "leaflet-ShowHideLayerGroup/README.md"
 }, {
     id: "LeafletPathDashFlow",
-    label: "Leaflet动态流向线",
+    label: "Leaflet-支持“Canvas”的Leaflet.Path.DashFlow动态流向线",
     url: "leaflet-PathDashFlow/README.md"
 }, {
     id: "LeafletPolylineDecorator",

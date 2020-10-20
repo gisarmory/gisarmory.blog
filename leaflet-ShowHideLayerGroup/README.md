@@ -31,7 +31,7 @@
 
 接下来，就采用include方式对LayerGroup添加显示隐藏方法，代码如下：
 
-![202010150301](F:\myself\gisarmory\Leaflet.ShowHideLayerGroup\202010150301.png)
+![202010150301](https://blogimage.gisarmory.xyz/202010150301.png)
 
 在这里，我们不止控制了图层的显示隐藏，还记录了图层默认状态下的透明度，以保证切换到显示时样式一致。
 
@@ -43,8 +43,9 @@
 
 ## 总结
 
-1. 控制大量、多种图层的显示隐藏，首先添加到“L.LayerGroup()”，采用“layergroup.eachLayer()”方法循环遍历图层、修改样式来实现。
-2. 把显示隐藏方法通过include方式封装成插件，一次引用，无限使用，方便简洁。
+1、控制大量、多种图层的显示隐藏，首先添加到“L.LayerGroup()”，采用“layergroup.eachLayer()”方法循环遍历图层、修改样式来实现。
+
+2、把显示隐藏方法通过include方式封装成插件，一次引用，无限使用，方便简洁。
 
 ## 在线示例
 

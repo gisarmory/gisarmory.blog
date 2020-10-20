@@ -9,19 +9,19 @@
 
 Leaflet.Path.DashFlow.js：
 
-![202010190101](F:\myself\gisarmory\Leaflet.Path.DashFlow\202010190101.png)
+![202010190101](https://blogimage.gisarmory.xyz/202010190101.png)
 
 L.SVG：
 
-![202010190102](F:\myself\gisarmory\Leaflet.Path.DashFlow\202010190102.png)
+![202010190102](https://blogimage.gisarmory.xyz/202010190102.png)
 
 L.Canvas：
 
-![202010190103](F:\myself\gisarmory\Leaflet.Path.DashFlow\202010190103.png)
+![202010190103](https://blogimage.gisarmory.xyz/202010190103.png)
 
 由此，我们找到了解决思路，及在“L.Canvas”在“updateStyle”的时候，添加对“dashOffset”属性的控制即可，核心代码如下：
 
-![202010190104](F:\myself\gisarmory\Leaflet.Path.DashFlow\202010190104.png)
+![202010190104](https://blogimage.gisarmory.xyz/202010190104.png)
 
 ## 如何使用
 
@@ -35,8 +35,9 @@ L.Canvas：
 
 ## 总结
 
-1. 通过修改“L.Canvas”中代码，即可在初始化地图“ preferCanvas”参数为“true”时使用“Leaflet.Path.DashFlow”动态流向线效果。
-2. 将“L.Path.DashFlow”插件重新封装，引用插件，即可在“Canvas”和“SVG”两种方式下实现动态流向线效果。
+1、通过修改“L.Canvas”中代码，即可在初始化地图“ preferCanvas”参数为“true”时使用“Leaflet.Path.DashFlow”动态流向线效果。
+
+2、将“L.Path.DashFlow”插件重新封装，引用插件，即可在“Canvas”和“SVG”两种方式下实现动态流向线效果。
 
 ## 在线示例
 

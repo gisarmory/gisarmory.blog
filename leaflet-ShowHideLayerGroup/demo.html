@@ -72,13 +72,20 @@
 
     //添加点
     function addPoint() {
-        var marker = L.marker([39.905963, 116.340813],{
-            opacity: 0.7
-        });
-        myLayerGroup.addLayer(marker)
-        
-        var circleMarker = L.circleMarker([39.905963, 116.430813]);
-        myLayerGroup.addLayer(circleMarker)
+        for (var i = 0; i < 200; i++) {
+            var lat = 39.905963 + (Math.random() - Math.random()) * 0.1;
+            var lng = 116.340813 + (Math.random() - Math.random()) * 0.2;
+            var marker = L.marker([lat, lng],{
+                opacity: 0.7
+            });
+            myLayerGroup.addLayer(marker);
+        }
+        for (var i = 0; i < 500; i++) {
+            var lat = 39.905963 + (Math.random() - Math.random()) * 0.1;
+            var lng = 116.340813 + (Math.random() - Math.random()) * 0.2;
+            var circleMarker = L.circleMarker([lat, lng]);
+            myLayerGroup.addLayer(circleMarker);
+        }
     };
 
     // 添加线
@@ -88,7 +95,6 @@
             [39.93, 116.39],
             [39.93, 116.32]
         ], {
-            opacity: 0.6,
             color: 'red'
         });
         myLayerGroup.addLayer(polyline)

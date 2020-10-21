@@ -37,7 +37,7 @@
 
 ![202010150301](https://blogimage.gisarmory.xyz/202010150301.png)
 
-在这里，我们不止控制了图层的显示隐藏，还记录了图层默认状态下的透明度，以保证切换到显示时样式一致。
+在这里，我们不止控制了layerGroup的显示隐藏，还记录了layerGroup中要素默认状态下的透明度，以保证切换到显示时样式一致。
 
 为方便使用，我们将上述代码封装成插件，你只需引用这个插件，调用`layergroup.showLayer()`、`layergroup.hideLayer()`就能实现对 layerGroup 中所有要素的显示隐藏控制。
 

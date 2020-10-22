@@ -2,7 +2,7 @@
 
 
 
-最近在leaflet开发过程中，遇到需要对地图数据通过时间轴播放的需求，处理思路是将每个时间节点的要素添加到layerGroup中，然后通过切换layerGroup的显示隐藏来实现效果。通过翻看leaflet的API文档，发现leaflet中没有直接控制layerGroup显示隐藏的方法，那如何来实现layerGroup的显示和隐藏呢？
+最近在leaflet开发过程中，遇到地图数据需要按时序播放的需求，处理思路是将每个时间节点的要素添加到layerGroup中，然后通过切换layerGroup的显示隐藏来实现效果。翻看leaflet的API文档，发现leaflet中没有直接控制layerGroup显示隐藏的方法，那如何来实现layerGroup的显示和隐藏呢？
 
 通常有如下两种思路：
 

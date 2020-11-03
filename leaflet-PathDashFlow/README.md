@@ -1,5 +1,5 @@
 # 支持Canvas的Leaflet.Path.DashFlow动态流向线
-通过对leaflet以及其插件的学习，我们了解到使用`Leaflet.Path.DashFlow`插件可实现轨迹动态展示、管道流向动态展示、河流流向动态展示等，以增强可视化展示效果。
+通过对leaflet以及其插件的学习，我们了解到使用`Leaflet.Path.DashFlow`插件可实现轨迹动态展示、管道流向动态展示、河流流向动态展示等，达到增强可视化展示的效果。
 
 效果如下：
 

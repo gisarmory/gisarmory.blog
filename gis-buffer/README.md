@@ -2,23 +2,43 @@
 
 buffer - 图形缓冲区分析，GIS中最基本的空间分析之一。
 
-实现buffer的工具有很多种，例如前端的truf.js、服务端的ArcGISserver、数据库端的PosrGIS、桌面端的ArcMap等都可以实现。
+实现buffer的工具有很多种，例如前端的truf.js、服务端的ArcGISserver、桌面端的ArcMap、数据库端的PosrGIS等都可以实现。
 
 但很多时候你会遇到标题中的那个问题，对点进行buffer分析得到的却是个椭圆。
 
 为什么是椭圆，不应该是正圆吗？
 
-接下来我们就研究一下这个问题。
+要搞清楚这个问题，就得去研究buffer的原理。
 
-我们平时用ArcGIS软件比较多，但看它的帮助文档却比较少，其实里面有很多内容写的都非常好。
+buffer的构建方法有两种：欧式方法 和 测地线方法。
 
-比如这篇 [缓冲区（分析）的工作原理](https://desktop.arcgis.com/zh-cn/arcmap/10.3/tools/analysis-toolbox/how-buffer-analysis-works.htm) 就对上面的问题给出了很专业的回答，在这里和大家一起学习一下。
+欧式方法是在二维平面地图上画圆，测地线方法是在三维椭球体上画圆。二者的区别是，二维平面地图是经过地图投影得到的地图，而三维椭球体没有。三维椭球体更接近于真实的地球，而二维平面地图在投影的过程中部分地区会出现变形。
 
-缓冲区的构建方法有两种：欧式方法 和 测地线方法
+而变形的程度，取决于选择的投影和所处的位置，以谷歌地图为例，它使用的是墨卡托投影的WGS84坐标系，墨卡托投影，圆柱投影的一种，这种投影的特点是，赤道地区变形最小，越是向南北两极的高纬度地区，变形越大，最明显的就是格陵兰岛
 
-欧式方法就是在地图上画圆。测地线方法是在真实的世界中画圆，然后再把这个圆反应到地图上。
+但在三维椭球体上进行缓冲，算法相对二维平面地图会更复杂很多，所以计算的效率会降低。
 
-额~  看上去，好像没啥区别，举个例子：
+
+
+ArcGIS的这篇 [缓冲区（分析）的工作原理](https://desktop.arcgis.com/zh-cn/arcmap/10.3/tools/analysis-toolbox/how-buffer-analysis-works.htm) 就对前面的问题给出了很专业的回答。
+
+
+
+欧式方法是在二维平面地图上画圆，测地线方法是在三维椭球体上画圆，二者各有优缺。
+
+二维平面地图和三维椭球体的区别是，后者经过地图投影能够得到前者。
+
+欧式方法的优点是算法简单，计算快。但因为
+
+
+
+
+
+
+
+
+
+举个例子：
 
 假设我们想要查看北京周边500公里的范围内有哪些城市，
 
@@ -26,13 +46,11 @@ buffer - 图形缓冲区分析，GIS中最基本的空间分析之一。
 
 测地线方法：找来一个软胶皮材质的地球仪，一个圆规，一把尺子。同样根据地球仪的比例尺算出500公里对应的长度，然后用圆规以北京为中心，画一个圆。
 
-（前方高能预警）
-
-接下来，把地球仪拆下来，找到本初子午线，然后把球沿本初子午线从南极点到北极点剪开，对剪开的地球进行拉拽，尽你最大的努力摊平了，
+接下来，拆下地球仪，找到本初子午线，用剪刀沿本初子午线从南极点剪到北极点，将剪开的地球仪进行拉伸，摊平了。
 
 摊平后再去看你之前画的那个圆，看它还圆不圆？
 
-这个把地球仪摊平的过程就是类似二维地图投影的一个过程，现实中的圆展示到二维地图上，要进行投影转换，而这个投影转换会导致圆变形。
+这个把地球仪摊平的过程就是类似地图投影的一个过程，现实中的圆展示到二维地图上，要进行投影转换，而这个投影转换会导致圆变形。
 
 到这里，答案揭晓，对点进行buffer分析得到椭圆的原因，是因为**地图投影**导致的变形。
 
@@ -54,9 +72,60 @@ buffer - 图形缓冲区分析，GIS中最基本的空间分析之一。
 
 
 
-开发时，如果选择构建方法：
-arcgis中使用xx参数
-postgis中，对xx进行类型转换postgis数据库中的缓冲用xx函数来实现
+开发时，如何选择构建方法：
+
+arcgis js api
+
+arcgis js api中使用`geodesic`参数（[详情](https://developers.arcgis.com/javascript/3/jsapi/bufferparameters-amd.html)）来控制，true时使用测地线方法，false时使用欧式方法。
+
+实现代码：
+
+```javascript
+var params = new BufferParameters();
+params.geometries = [ geometry ];
+params.distances = [ 500 ];
+params.unit = BufferParameters.UNIT_KILOMETER;
+params.geodesic = true;		//true时使用测地线方法，false时使用欧式方法
+geometryService.buffer(params, showBuffer);
+```
+
+如果不设置，默认值取决于多个参数共同作用（[详情](http://server.arcgisonline.com/arcgis/sdk/rest/index.html#//02ss000000nq000000)），下图是选择的逻辑树。
+
+![image-20201024112550835](C:\Users\xiaolei\AppData\Roaming\Typora\typora-user-images\image-20201024112550835.png)
+
+
+
+
+
+postGIS
+
+postgis数据库中用 [ST_Buffer](http://www.postgis.net/docs/ST_Buffer.html) 函数来实现缓冲，函数会根据输入坐标的类型来决定使用测地线方法还是欧式方法。
+
+![image-20201025112835533](C:\Users\xiaolei\AppData\Roaming\Typora\typora-user-images\image-20201025112835533.png)
+
+ geometry 类型代表投影坐标。函数会使用欧式方法；geography 类型代表地理坐标，函数会使用测地线方法。
+
+分析完成后返回的类型会和输入的类型保持一致。
+
+
+
+geometry和geography都是二进制类型，而我们平时用的最多的类型是geojson，使用 [ST_GeomFromGeoJSON](https://postgis.net/docs/ST_GeomFromGeoJSON.html) 函数可以将geojson数据转换为geometry类型。
+
+如果想要得到 geography 类型，
+
+
+
+反过来使用 [ST_AsGeoJSON](https://postgis.net/docs/ST_AsGeoJSON.html) 可以将
+
+下面的这个sql就是以天安门为中心，进行500公里的周边缓冲。输入和输出都使用geojson格式。
+
+```sql
+SELECT st_asgeojson(ST_Buffer(st_geomfromgeojson('{"type":"Point","coordinates":[116.391327,39.906329]}'),(500*1000) / (2 * pi() * 6371004) * 360))
+```
+
+
+
+
 
 truf中，xxxx。
 
@@ -78,3 +147,19 @@ truf中，xxxx。
 https://developers.arcgis.com/javascript/latest/sample-code/ge-geodesicbuffer/index.html
 
 http://www.postgis.net/docs/ST_Buffer.html
+
+
+
+http://server.arcgisonline.com/arcgis/sdk/rest/index.html#//02ss000000nq000000
+
+
+
+https://developers.arcgis.com/javascript/3/jsapi/bufferparameters-amd.html
+
+
+
+https://postgis.net/docs/using_postgis_dbmanagement.html#Geography_Basics
+
+
+
+https://postgis.net/docs/PostGIS_Special_Functions_Index.html#PostGIS_GeographyFunctions

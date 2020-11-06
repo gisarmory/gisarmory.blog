@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <style type="text/css">
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        html,
+        body,
+        #map {
+            height: 100%;
+        }
+    </style>
+
+    <!-- 引入leafletapi -->
+    <link rel="stylesheet" href="../lib/leaflet/leaflet.css" />
+    <script src="../lib/leaflet/leaflet.js"></script>
+    
+    <!-- 引入互联网地图插件 -->
+    <script src="../lib/leaflet/plugins/leaflet.ChineseTmsProviders.js"></script>
+
+    <!-- 
+        互联网地图纠偏插件
+        需配合 leaflet.ChineseTmsProviders.js 插件使用
+        无需js代码，引用后自动纠偏
+        纠偏后的坐标为WGS84
+    -->
+    <script type="text/javascript" src='../lib//leaflet/plugins/leaflet.mapCorrection.min.js'></script>
+
+    <script src='../lib//leaflet/plugins/turf.min.js'></script>
+    <script src="../lib/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <div id='map'></div>
+</body>
+
+<script type="text/javascript">
+
+    var map = L.map('map', {
+            center: [39.905530, 116.391305],
+            zoom: 17
+        });
+
+    //添加底图
+    L.tileLayer.chinaProvider('GaoDe.Normal.Map').addTo(map);
+
+    //设置中心点
+    var marker = L.marker([39.905530,116.391305]).addTo(map).bindPopup('<p>我是WGS84坐标下，天安门广场国旗所在位置</p>').openPopup();
+
+    //turf缓冲
+    var buffered = turf.buffer(marker.toGeoJSON(), 500, {units: 'meters'});
+    L.GeoJSON.geometryToLayer(buffered).addTo(map);
+
+    
+    //postGIS缓冲
+    var markerGeojson = marker.toGeoJSON();
+    var jsonObj = {
+            geojson:markerGeojson.geometry,
+            buffer:(500),
+            type:2
+    };
+    var jsonStr = JSON.stringify(jsonObj);
+    callAjax("geometry/buffer_geojson", jsonStr, "图形缓冲,geojson格式，buffer_geojson", function (result){
+        if(result.resCode == 0){
+            alert("调用后台接口出错")
+            return;
+        }
+        var resObj = result.data[0];
+
+        //把缓冲的结果显示在地图上
+        L.GeoJSON.geometryToLayer(JSON.parse(resObj.buffer)).addTo(map);
+    });
+    
+    //调用后台接口
+    function callAjax(funcName, paramObj, log, callback){
+        var hostUrl = "http://localhost:8885/gisarmory/backend/";
+        $.ajax({
+            type: "post",
+            url: hostUrl + funcName,
+            data: paramObj,
+            contentType:'application/json',
+            dataType: 'json',
+            success: function(result) {
+                console.log(log);
+                console.log(result);
+                if(callback){
+                    callback(result);
+                }
+                },
+            error:function(e){
+                console.log(e);
+            }
+        });
+    }
+    
+</script>
+
+</html>

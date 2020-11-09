@@ -52,10 +52,9 @@
     //添加底图
     L.tileLayer.chinaProvider('GaoDe.Normal.Map').addTo(map);
     //设置中心点
-    // var marker = L.marker([39.905530,116.391305]).addTo(map).bindPopup('<p>我是WGS84坐标下，天安门广场国旗所在位置</p>').openPopup();
+    var marker = L.marker([39.905530,116.391305]).addTo(map).bindPopup('<p>我是WGS84坐标下，天安门广场国旗所在位置</p>').openPopup();
     // var marker = L.marker([0.06591795420830737,114.69726562500001]).addTo(map).bindPopup('<p>我是WGS84坐标下，天安门广场国旗所在位置</p>').openPopup();
-    
-    var marker = L.marker([78.905530,116.391305]).addTo(map).bindPopup('<p>我是WGS84坐标下，天安门广场国旗所在位置</p>').openPopup();
+    // var marker = L.marker([78.905530,116.391305]).addTo(map).bindPopup('<p>我是WGS84坐标下，天安门广场国旗所在位置</p>').openPopup();
 
     //turf 缓冲
     function turfBuffer(){

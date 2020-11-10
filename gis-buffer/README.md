@@ -36,85 +36,92 @@ buffer的构建方法有两种：欧式方法 和 测地线方法。
 
 搞明白buffer的原理以后，再回过头来看开头出现的那个问题。
 
-最开始以为是欧式方法
+我的sql代码是这么写的
+
+![image-20201110183817280](C:\Users\HERO\AppData\Roaming\Typora\typora-user-images\image-20201110183817280.png)
+
+缓冲500米的效果是这样的
+
+![image-20201109210112613](C:\Users\HERO\AppData\Roaming\Typora\typora-user-images\image-20201109210112613.png)
+
+我自己的理解是，这个属于欧式方法。
+
+然后我又写了一个测地线方法，注意红框中是和上面的区别
+
+![image-20201110184138590](C:\Users\HERO\AppData\Roaming\Typora\typora-user-images\image-20201110184138590.png)
+
+缓冲500米效果是这样的
+
+![image-20201110184415635](C:\Users\HERO\AppData\Roaming\Typora\typora-user-images\image-20201110184415635.png)
+
+两个同时显示
+
+![image-20201110184657159](C:\Users\HERO\AppData\Roaming\Typora\typora-user-images\image-20201110184657159.png)
+
+问题很明显，为啥测地线方法的结果是圆的，欧式方法的结果是椭圆的呢？这和前面我学习的原理对不上啊！
+
+我又使用 truf.js 做500米的缓冲，缓冲结果和上面的图形叠加，效果是这样的
+
+![image-20201110185227560](C:\Users\HERO\AppData\Roaming\Typora\typora-user-images\image-20201110185227560.png)
+
+我陷入了深深的思考。
+
+感觉 truf.js 的这个应该是属欧式方法，查看 truf.js 的说明文档，只有一种缓冲方式，也没有相关说明解释是哪种。
+
+看来要找个权威的来校准一下了，使用 arcgis server 的 buffer 接口试试，看看是啥效果。
+
+代码
+
+![image-20201110190244861](C:\Users\HERO\AppData\Roaming\Typora\typora-user-images\image-20201110190244861.png)
+
+效果如下，大圈的是测地线方法，小圈的是欧式方法
+
+![image-20201110190339808](C:\Users\HERO\AppData\Roaming\Typora\typora-user-images\image-20201110190339808.png)
+
+这么看来，truf.js 就是只支持欧式方法，上面写的postGIS的测地线方法是正确的，欧式方法是有问题的。
+
+那就再研究postGIS中的欧式方法
+
+在调用arcgis server 的 buffer 接口时，注意到接口中传3个坐标相关的参数，`inSR` 输入图形的坐标，`outSR`输出图形的坐标，`bufferSR`缓冲时使用的坐标。
+
+![image-20201110191005317](C:\Users\HERO\AppData\Roaming\Typora\typora-user-images\image-20201110191005317.png)
+
+同样的方式对标一下postGIS中，
+
+传入和返回的也同样是`wgs84`的坐标，那缓冲时用的呢？
+
+哦，明白了。缓冲时应该也是用的`wgs84`坐标，但`wgs84`本身是个没有经过投影的地理坐标，当在一个地理坐标上进行欧式方法的缓冲计算时，就出现了上面的那种奇怪现象。
+
+嗯，有道理。转一下坐标试试，下图红框中就是坐标转换的过程，同时，因为使用投影坐标计算，buffer的距离参数可以直接使用米，不需要再转成弧度了。
+
+![image-20201110191757338](C:\Users\HERO\AppData\Roaming\Typora\typora-user-images\image-20201110191757338.png)
+
+看结果，哈哈，完美！
+
+![image-20201110192011776](C:\Users\HERO\AppData\Roaming\Typora\typora-user-images\image-20201110192011776.png)
 
 
-
-最后说一下开发时，这两种构建方法的实现方式
-
-
-
-开发时，如何选择构建方法：
-
-arcgis js api
-
-arcgis js api中使用`geodesic`参数（[详情](https://developers.arcgis.com/javascript/3/jsapi/bufferparameters-amd.html)）来控制，true时使用测地线方法，false时使用欧式方法。
-
-实现代码：
-
-```javascript
-var params = new BufferParameters();
-params.geometries = [ geometry ];
-params.distances = [ 500 ];
-params.unit = BufferParameters.UNIT_KILOMETER;
-params.geodesic = true;		//true时使用测地线方法，false时使用欧式方法
-geometryService.buffer(params, showBuffer);
-```
-
-如果不设置，默认值取决于多个参数共同作用（[详情](http://server.arcgisonline.com/arcgis/sdk/rest/index.html#//02ss000000nq000000)），下图是选择的逻辑树。
-
-![image-20201024112550835](C:\Users\xiaolei\AppData\Roaming\Typora\typora-user-images\image-20201024112550835.png)
-
-
-
-
-
-postGIS
-
-postgis数据库中用 [ST_Buffer](http://www.postgis.net/docs/ST_Buffer.html) 函数来实现缓冲，函数会根据输入坐标的类型来决定使用测地线方法还是欧式方法。
-
-![image-20201025112835533](C:\Users\xiaolei\AppData\Roaming\Typora\typora-user-images\image-20201025112835533.png)
-
- geometry 类型代表投影坐标。函数会使用欧式方法；geography 类型代表地理坐标，函数会使用测地线方法。
-
-分析完成后返回的类型会和输入的类型保持一致。
-
-
-
-geometry和geography都是二进制类型，而我们平时用的最多的类型是geojson，使用 [ST_GeomFromGeoJSON](https://postgis.net/docs/ST_GeomFromGeoJSON.html) 函数可以将geojson数据转换为geometry类型。
-
-如果想要得到 geography 类型，
-
-
-
-反过来使用 [ST_AsGeoJSON](https://postgis.net/docs/ST_AsGeoJSON.html) 可以将
-
-下面的这个sql就是以天安门为中心，进行500公里的周边缓冲。输入和输出都使用geojson格式。
-
-```sql
-SELECT st_asgeojson(ST_Buffer(st_geomfromgeojson('{"type":"Point","coordinates":[116.391327,39.906329]}'),(500*1000) / (2 * pi() * 6371004) * 360))
-```
-
-
-
-
-
-truf中，xxxx。
 
 ## 总结：
 
 1. buffer有两种构建方式，欧式方法和测地线方法
 2. 欧式方法是在投影变形后的平面地图上计算缓冲，优点是效率高，缺点是结果有误差，误差大小取决于投影、位置、缓冲距离。
 3. 测地线方法是在现实世界中画圆，再经过投影变形展示到地图上，优点是结果准确，不受投影和坐标的影响，缺点是计算复杂，大数据量时效率可能会有影响。
-4. truf.js 只支持欧式方法，arcgis server 两种构建方式。
-5. postGIS 支持两种构建方式，但欧式方法有bug。
+4. truf.js 只支持欧式方法。
+5. arcgis server 支持两种构建方式。
+6. postGIS 支持两种构建方式，但需要注意坐标的转换。
+
+## 在线示例
+
+文中用到的示例
+
+postGIS同时直接两种buffer方式的函数脚本
 
 
 
+参考文档：
 
-
-
-参考：https://desktop.arcgis.com/zh-cn/arcmap/10.3/tools/analysis-toolbox/how-buffer-analysis-works.htm
+https://desktop.arcgis.com/zh-cn/arcmap/10.3/tools/analysis-toolbox/how-buffer-analysis-works.htm
 
 https://developers.arcgis.com/javascript/latest/sample-code/ge-geodesicbuffer/index.html
 

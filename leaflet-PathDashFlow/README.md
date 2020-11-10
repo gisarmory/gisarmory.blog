@@ -3,7 +3,8 @@
 
 ![202010100101](http://blogimage.gisarmory.xyz/202010100101.png)
 
-注意，在`dashSpeed`为负时，线是正向流动。
+> 注意，在`dashSpeed`为负时，线是正向流动。
+>
 
 效果如下：
 
@@ -29,7 +30,7 @@ L.Canvas：
 
 ![202010190104](https://blogimage.gisarmory.xyz/202010190104.png)
 
-## 如何使用
+
 
 为方便使用，我们将`L.Path.DashFlow`插件重新封装，大家引用这个插件，即可在`Canvas`和`SVG`两种方式下使用此插件。
 

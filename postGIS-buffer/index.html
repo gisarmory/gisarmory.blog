@@ -34,10 +34,9 @@
 <body>
     <div id='map'></div>
 	<div class="menuBar">
-		<input type="button" value="turf-buffer" onclick="turfBuffer()" />
+		<input type="button" value="turf-buffer（欧式方法）" onclick="turfBuffer()" />
 		<input type="button" value="postGIS缓冲（测地线方法）" onclick="postGISBuffer(1)" />
 		<input type="button" value="postGIS缓冲（欧式方法）" onclick="postGISBuffer(2)" />
-		<input type="button" value="postGIS缓冲（欧式方法2）" onclick="postGISBuffer(3)" />
 		<input type="button" value="arcGIS缓冲（测地线方法）" onclick="arcgisServerBuffer(1)" />
 		<input type="button" value="arcGIS缓冲（欧式方法）" onclick="arcgisServerBuffer(2)" />
 	</div>
@@ -53,9 +52,7 @@
     //添加底图
     L.tileLayer.chinaProvider('GaoDe.Normal.Map').addTo(map);
     //设置中心点
-    var marker = L.marker([39.905530,116.391305]).addTo(map).bindPopup('<p>我是WGS84坐标下，天安门广场国旗所在位置</p>').openPopup();
-    // var marker = L.marker([0.06591795420830737,114.69726562500001]).addTo(map).bindPopup('<p>我是WGS84坐标下，天安门广场国旗所在位置</p>').openPopup();
-    // var marker = L.marker([78.905530,116.391305]).addTo(map).bindPopup('<p>我是WGS84坐标下，天安门广场国旗所在位置</p>').openPopup();
+    var marker = L.marker([39.905530,116.391305]).addTo(map).bindPopup('<p>天安门广场国旗所在位置</p>').openPopup();
 
     //turf 缓冲
     function turfBuffer(){
@@ -73,9 +70,11 @@
                 type:bufferType
         };
         var jsonStr = JSON.stringify(jsonObj);
-        var url = "http://localhost:8885/gisarmory/backend/geometry/buffer_geojson";
+        
+        //给接口地址仅用于测试
+        var url = "http://gisarmory.xyz/gisarmory/backend/geometry/buffer_geojson";
 
-        callAjax2('post', url, jsonStr, "图形缓冲,geojson格式，buffer_geojson", function (result){
+        callAjax('post', 'json', url, jsonStr, "图形缓冲,geojson格式，buffer_geojson", function (result){
             if(result.resCode == 0){
                 alert("调用后台接口出错")
                 return;
@@ -87,6 +86,7 @@
         });
     }
     
+    //arcgis server缓冲
     function arcgisServerBuffer(bufferType){
 
         var latlng = marker.getLatLng();
@@ -107,9 +107,11 @@
             geodesic:isGeodesic,         //是否使用测地线方法
             f:'json'
         }
+
+        //内网地址，需要替换成自己的
         var url = "http://192.168.200.30:6080/arcgis/rest/services/Utilities/Geometry/GeometryServer/buffer";
 
-        callAjax('get', url, paramObj, "图形缓冲,geojson格式，buffer_geojson", function (result){
+        callAjax('get', 'jsonp', url, paramObj, "图形缓冲,geojson格式，buffer_geojson", function (result){
 			for(var i=0; i<result.geometries.length; i++){
 				var geoObj = result.geometries[i];
 
@@ -129,13 +131,13 @@
 
     
     //调用后台接口
-    function callAjax(type, url, paramObj, log, callback){
+    function callAjax(type, dataType, url, paramObj, log, callback){
         $.ajax({
             type: type,
             url: url,
             data: paramObj,
             contentType:'application/json',
-            dataType: 'jsonp',
+            dataType: dataType,
             success: function(result) {
                 console.log(log);
                 console.log(result);
@@ -149,27 +151,6 @@
         });
     }
 
-    
-    //调用后台接口
-    function callAjax2(type, url, paramObj, log, callback){
-        $.ajax({
-            type: type,
-            url: url,
-            data: paramObj,
-            contentType:'application/json',
-            dataType: 'json',
-            success: function(result) {
-                console.log(log);
-                console.log(result);
-                if(callback){
-                    callback(result);
-                }
-                },
-            error:function(e){
-                console.log(e);
-            }
-        });
-    }
     
 </script>
 

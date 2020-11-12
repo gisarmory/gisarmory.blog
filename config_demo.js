@@ -18,4 +18,8 @@ var demoList = [{
     id: "LeafletPolylineDecorator",
     label: "Leaflet带箭头的线",
     url: "leaflet-PolylineDecorator/demo.html"
+}, {
+    id: "postGISbuffer",
+    label: "为什么PostGIS中对点进行buffer分析得到的是个椭圆",
+    url: "postGIS-buffer/index.html"
 }];

@@ -22,6 +22,7 @@
 
 [maputnik-如何让矢量瓦片配图神器maputnik支持 geoserver](http://gisarmory.xyz/blog/index.html?blog=maputnikGeoserverVectorTiles)
 
+[postGIS-为什么对点进行buffer分析得到的是个椭圆](http://gisarmory.xyz/blog/index.html?blog=postGISbuffer)
 
 
 ## 三维GIS开发

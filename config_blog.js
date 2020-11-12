@@ -38,4 +38,8 @@ var blogList = [{
     id: "maputnikGeoserverVectorTiles",
     label: "maputnik加载geoserver发布的tms矢量瓦片",
     url: "maputnik-GeoserverVectorTiles/README.md"
+}, {
+    id: "postGISbuffer",
+    label: "为什么PostGIS中对点进行buffer分析得到的是个椭圆",
+    url: "postGIS-buffer/README.md"
 }];

@@ -37,8 +37,8 @@
 		<input type="button" value="turf-buffer（欧式方法）" onclick="turfBuffer()" />
 		<input type="button" value="postGIS缓冲（测地线方法）" onclick="postGISBuffer(1)" />
 		<input type="button" value="postGIS缓冲（欧式方法）" onclick="postGISBuffer(2)" />
-		<input type="button" value="arcGIS缓冲（测地线方法）" onclick="arcgisServerBuffer(1)" />
-		<input type="button" value="arcGIS缓冲（欧式方法）" onclick="arcgisServerBuffer(2)" />
+		<!-- <input type="button" value="arcGIS缓冲（测地线方法）" onclick="arcgisServerBuffer(1)" />
+		<input type="button" value="arcGIS缓冲（欧式方法）" onclick="arcgisServerBuffer(2)" /> -->
 	</div>
 </body>
 
@@ -108,8 +108,8 @@
             f:'json'
         }
 
-        //内网地址，需要替换成自己的
-        var url = "http://192.168.200.30:6080/arcgis/rest/services/Utilities/Geometry/GeometryServer/buffer";
+        //arcgis服务buffer服务地址，需要替换成自己的
+        var url = "http://127.0.0.1:6080/arcgis/rest/services/Utilities/Geometry/GeometryServer/buffer";
 
         callAjax('get', 'jsonp', url, paramObj, "图形缓冲,geojson格式，buffer_geojson", function (result){
 			for(var i=0; i<result.geometries.length; i++){

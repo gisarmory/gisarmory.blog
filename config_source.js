@@ -19,7 +19,7 @@ var sourceList = [{
     label: "Leaflet带箭头的线",
     url: "https://github.com/gisarmory/Leaflet.PolylineDecorator"
 }, {
-    id: "maputnikGeoserverVectorTiles",
-    label: "maputnik加载geoserver发布的tms矢量瓦片",
+    id: "postGISbuffer",
+    label: "PostGIS中buffer函数脚本",
     url: "https://github.com/gisarmory/editor"
 }];

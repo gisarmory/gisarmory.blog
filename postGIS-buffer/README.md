@@ -128,11 +128,11 @@ buffer的构建方法有两种：**欧式方法** 和 **测地线方法**。
 5. arcgis server 支持两种构建方式。
 6. postGIS 支持两种构建方式，默认是欧式方法，欧式方法中，参数如果是经纬度坐标，需要先将经纬度坐标转换为投影坐标再进行计算，不然缓冲的结果会是个椭圆。将参数的类型从`geometry`强制转换为`geography` 后，postGIS会采用测地线方法进行缓冲计算。
 
-## 在线示例
+## 示例、源码
 
-文中用到的示例
+[postGIS缓冲区示例](http://gisarmory.xyz/blog/index.html?demo=postGISbuffer)
 
-postGIS同时直接两种buffer方式的函数脚本
+[postGIS中buffer函数创建脚本](http://gisarmory.xyz/blog/index.html?demo=postGISbuffer)
 
 
 
@@ -156,7 +156,7 @@ postGIS同时直接两种buffer方式的函数脚本
 
 * * *
 
-原文地址：[http://gisarmory.xyz/blog/index.html?blog=maputnikGeoserverVectorTiles](http://gisarmory.xyz/blog/index.html?blog=maputnikGeoserverVectorTiles)
+原文地址：[http://gisarmory.xyz/blog/index.html?blog=postGISbuffer](http://gisarmory.xyz/blog/index.html?blog=postGISbuffer)
 
 关注《[GIS兵器库](http://gisarmory.xyz/blog/index.html?blog=wechat)》公众号， 第一时间获得更多高质量GIS文章。
 

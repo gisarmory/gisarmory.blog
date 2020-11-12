@@ -21,5 +21,5 @@ var sourceList = [{
 }, {
     id: "postGISbuffer",
     label: "PostGIS中buffer函数脚本",
-    url: "https://github.com/gisarmory/editor"
+    url: "https://github.com/gisarmory/gisarmory.blog/blob/master/postGIS-buffer/postGIS-buffer.sql"
 }];

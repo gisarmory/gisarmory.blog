@@ -42,17 +42,17 @@ buffer的构建方法有两种：**欧式方法** 和 **测地线方法**。
 
 在postGIS中我的sql代码是这么写的，根据postGIS的[官方文档](http://www.postgis.net/docs/ST_Buffer.html)，这个应该属于欧式方法。
 
-![image-20201112141538745](C:\Users\HERO\AppData\Roaming\Typora\typora-user-images\image-20201112141538745.png)
+![image-20201112141538745](http://blogimage.gisarmory.xyz/20201112154513.png)
 
 缓冲500米的效果是这样的
 
-![image-20201109210112613](http://blogimage.gisarmory.xyz/20201112122701.png)
+![image-20201109210112613](http://blogimage.gisarmory.xyz/20201112122638.png)
 
 
 
 然后我又写了一个测地线方法，注意红框中和上面的区别，输入的 `v_inGeom` 变量，默认是`geometry`类型，把它强制转换为`geography` 后，postGIS就会使用测地线方法。
 
-![image-20201112141932669](C:\Users\HERO\AppData\Roaming\Typora\typora-user-images\image-20201112141932669.png)
+![image-20201112141932669](http://blogimage.gisarmory.xyz/20201112154509.png)
 
 缓冲500米效果是这样的
 
@@ -106,13 +106,13 @@ buffer的构建方法有两种：**欧式方法** 和 **测地线方法**。
 
 之所以会出现椭圆是因为，在geojson转几何图形时（看下图），`St_geomfromgeojson` [函数](http://postgis.net/docs/ST_GeomFromGeoJSON.html)返回的是`geometry`类型，缓冲时`ST_Buffer`[函数](http://www.postgis.net/docs/ST_Buffer.html)接收到`geometry`类型就会选择使用欧式方法进行缓冲，但geojson中的数据却是球面坐标的经纬度数据，缓冲的半径传入的也是弧度单位，用球面坐标和弧度距离单位，在欧式方法的平面地图算法中计算，最终结果是个椭圆也就不奇怪了。
 
-![image-20201112141538745](C:\Users\HERO\AppData\Roaming\Typora\typora-user-images\image-20201112141538745.png)
+![image-20201112141538745](http://blogimage.gisarmory.xyz/20201112154529.png)
 
 嗯~ 有道理。
 
 转一下坐标试试，下图红框中就是坐标转换的过程，同时，因为使用投影坐标计算，buffer的距离参数可以直接使用米，不需要再转成弧度了。
 
-![image-20201112150016107](C:\Users\HERO\AppData\Roaming\Typora\typora-user-images\image-20201112150016107.png)
+![image-20201112150016107](http://blogimage.gisarmory.xyz/20201112154533.png)
 
 再试，大圆是测地线方法，小圆是欧式方法，哈哈，完美！
 

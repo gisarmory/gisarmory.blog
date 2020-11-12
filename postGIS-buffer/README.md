@@ -1,4 +1,4 @@
-# 为什么PostGIS中对点进行buffer分析得到的是个椭圆
+# 你真的会用PostGIS中的buffer缓冲吗？
 
 buffer - 图形缓冲区分析，GIS中最基本的空间分析之一。
 
@@ -10,13 +10,13 @@ buffer - 图形缓冲区分析，GIS中最基本的空间分析之一。
 
 为什么是椭圆，不应该是正圆吗？
 
-要搞清楚这个问题，就得去研究buffer的原理。
+为了搞清楚这个问题，我去研究buffer的原理。
 
 buffer的构建方法有两种：**欧式方法** 和 **测地线方法**。
 
 1. 欧式方法是在二维平面地图上做缓冲计算，这个二维平面地图是地球经过投影后得到的地图，投影的过程会导致地图发生变形，欧式方法就是基于变形以后的地图来计算缓冲区的。
 
-2. 测地线方法是在三维椭球体上计算，三维椭球体是一个很接近地球形状球体，测地线方法就是基于这个球体的表面进行缓冲计算，再将计算结果经过投影变换，展示到地图上。
+2. 测地线方法是在三维椭球体上计算，三维椭球体是一个很接近地球形状的球体，测地线方法就是基于这个球体的表面进行缓冲计算，再将计算结果经过投影变换，展示到地图上。
 
 
 二者计算结果的区别是，欧式方法的计算结果在任何时候都是一个正圆，但把结果放到现实世界中却会存在误差。误差的大小，取决于投影、缓冲的位置和缓冲的距离，以高德地图为例，它使用的是墨卡托投影，这种投影下，赤道地区变形最小，越是向南北两极的高纬度地区，变形越大，最明显的就是格陵兰岛，它的面积只有中国大陆面积的1/4左右，但在地图上看，却比中国还要大。
@@ -25,7 +25,7 @@ buffer的构建方法有两种：**欧式方法** 和 **测地线方法**。
 
 
 
-测地线方法的计算结果没有实际没有误差，但要在二维地图上展示，就要进行地图投影，投影就会导致变形。
+测地线方法的计算结果实际没有误差，但要在二维地图上展示，就要进行地图投影，投影就会导致变形。
 
 如果既要结果没有误差，又要展示不出现变形，怎么办？
 
@@ -41,7 +41,7 @@ buffer的构建方法有两种：**欧式方法** 和 **测地线方法**。
 
 搞明白buffer的原理以后，再回过头来看开头出现的那个问题。
 
-在postGIS中我的sql代码是这么写的
+在postGIS中我的sql代码是这么写的，根据postGIS的[官方文档](http://www.postgis.net/docs/ST_Buffer.html)，这个应该属于欧式方法。
 
 ![image-20201111181346367](http://blogimage.gisarmory.xyz/20201112122658.png)
 
@@ -50,8 +50,6 @@ buffer的构建方法有两种：**欧式方法** 和 **测地线方法**。
 ![image-20201109210112613](http://blogimage.gisarmory.xyz/20201112122701.png)
 
 
-
-我自己的理解是，这个应该属于欧式方法。
 
 然后我又写了一个测地线方法，注意红框中和上面的区别，输入的 `v_inGeom` 变量，默认是`geometry`类型，把它强制转换为`geography` 后，postGIS就会使用测地线方法。
 
@@ -75,11 +73,13 @@ buffer的构建方法有两种：**欧式方法** 和 **测地线方法**。
 
 我陷入了深深的思考。
 
-查看 truf.js 的说明文档，只有一种缓冲方式，也没有具体说明是哪种。
+查看 truf.js 的[官方文档](http://turfjs.org/docs/#buffer)，只有一种缓冲方式，也没有具体说明是哪种。
 
-感觉 truf.js 的这个应该才是正确的欧式方法，那个椭圆到底是什么鬼？
+感觉 truf.js 的这个应该才是正确的欧式方法，那上面的椭圆是什么鬼？
 
-看来要找个权威的来校准一下了，使用 arcgis server 的 buffer 接口试试，看看是啥效果。
+
+
+看来需要找个权威的来校准一下，使用 arcgis server 的 buffer 接口试试，看看是啥效果。
 
 代码
 
@@ -91,7 +91,7 @@ buffer的构建方法有两种：**欧式方法** 和 **测地线方法**。
 
 
 
-这么看来，truf.js 就是只支持欧式方法，上面写的postGIS的测地线方法是正确的，欧式方法是有问题的。
+这么看来，truf.js 中是欧式方法，postGIS中的测地线方法是正确的，但欧式方法是有问题的。
 
 那就再研究postGIS中的欧式方法。
 
@@ -138,6 +138,12 @@ buffer的构建方法有两种：**欧式方法** 和 **测地线方法**。
 
 ## 参考文档
 
+> *http://www.postgis.net/docs/ST_Buffer.html*
+>
+> *https://postgis.net/docs/using_postgis_dbmanagement.html#Geography_Basics*
+>
+> *http://turfjs.org/docs/#buffer*
+>
 > *https://desktop.arcgis.com/zh-cn/arcmap/10.3/tools/analysis-toolbox/how-buffer-analysis-works.htm*
 >
 > *http://server.arcgisonline.com/arcgis/sdk/rest/index.html#//02ss000000nq000000*
@@ -145,10 +151,6 @@ buffer的构建方法有两种：**欧式方法** 和 **测地线方法**。
 > *http://server.arcgisonline.com/arcgis/sdk/rest/index.html#/Buffer/02ss0000003z000000/*
 >
 > *https://developers.arcgis.com/javascript/latest/sample-code/ge-geodesicbuffer/index.html*
->
-> *http://www.postgis.net/docs/ST_Buffer.html*
->
-> *https://postgis.net/docs/using_postgis_dbmanagement.html#Geography_Basics*
 
 
 

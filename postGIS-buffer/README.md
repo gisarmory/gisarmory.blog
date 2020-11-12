@@ -122,7 +122,7 @@ buffer的构建方法有两种：**欧式方法** 和 **测地线方法**。
 
 很明显，下图中，500米的距离和上图中大圆的边界是一致的，也就是测地线方法更准确。
 
-![image-20201112151837047](C:\Users\HERO\AppData\Roaming\Typora\typora-user-images\image-20201112151837047.png)
+![image-20201112151837047](http://blogimage.gisarmory.xyz/20201112155024.png)
 
 
 

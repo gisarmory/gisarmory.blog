@@ -132,7 +132,7 @@ buffer的构建方法有两种：**欧式方法** 和 **测地线方法**。
 
 [postGIS缓冲区示例](http://gisarmory.xyz/blog/index.html?demo=postGISbuffer)
 
-[postGIS中buffer函数创建脚本](http://gisarmory.xyz/blog/index.html?demo=postGISbuffer)
+[postGIS中buffer函数创建脚本](http://gisarmory.xyz/blog/index.html?source=postGISbuffer)
 
 
 

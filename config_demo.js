@@ -22,4 +22,13 @@ var demoList = [{
     id: "postGISbuffer",
     label: "为什么PostGIS中对点进行buffer分析得到的是个椭圆",
     url: "postGIS-buffer/index.html"
-}];
+}, {
+    id: "diviconError-CanvasMarker",
+    label: "H5时代leaflet中还在用DivIcon，标签示例",
+    url: "leaflet-divIconError/canvas-markers.html"
+}, {
+    id: "diviconError-LabelTextCollision",
+    label: "H5时代leaflet中还在用DivIcon，文字标注示例",
+    url: "leaflet-divIconError/LabelTextCollision.html"
+}
+];

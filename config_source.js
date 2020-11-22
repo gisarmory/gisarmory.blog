@@ -22,4 +22,12 @@ var sourceList = [{
     id: "postGISbuffer",
     label: "PostGIS中buffer函数脚本",
     url: "https://github.com/gisarmory/gisarmory.blog/blob/master/postGIS-buffer/postGIS-buffer.sql"
+}, {
+    id: "diviconError-CanvasMarker",
+    label: "H5时代leaflet中还在用DivIcon，标签示例",
+    url: "https://github.com/gisarmory/Leaflet.Canvas-Markers"
+}, {
+    id: "diviconError-LabelTextCollision",
+    label: "H5时代leaflet中还在用DivIcon，文字标注示例",
+    url: "https://github.com/gisarmory/Leaflet.LabelTextCollision"
 }];

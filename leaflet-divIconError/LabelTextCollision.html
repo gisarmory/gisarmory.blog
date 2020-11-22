@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Leaflet.label example</title>
+
+<link rel="stylesheet" href="../lib/leaflet/leaflet.css" crossorigin=""/>
+<script src="../lib/leaflet/leaflet.js" crossorigin=""></script>
+
+<script src="../lib/leaflet/plugins/L.LabelTextCollision.js"></script>
+
+</head>
+<body>
+    <div id="map" style="width: 60%; height: 600px"></div>
+    <br>
+    <input type="checkbox" checked onclick="setCollisionDetection(this.checked)"> Collision detection
+    <script>
+        var baseMap = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png');
+        var labelTextCollision = new L.LabelTextCollision({
+                collisionFlg : true
+            });
+
+        var map = new L.Map('map', {
+            layers : [ baseMap ],
+            center : new L.LatLng(39.905963, 116.390813),
+            zoom : 14,
+            renderer : labelTextCollision
+        });
+
+        var p = L.polyline(
+                [ [ 39.695786, 116.749213 ],
+                        [ 39.696786, 116.748213 ],
+                        [ 39.695786, 116.747213 ] ], {
+                    weight : 12,
+                    color : '#fe57a1',
+                    text : 'Leaflet.LabelTextCollision!!!!!!!!',
+                    textStyle: {
+                        stroke: true,
+                        color: '#ff0000',
+                        font: "16px 'Microsoft Yahei'",
+                    }
+                }).addTo(map);
+
+        var layers = L.featureGroup().addTo(map);
+
+        for (var i = 0; i < 10000; i++) {   //最高可到5万左右
+            var lat = 39.905963 + (Math.random() - Math.random()) * 3;
+            var lng = 116.390813 + (Math.random() - Math.random()) * 3;
+            var latlng = L.latLng(lat, lng);
+
+            var c = L.circleMarker(latlng, {
+                radius : 5,
+                text : latlng.toString(),
+                textStyle: {
+                    stroke: true,
+                    color: '#3388ff',
+                    font: "15px 'Microsoft Yahei'",
+                    offsetX: -70,
+                    offsetY: -10,
+                }
+            });
+            layers.addLayer(c);
+
+        }
+
+        function setCollisionDetection(flg) {
+            labelTextCollision.options.collisionFlg = flg;
+            map.fitBounds(map.getBounds());
+        }
+    </script>
+</body>
+</html>

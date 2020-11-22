@@ -42,4 +42,8 @@ var blogList = [{
     id: "postGISbuffer",
     label: "为什么PostGIS中对点进行buffer分析得到的是个椭圆",
     url: "postGIS-buffer/README.md"
+}, {
+    id: "diviconError",
+    label: "H5时代leaflet中还在用DivIcon，标签示例",
+    url: "leaflet-divIconError/README.md"
 }];

@@ -118,7 +118,7 @@ LabelTextCollision插件创作的目的，是为了实现的文字标注的自�
 
 标签功能 [http://gisarmory.xyz/blog/index.html?source=diviconError-CanvasMarker](http://gisarmory.xyz/blog/index.html?source=diviconError-CanvasMarker)
 
-文字标注功能 [http://gisarmory.xyz/blog/index.html?source=diviconError-LabelTextCollision](http://gisarmory.xyz/blog/index.html?demo=diviconError-LabelTextCollision)
+文字标注功能 [http://gisarmory.xyz/blog/index.html?source=diviconError-LabelTextCollision](http://gisarmory.xyz/blog/index.html?source=diviconError-LabelTextCollision)
 
 
 

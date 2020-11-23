@@ -24,6 +24,8 @@
 
 [postGIS-你真的会用buffer缓冲吗？](http://gisarmory.xyz/blog/index.html?blog=postGISbuffer)
 
+[H5时代leaflet中还在用DivIcon？](http://gisarmory.xyz/blog/index.html?blog=diviconError)
+
 
 
 ## 三维GIS开发

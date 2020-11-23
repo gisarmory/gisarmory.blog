@@ -1,18 +1,26 @@
 # H5时代leaflet中还在用DivIcon？
 
-前段时间发了篇《[leaflet如何加载10万数据](http://gisarmory.xyz/blog/index.html?blog=leaflet100ThousandData)》的文章，有同学反应其中的Canvas-Markers插件不支持DivIcon，我们今天就来解决一下这个问题。
+前段时间发了篇《[leaflet如何加载10万数据](http://gisarmory.xyz/blog/index.html?blog=leaflet100ThousandData)》的文章，有同学反应其中的Canvas-Markers插件不支持DivIcon。我们今天就来聊一聊，为什么这个插件不支持DivIcon，以及如何用H5的Canvas特性，实现以前经常用DivIcon来实现的 **标签** 和 **文字标注** 功能。
 
-今年疫情期间，在家远程办公时，发现家里的网不好，年前联通刚打电话通知过，说宽带给从100兆免费升级到了300兆，但自己实际测试，网速只有50兆，让联通的技术人员来检查，说线路没有问题，建议换个路由器。我看了一下路由器，恍然大悟，宽带虽然升级了，但路由还是之前的百兆路由，成为了瓶颈。马上京东下单个千兆路由，换上以后网速妥妥的200兆以上。
+老规矩，先上最终效果图：
 
-回到前面Canvas-Markers插件不支持DivIcon的问题。
+标签功能
 
-Canvas-Markers插件的目的就是为了解决，展示大批量数据时的性能问题，它通过使用H5中Canvas的绘图方式绘制Marker，提升了展示性能。但该插件目前只支持Icon，不支持DivIcon。
+![canvas](http://blogimage.gisarmory.xyz/20201123185156.gif)
 
-为什么不支持？
+文字标注功能
 
-因为DivIcon的实现原理是在HTML页面中添加DOM元素，并在地图平移、缩放时不断的修改DOM元素的属性，而大量添加和修改DOM元素会拉低浏览器的展示性能，出现卡顿等现象。
+![textConllis2](D:\Users\HERO\Desktop\20201123122445.gif)
 
-如果使用Canvas-Markers后还继续使用DivIcon，就相当于是升级了带宽以后，还在用之前的老路由器。这时DivIcon就会成为提升显示性能的瓶颈。
+
+
+## 为什么不支持DivIcon
+
+Canvas-Markers插件的目的是为了解决，大批量数据在浏览器展示时的性能问题，它通过使用H5中Canvas的绘图方式绘制Marker，提升展示性能。但该插件目前只支持Icon，不支持DivIcon。
+
+之所以不支持，是因为DivIcon的实现原理是在HTML页面中添加DOM元素，并在地图平移、缩放时不断的修改DOM元素的属性，而大量添加和修改DOM元素会拉低浏览器的展示性能，出现卡顿等现象。
+
+如果使用Canvas-Markers后还继续使用DivIcon，就相当于是升级了千兆带宽以后，还在用之前的百兆老路由器。这时DivIcon就会成为提升显示性能的瓶颈。
 
 如果不用DivIcon这个老路由器，有没有新路由器呢？
 
@@ -96,7 +104,7 @@ LabelTextCollision插件创作的目的，是为了实现的文字标注的自�
 
 ## 总结
 
-1. Canvas-Markers插件的目的是为了解决，展示大批量数据时的性能问题
+1. Canvas-Markers插件的目的是为了解决，大批量数据在浏览器展示时的性能问题
 2. DivIcon实现的原理是在HTML页面中添加DOM元素，大量添加和修改DOM元素会拉低浏览器展示性能
 3. 从提高浏览器展示性能的出发点考虑，Canvas-Markers不应该去支持DivIcon
 4. 我们用DivIcon，通常是为了实现标签功能和文字标注功能，这两个功能可以通过其它方式来实现

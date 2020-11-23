@@ -22,11 +22,11 @@ Canvas-Markers插件的目的就是为了解决，展示大批量数据时的性
 
 标签功能：
 
-![image-20201121164957140](C:\Users\HERO\AppData\Roaming\Typora\typora-user-images\image-20201121164957140.png)
+![image-20201121164957140](http://blogimage.gisarmory.xyz/20201123122419.png)
 
 文字标注功能：
 
-![image-20201121165508761](C:\Users\HERO\AppData\Roaming\Typora\typora-user-images\image-20201121165508761.png)
+![image-20201121165508761](http://blogimage.gisarmory.xyz/20201123122423.png)
 
 
 
@@ -44,15 +44,15 @@ Canvas-Markers插件通过Icon获取图片的地址和图片的偏移位置等�
 
 打开Canvas-Markers插件的代码，在下图位置增加一个绘制文字的方法。
 
-![image-20201121172659282](C:\Users\HERO\AppData\Roaming\Typora\typora-user-images\image-20201121172659282.png)
+![image-20201121172659282](http://blogimage.gisarmory.xyz/20201123122427.png)
 
 再在下图中的三个位置，增加上面新增方法的调用
 
-![image-20201121173254912](C:\Users\HERO\AppData\Roaming\Typora\typora-user-images\image-20201121173254912.png)
+![image-20201121173254912](http://blogimage.gisarmory.xyz/20201123122430.png)
 
 这样就可以实现标签功能了，看效果
 
-![canvasicon2](D:\Users\HERO\Desktop\canvasicon2.gif)
+![canvasicon2](http://blogimage.gisarmory.xyz/20201123122434.gif)
 
 性能方面，最大支持10万条数据左右。
 
@@ -64,7 +64,7 @@ Canvas-Markers插件通过Icon获取图片的地址和图片的偏移位置等�
 
 LabelTextCollision插件创作的目的，是为了实现的文字标注的自动避让功能，实现方式是Canvas，文字标注功能是它顺带解决的问题。
 
-![image-20201121182405099](C:\Users\HERO\AppData\Roaming\Typora\typora-user-images\image-20201121182405099.png)
+![image-20201121182405099](http://blogimage.gisarmory.xyz/20201123122439.png)
 
 测试时，发现了它一个问题，1万条数据，在缩小地图时，显示很流畅，但放大地图时，会出现卡顿的情况，而且地图越放大，卡顿的就越厉害。
 
@@ -78,11 +78,11 @@ LabelTextCollision插件创作的目的，是为了实现的文字标注的自�
 
 那我们就来给它加上，在下图中的两个地方添加对屏幕显示范围的判断，只显示当前能看到的数据。
 
-![image-20201121193759514](C:\Users\HERO\AppData\Roaming\Typora\typora-user-images\image-20201121193759514.png)
+![image-20201121193759514](http://blogimage.gisarmory.xyz/20201123122442.png)
 
 再试一下，哈哈，搞定
 
-![textConllis2](D:\Users\HERO\Desktop\textConllis2.gif)
+![textConllis2](http://blogimage.gisarmory.xyz/20201123122445.gif)
 
 测试了下，优化后，可以加载5万条数据左右。
 

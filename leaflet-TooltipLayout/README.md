@@ -46,9 +46,9 @@
 
 ## 在线示例
 
-[点击显示气泡](http://gisarmory.xyz/blog/index.html?demo=LeafletShowHideLayerGroup)
+[点击显示气泡](http://gisarmory.xyz/blog/index.html?demo=LeafletTooltipLayout1)
 
-[常显示气泡](http://gisarmory.xyz/blog/index.html?demo=LeafletShowHideLayerGroup)
+[常显示气泡](http://gisarmory.xyz/blog/index.html?demo=LeafletTooltipLayout2)
 
 
 

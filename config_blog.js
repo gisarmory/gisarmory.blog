@@ -46,4 +46,8 @@ var blogList = [{
     id: "diviconError",
     label: "H5时代leaflet中还在用DivIcon，标签示例",
     url: "leaflet-divIconError/README.md"
+}, {
+    id: "LeafletTooltipLayout",
+    label: "leaflet可自动避让的气泡窗口",
+    url: "leaflet-TooltipLayout/README.md"
 }];

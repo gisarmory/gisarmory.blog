@@ -26,6 +26,8 @@
 
 [H5时代leaflet中还在用DivIcon？](http://gisarmory.xyz/blog/index.html?blog=diviconError)
 
+[leaflet可自动避让的气泡窗口](http://gisarmory.xyz/blog/index.html?blog=LeafletTooltipLayout)
+
 
 
 ## 三维GIS开发

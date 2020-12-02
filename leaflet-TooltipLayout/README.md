@@ -4,27 +4,27 @@
 
 话不多说，先上效果：
 
-![2020113002](F:\myself\gisarmory\Leaflet.TooltipLayout\2020113002.gif)
+![2020113002](https://blogimage.gisarmory.xyz/2020113002.gif)
 
 
 
 在平时项目工作中，经常遇到这种需求，两个或者多个点位完全重合了，但就是想点击时同时看到这些个点位的信息。之前常用的解决方案就是处理下气泡代码，可以切换展示（如下图效果）；甚至看到有些处理方式是直接修改部分点位坐标，让点位不再重合，从而可以点击到每个点位来避免此问题。
 
-![2020113005](F:\myself\gisarmory\Leaflet.TooltipLayout\2020113005.gif)
+![2020113005](https://blogimage.gisarmory.xyz/2020113005.gif)
 
 相信有不少同学都用过这两种方式来解决此问题，在此我们不评论上述两种方式是否可取。不过当我在GIT上找到`leaflet-tooltip-layout`这个插件后，我觉着这才应该是解决点位重合又要同时看到所有点位气泡信息的最佳解决效果。
 
 在使用该插件时，发现直接引用，并没有成功展示气泡信息。通过对该插件代码的研究，将`initialize()`方法中的`markerList = []`注释，即可正常使用。
 
-![202011300106](F:\myself\gisarmory\Leaflet.TooltipLayout\202011300106.png)
+![202011300106](https://blogimage.gisarmory.xyz/202011300106.png)
 
 该插件主要是通过处理`L.tooltip()`位置关系，从而实现多点位气泡信息展示，同时尽可能避免气泡之间的遮盖，下图就是同时展示多个点位气泡信息的效果。
 
-![202011300101](F:\myself\gisarmory\Leaflet.TooltipLayout\202011300101.png)
+![202011300101](https://blogimage.gisarmory.xyz/202011300101.png)
 
 在我们平时常遇到的另一种需求就是通过点位的点击事件来展示气泡信息。然而在使用该插件过程中，发现该插件没有清除的方法，无法直接实现点击查看气泡。经过对该插件代码研究，添加了清除的方法后，即可在点击时使用该插件，效果见文章开头gif图。
 
-![202011300103](F:\myself\gisarmory\Leaflet.TooltipLayout\202011300103.png)
+![202011300103](https://blogimage.gisarmory.xyz/202011300103.png)
 
 ## 如何使用
 
@@ -36,7 +36,7 @@
 
 第三步，L.tooltipLayout.initialize(map, onPolylineCreated)；
 
-![202011300104](F:\myself\gisarmory\Leaflet.TooltipLayout\202011300104.png)
+![202011300104](https://blogimage.gisarmory.xyz/202011300104.png)
 
 ## 总结
 

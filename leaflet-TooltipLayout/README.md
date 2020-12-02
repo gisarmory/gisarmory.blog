@@ -54,8 +54,6 @@
 
 [常显示气泡](http://gisarmory.xyz/blog/index.html?demo=LeafletTooltipLayout2)
 
-
-
 [完整代码](http://gisarmory.xyz/blog/index.html?source=LeafletTooltipLayout)
 
 

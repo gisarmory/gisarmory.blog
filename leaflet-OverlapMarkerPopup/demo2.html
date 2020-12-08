@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <!-- 引入leafletapi -->
+    <link rel="stylesheet" href="../lib/leaflet/leaflet.css" />
+    <script src="../lib/leaflet/leaflet.js"></script>
+
+    <!-- 引入插件 -->
+    <script src="../lib/leaflet/plugins/Leaflet.PopupLayoutLayer.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .map {
+            position: absolute;
+            height: 100%;
+            right: 0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="map" id="map"></div>
+</body>
+
+<script>
+    // 初始化地图
+    var map = L.map('map', {
+        center: [39.924317, 116.390619],
+        zoom: 8,
+        preferCanvas: true // 使用canvas模式渲染矢量图形 
+    });
+    // 添加底图
+    var tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
+
+    const iconsmall = L.icon({
+        iconUrl: '../img/circle-grey.png',
+        iconSize: [10, 10]
+    });
+
+    const iconlarge = L.icon({
+        iconUrl: '../img/circle-red.png',
+        iconSize: [14, 14]
+    });
+
+    var popupLayoutLayer = new L.popupLayoutLayer().addTo(map)
+
+    // 添加点
+    addPoint()
+
+    function addPoint() {
+        for (var i = 0; i < 10; i++) {
+            var x = 115.390619 + (2 * Math.random());
+            var y = 38.924317 + (2 * Math.random());
+            var k = Math.ceil(5 * Math.random())
+            for (var j = 0; j < k; j++) {
+                addMarker(x, y, j, k)
+            }
+        }
+    }
+
+    function addMarker(x, y, j, k) {
+        var marker = L.marker([y, x], {
+            icon: iconsmall
+        }).addTo(map)
+        var contentHTML = ` <div> <strong>共` + k + `个点</strong> <div>第` + (j + 1) + `个点</div> </div> `
+        popupLayoutLayer.addMarker(marker, contentHTML)
+    }
+</script>
+
+</html>

@@ -47,7 +47,7 @@ var blogList = [{
     label: "H5时代leaflet中还在用DivIcon，标签示例",
     url: "leaflet-divIconError/README.md"
 }, {
-    id: "LeafletTooltipLayout",
-    label: "leaflet可自动避让的气泡窗口",
-    url: "leaflet-TooltipLayout/README.md"
+    id: "LeafletOverlapMarkerPopup",
+    label: "leaflet如何优雅的展示重叠点位的气泡窗口",
+    url: "leaflet-OverlapMarkerPopup/README.md"
 }];

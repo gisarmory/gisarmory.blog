@@ -31,12 +31,16 @@ var demoList = [{
     label: "H5时代leaflet中还在用DivIcon，文字标注示例",
     url: "leaflet-divIconError/LabelTextCollision.html"
 }, {
-    id: "LeafletTooltipLayout1",
-    label: "leaflet可自动避让的气泡窗口-点击显示气泡",
-    url: "leaflet-TooltipLayout/demo1.html"
+    id: "LeafletOverlapMarkerPopup1",
+    label: "leaflet可自动避让的气泡窗口-切换显示气泡",
+    url: "leaflet-OverlapMarkerPopup/demo1.html"
 }, {
-    id: "LeafletTooltipLayout2",
-    label: "leaflet可自动避让的气泡窗口-常显示气泡",
-    url: "leaflet-TooltipLayout/demo2.html"
+    id: "LeafletOverlapMarkerPopup2",
+    label: "leaflet可自动避让的气泡窗口-显示所有气泡",
+    url: "leaflet-OverlapMarkerPopup/demo2.html"
+}, {
+    id: "LeafletOverlapMarkerPopup3",
+    label: "leaflet可自动避让的气泡窗口-点击显示气泡",
+    url: "leaflet-OverlapMarkerPopup/demo3.html"
 }
 ];

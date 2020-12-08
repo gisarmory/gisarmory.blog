@@ -31,7 +31,7 @@ var sourceList = [{
     label: "H5时代leaflet中还在用DivIcon，文字标注示例",
     url: "https://github.com/gisarmory/Leaflet.LabelTextCollision"
 }, {
-    id: "LeafletTooltipLayout",
-    label: "leaflet可自动避让的气泡窗口",
-    url: "https://github.com/gisarmory/Leaflet.TooltipLayout"
+    id: "LeafletOverlapMarkerPopup",
+    label: "leaflet如何优雅的展示重叠点位的气泡窗口",
+    url: "https://github.com/gisarmory/Leaflet.OverlapMarkerPopup"
 }];

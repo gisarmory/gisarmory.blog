@@ -6,11 +6,11 @@
 
 效果一：
 
-![2020120701](F:\myself\gisarmory\Leaflet.TooltipLayout\2020120701.gif)
+![2020120701](https://blogimage.gisarmory.xyz/2020120701.gif)
 
 效果二：
 
-![2020120702](F:\myself\gisarmory\Leaflet.TooltipLayout\2020120702.gif)
+![2020120702](https://blogimage.gisarmory.xyz/2020120702.gif)
 
 
 
@@ -22,7 +22,7 @@
 
 此方案的处理方式是，点击时获取与该点位重合的所有点位，然后整合需要在气泡中展示的内容，添加切换功能，达到切换展示所有气泡信息的效果（见本文开头效果一）核心代码如下。
 
-![2020120703](F:\myself\gisarmory\Leaflet.TooltipLayout\2020120703.png)
+![2020120703](https://blogimage.gisarmory.xyz/2020120703.png)
 
 我们将该方法封装成插件，引用插件后，只需简单的两步即可实现上图效果。
 
@@ -66,7 +66,7 @@
 
 `popupLayoutLayer.showPopup()`
 
-![202012040102](F:\myself\gisarmory\Leaflet.TooltipLayout\202012040102.png)
+![202012040102](https://blogimage.gisarmory.xyz/202012040102.png)
 
 
 
@@ -83,13 +83,13 @@
 
 ## 在线示例
 
-[PopupListLayer 切换显示气泡](http://gisarmory.xyz/blog/index.html?demo=LeafletTooltipLayout1)
+[PopupListLayer 切换显示气泡](http://gisarmory.xyz/blog/index.html?demo=LeafletOverlapMarkerPopup1)
 
-[PopupLayoutLayer 常显示气泡](http://gisarmory.xyz/blog/index.html?demo=LeafletTooltipLayout2)
+[PopupLayoutLayer 显示所有气泡](http://gisarmory.xyz/blog/index.html?demo=LeafletOverlapMarkerPopup2)
 
-[PopupLayoutLayer 点击显示气泡](http://gisarmory.xyz/blog/index.html?demo=LeafletTooltipLayout1)
+[PopupLayoutLayer 点击显示气泡](http://gisarmory.xyz/blog/index.html?demo=LeafletOverlapMarkerPopup3)
 
-[完整代码](http://gisarmory.xyz/blog/index.html?source=LeafletTooltipLayout)
+[完整代码](http://gisarmory.xyz/blog/index.html?source=LeafletOverlapMarkerPopup)
 
 
 

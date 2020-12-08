@@ -49,7 +49,9 @@
         iconSize: [14, 14]
     });
 
-    var popupLayoutLayer = new L.popupLayoutLayer().addTo(map)
+    var popupLayoutLayer = new L.popupLayoutLayer({
+        showAll: true // true，显示所有气泡；默认为 false，通过点击查看气泡
+    }).addTo(map)
 
     // 添加点
     addPoint()
@@ -68,9 +70,53 @@
     function addMarker(x, y, j, k) {
         var marker = L.marker([y, x], {
             icon: iconsmall
-        }).addTo(map)
+        })
         var contentHTML = ` <div> <strong>共` + k + `个点</strong> <div>第` + (j + 1) + `个点</div> </div> `
         popupLayoutLayer.addMarker(marker, contentHTML)
+    }
+
+    // 显示所有气泡（showAll 为 true 时有效）
+    popupLayoutLayer.showPopup()
+
+    tooltipMouseEvent()
+
+
+    // 鼠标移入事件
+    function tooltipMouseEvent() {
+        var tooltipMarkerList = popupLayoutLayer.getMarkers();
+        for (var i = 0; i < tooltipMarkerList.length; i++) {
+            var marker = tooltipMarkerList[i];
+            var tooltip = marker.getTooltip();
+            marker._icon.addEventListener('mouseover', onMarkerMouseover(marker, tooltip._container));
+            marker._icon.addEventListener('mouseout', onMarkerMouseout(marker, tooltip._container));
+            tooltip._container.addEventListener('mouseover', onMarkerMouseover(marker, tooltip._container));
+            tooltip._container.addEventListener('mouseout', onMarkerMouseout(marker, tooltip._container));
+        }
+    }
+
+    function onMarkerMouseover(marker, tooltipDom) {
+        return function() {
+            marker.setIcon(iconlarge);
+            marker._icon.style.zIndex = 999;
+            tooltipDom.style.zIndex = 999;
+            tooltipDom.style.border = '2px solid #039BE5';
+            popupLayoutLayer.getLine(marker) && popupLayoutLayer.getLine(marker).setStyle({
+                color: '#039BE5'
+            });
+        };
+    }
+
+    function onMarkerMouseout(marker, tooltipDom) {
+        return function() {
+            marker.setIcon(iconsmall);
+            marker._icon.style.zIndex = '';
+            tooltipDom.style.zIndex = '';
+            tooltipDom.style.border = '';
+            tooltipDom.style.borderColor = '';
+            popupLayoutLayer.getLine(marker) && popupLayoutLayer.getLine(marker).setStyle({
+                color: '#90A4AE'
+            });
+        };
     }
 </script>
 

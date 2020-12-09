@@ -30,7 +30,7 @@
 
 `popupListLayer.addMarker(marker, contentHTML)`
 
-![202012040101](https://blogimage.gisarmory.xyz/202012040101.png)
+![2020120904](https://blogimage.gisarmory.xyz/2020120904.png)
 
 
 
@@ -42,7 +42,7 @@
 
 ![](https://blogimage.gisarmory.xyz/202011300101.png)
 
-我们将该方法封装成插件，引用插件后，只需简单的两步即可实现上述效果。
+我们将该方法封装成插件，引用插件后，只需简单的三步即可实现上述效果。
 
 第一步：初始化`popupLayoutLayer`。如需查看所有点位气泡，需将 `showAll` 参数设置为 `true`，默认为`false，点击查看气泡信息。
 
@@ -66,7 +66,7 @@
 
 `popupLayoutLayer.showPopup()`
 
-![2020120903](F:\myself\gisarmory\Leaflet.TooltipLayout\2020120903.png)
+![2020120903](https://blogimage.gisarmory.xyz/2020120903.png)
 
 
 

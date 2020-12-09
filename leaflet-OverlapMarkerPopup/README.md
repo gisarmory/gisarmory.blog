@@ -12,7 +12,7 @@
 
 ![2020120901](https://blogimage.gisarmory.xyz/2020120901.gif)
 
-在平时工作中，经常遇到这种问题，两个或者多个点位完全重合了，鼠标无法点击到被遮盖的点位。之前看到有些同学的处理方式是，直接修改点位坐标，让点位不再重合，从而可以点击到每个点位。在此我们暂不评论此方式是否可取。
+在平时工作中，经常遇到这种问题，两个或者多个点位完全重合了，鼠标无法点击到被遮盖的点位，从而无法查看其气泡信息。之前看到有些同学的处理方式是，直接修改点位坐标，让点位不再重合，从而可以点击到每个点位。在此我们暂不评论此方式是否可取。
 
 今天我们从另外两个维度来讨论，如何解决此问题。
 
@@ -66,7 +66,7 @@ var popupLayoutLayer = new L.popupLayoutLayer({
 }).addTo(map)
 ```
 
-第二步：将点位以及气泡内容传入popupLayoutLayer
+第二步：将点位以及气泡内容传入`popupLayoutLayer`
 
 ```js
 popupLayoutLayer.addMarker(marker, contentHTML)
@@ -118,7 +118,7 @@ https://github.com/ZijingPeng/leaflet-tooltip-layout
 
 * * *
 
-原文地址：[http://gisarmory.xyz/blog/index.html?blog=LeafletPopupLayoutLayer](http://gisarmory.xyz/blog/index.html?blog=LeafletTooltipLayout)。
+原文地址：[http://gisarmory.xyz/blog/index.html?blog=LeafletPopupLayoutLayer](http://gisarmory.xyz/blog/index.html?blog=LeafletOverlapMarkerPopup)。
 
 关注《[GIS兵器库](http://gisarmory.xyz/blog/index.html?blog=wechat)》公众号， 第一时间获得更多高质量GIS文章。
 

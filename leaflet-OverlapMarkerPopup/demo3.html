@@ -39,21 +39,8 @@
     // 添加底图
     var tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
 
-    const iconsmall = L.icon({
-        iconUrl: '../img/circle-grey.png',
-        iconSize: [10, 10]
-    });
-
-    const iconlarge = L.icon({
-        iconUrl: '../img/circle-red.png',
-        iconSize: [14, 14]
-    });
-
-    var popupLayoutLayer = new L.popupLayoutLayer({mouseType:'mouseover'}).addTo(map)
-
-    // 添加点
-    addPoint()
-
+    var popupLayoutLayer = new L.popupLayoutLayer().addTo(map)
+    addPoint() // 添加点
     function addPoint() {
         for (var i = 0; i < 10; i++) {
             var x = 115.390619 + (2 * Math.random());
@@ -64,11 +51,28 @@
             }
         }
     }
-
     function addMarker(x, y, j, k) {
-        var marker = L.marker([y, x]).addTo(map).bindPopup("sssssssssssssssssssssssss")
-        var contentHTML = ` <div> <strong>共` + k + `个点</strong> <div>第` + (j + 1) + `个点</div> </div> `
+        var marker = L.marker([y, x], {
+            data: {
+                j: j,
+                k: k
+            }
+        })
+        var contentHTML = ` <div> <div>第` + (j + 1) + `个点</div> </div> `
         popupLayoutLayer.addMarker(marker, contentHTML)
+    }
+    // 点击事件
+    popupLayoutLayer.on('click', clickShowPopup)
+    function clickShowPopup(evt) {
+        var dataObj = evt.options.data
+        var contentHTML = ` <div> <strong>共` + dataObj.k + `个点</strong> <div>第` + (dataObj.j + 1) + `个点</div> </div> `
+        // 显示气泡
+        L.popup({
+                offset: [0, -10]
+            })
+            .setLatLng(evt.getLatLng())
+            .setContent(contentHTML)
+            .openOn(map)
     }
 </script>
 

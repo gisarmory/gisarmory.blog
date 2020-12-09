@@ -40,10 +40,8 @@
     var tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
 
     var popupListLayer = new L.popupListLayer().addTo(map)
-
     // 添加点
     addPoint()
-
     function addPoint() {
         for (var i = 0; i < 10; i++) {
             var x = 115.390619 + (2 * Math.random());
@@ -54,7 +52,6 @@
             }
         }
     }
-
     function addMarker(x, y, j, k) {
         var marker = L.marker([y, x]).addTo(map)
         var contentHTML = '<div> <strong>共' + k + '个点</strong> <div>第' + (j + 1) + '个点</div> </div> '

@@ -6,11 +6,11 @@
 
 效果一：
 
-![2020120902](F:\myself\gisarmory\Leaflet.TooltipLayout\2020120902.gif)
+![2020120902](https://blogimage.gisarmory.xyz/2020120902.gif)
 
 效果二：
 
-![2020120901](F:\myself\gisarmory\Leaflet.TooltipLayout\2020120901.gif)
+![2020120901](https://blogimage.gisarmory.xyz/2020120901.gif)
 
 在平时项目工作中，经常遇到这种需求，两个或者多个点位完全重合了，但就是想点击时同时看到这些个点位的信息。之前看到有些同学的处理方式是，直接修改部分点位坐标，让点位不再重合，从而可以点击到每个点位来避免此问题，在此我们暂不评论此方式是否可取。接下来我们从两个维度来解决此问题。
 

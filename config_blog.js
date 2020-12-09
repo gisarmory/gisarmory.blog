@@ -50,4 +50,8 @@ var blogList = [{
     id: "LeafletOverlapMarkerPopup",
     label: "leaflet如何优雅的展示重叠点位的气泡窗口",
     url: "leaflet-OverlapMarkerPopup/README.md"
+}, {
+    id: "OSMVectorTiles",
+    label: "如何将OSM地图数据发布成矢量瓦片",
+    url: "OSM-VectorTiles/README.md"
 }];

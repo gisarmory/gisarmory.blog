@@ -1,6 +1,6 @@
 
 
-#  如何将OSM地图数据发布成矢量瓦片
+#  如何实现OSM地图本地发布并自定义配图
 
 
 
@@ -8,10 +8,10 @@
 
 ## 1、缘起
 
-1. 想要一个免费的矢量瓦片地图服务，目的是想要自己调整地图样式，就像[百度自定义地图](http://lbsyun.baidu.com/index.php?title=open/custom)那样的。
-2. [OpenStreetMap](https://www.openstreetmap.org/)（简称OSM）可以提供免费数据，支持[下载](https://download.geofabrik.de/)，数据格式有`.osm.pbf`和`shp`。
+1. [OpenStreetMap](https://www.openstreetmap.org/)（简称OSM）不仅可以免费在线使用，还可以免费[下载](https://download.geofabrik.de/)原始数据，数据格式有`.osm.pbf`和`shp`。
+2. 我们将OSM原始数据下载下来，处理成矢量瓦片，发布成服务，就可以实现OSM地图的本地发布和自定义配图。
 3. OSM对数据的组织方式，是按点、线、面来的，不是我们常见的按道路、建筑物、河流来分图层的方法，但可以根据属性进行提取。
-4. [openmaptiles](https://openmaptiles.org/)提供了一套完整解决方案，可以完成OSM数据的下载、入库、分析、生成矢量瓦片、调整地图样式、地图预览的全套功能，并且[开源](https://github.com/openmaptiles/openmaptiles)。
+4. [openmaptiles](https://openmaptiles.org/)提供了一套OSM数据使用的完整解决方案，可以实现OSM数据的下载、入库、分析、生成矢量瓦片、调整地图样式、地图预览的全套功能，并且[开源](https://github.com/openmaptiles/openmaptiles)。
 5. 接下来我们就来详细介绍`openmaptiles`开源库如何安装和快速入门。
 
 

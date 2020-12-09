@@ -39,12 +39,6 @@
     // 添加底图
     var tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
 
-    const iconsmall = L.icon({
-        iconUrl: '../img/circle-grey.png',
-        iconSize: [10, 10]
-    });
-
-
     var popupListLayer = new L.popupListLayer().addTo(map)
 
     // 添加点
@@ -62,10 +56,8 @@
     }
 
     function addMarker(x, y, j, k) {
-        var marker = L.marker([y, x], {
-            icon: iconsmall
-        }).addTo(map)
-        var contentHTML = ` <div> <strong>共` + k + `个点</strong> <div>第` + (j + 1) + `个点</div> </div> `
+        var marker = L.marker([y, x]).addTo(map)
+        var contentHTML = '<div> <strong>共' + k + '个点</strong> <div>第' + (j + 1) + '个点</div> </div> '
         popupListLayer.addMarker(marker, contentHTML)
     }
 </script>

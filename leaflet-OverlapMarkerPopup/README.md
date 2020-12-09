@@ -6,15 +6,11 @@
 
 效果一：
 
-![2020120701](https://blogimage.gisarmory.xyz/2020120701.gif)
+![2020120902](F:\myself\gisarmory\Leaflet.TooltipLayout\2020120902.gif)
 
 效果二：
 
-![2020120702](https://blogimage.gisarmory.xyz/2020120702.gif)
-
-
-
-
+![2020120901](F:\myself\gisarmory\Leaflet.TooltipLayout\2020120901.gif)
 
 在平时项目工作中，经常遇到这种需求，两个或者多个点位完全重合了，但就是想点击时同时看到这些个点位的信息。之前看到有些同学的处理方式是，直接修改部分点位坐标，让点位不再重合，从而可以点击到每个点位来避免此问题，在此我们暂不评论此方式是否可取。接下来我们从两个维度来解决此问题。
 
@@ -46,8 +42,6 @@
 
 ![](https://blogimage.gisarmory.xyz/202011300101.png)
 
-
-
 我们将该方法封装成插件，引用插件后，只需简单的两步即可实现上述效果。
 
 第一步：初始化`popupLayoutLayer`。如需查看所有点位气泡，需将 `showAll` 参数设置为 `true`，默认为`false，点击查看气泡信息。
@@ -62,13 +56,17 @@
 
 `popupLayoutLayer.addMarker(marker, contentHTML)`
 
-如果为点击查看气泡，只需上面两步即可实现效果；若要展示所有气泡，还需下面一步，显示所有气泡。
+第三步：分为点击查看气泡和展示所有气泡两种情况
+
+1、点击查看气泡。添加点击事件，在点击事件中添加气泡
+
+`popupLayoutLayer.on('click', function(evt) {})`
+
+2、展示所有气泡
 
 `popupLayoutLayer.showPopup()`
 
-![202012040102](https://blogimage.gisarmory.xyz/202012040102.png)
-
-
+![2020120903](F:\myself\gisarmory\Leaflet.TooltipLayout\2020120903.png)
 
 
 

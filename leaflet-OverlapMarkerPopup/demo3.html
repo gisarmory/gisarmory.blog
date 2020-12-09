@@ -49,7 +49,7 @@
         iconSize: [14, 14]
     });
 
-    var popupLayoutLayer = new L.popupLayoutLayer().addTo(map)
+    var popupLayoutLayer = new L.popupLayoutLayer({mouseType:'mouseover'}).addTo(map)
 
     // 添加点
     addPoint()
@@ -66,9 +66,7 @@
     }
 
     function addMarker(x, y, j, k) {
-        var marker = L.marker([y, x], {
-            icon: iconsmall
-        }).addTo(map)
+        var marker = L.marker([y, x]).addTo(map).bindPopup("sssssssssssssssssssssssss")
         var contentHTML = ` <div> <strong>共` + k + `个点</strong> <div>第` + (j + 1) + `个点</div> </div> `
         popupLayoutLayer.addMarker(marker, contentHTML)
     }

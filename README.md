@@ -28,7 +28,9 @@
 
 [leaflet如何优雅的展示重叠点位的气泡窗口](http://gisarmory.xyz/blog/index.html?blog=LeafletOverlapMarkerPopup)
 
-[如何将OSM地图数据发布成矢量瓦片](http://gisarmory.xyz/blog/index.html?blog=OSMVectorTiles)
+[OSM地图本地发布（一）- 环境搭建](http://gisarmory.xyz/blog/index.html?blog=OSMVectorTiles)
+
+[OSM地图本地发布（二）- 自定义切图](http://gisarmory.xyz/blog/index.html?blog=OSMOpenmaptiles)
 
 ## 三维GIS开发
 

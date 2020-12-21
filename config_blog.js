@@ -52,6 +52,10 @@ var blogList = [{
     url: "leaflet-OverlapMarkerPopup/README.md"
 }, {
     id: "OSMVectorTiles",
-    label: "如何将OSM地图数据发布成矢量瓦片",
+    label: "OSM地图本地发布（一）- 环境搭建片",
+    url: "OSM-VectorTiles/README.md"
+}, {
+    id: "OSMOpenmaptiles",
+    label: "OSM地图本地发布（二）- 自定义切图",
     url: "OSM-VectorTiles/README.md"
 }];

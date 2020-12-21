@@ -126,13 +126,13 @@ openmaptiles开源库
 
 ### 3.1、拉取代码
 
-1. 拉取openmaptiles代码
+1. 克隆openmaptiles代码
 
    ```
    git clone https://github.com/openmaptiles/openmaptiles.git
    ```
 
-2. 拉取完成后，进入目录
+2. 克隆完成后，进入目录
 
    ```
    cd openmaptiles

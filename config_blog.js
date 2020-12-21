@@ -52,10 +52,10 @@ var blogList = [{
     url: "leaflet-OverlapMarkerPopup/README.md"
 }, {
     id: "OSMVectorTiles",
-    label: "OSM地图本地发布（一）- 环境搭建片",
+    label: "OSM地图本地发布（一）- 环境搭建",
     url: "OSM-VectorTiles/README.md"
 }, {
     id: "OSMOpenmaptiles",
     label: "OSM地图本地发布（二）- 自定义切图",
-    url: "OSM-VectorTiles/README.md"
+    url: "OSM-openmaptiles/README.md"
 }];

@@ -67,7 +67,7 @@
 1. 前面的`./quickstart.sh china `命令在执行过程中，下载了4个docker镜像，启动了若干个容器，工具类容器在使用完成后就销毁了，数据类和应用类的容器会保留。（[镜像和容器的关系](https://blog.csdn.net/qq_40722827/article/details/102827125)）
 
 2. 下图红框中的容器就是存放数据的，它里面有个postGIS，我们需要启动这个容器。
-   ![image-20201219164614135](C:\Users\HERO\AppData\Local\Temp\image-20201219164614135.png)
+   ![](http://blogimage.gisarmory.xyz/20201222095847.png)
 
 3. 进入`openmaptiles`文件夹
 

@@ -57,5 +57,6 @@ var blogList = [{
 }, {
     id: "OSMOpenmaptiles",
     label: "OSM地图本地发布（二）- 自定义切图",
-    url: "OSM-openmaptiles/README.md"
+    // url: "OSM-openmaptiles/README.md"
+    href: "https://blog.csdn.net/gisarmory/article/details/111540803"
 }];

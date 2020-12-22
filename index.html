@@ -159,7 +159,7 @@
   //加载markdown文件
   function loadMarkdown(blogid) {
     var blogObj = getBlogConfigById(blogid);
-    if (blogObj) {
+    if (blogObj.url) {
       xhr = new XMLHttpRequest();
       xhr.open('get', blogObj.url);
       xhr.send('')
@@ -169,6 +169,8 @@
         //replace是解决代码不显示黑色背景的问题
         mdContent.innerHTML = marked(mdText).replace(/<pre>/g, "<pre class='hljs'>");
       }
+    }else if(blogObj.href){
+      window.open(blogObj.href,"_blank"); 
     }
   }
 

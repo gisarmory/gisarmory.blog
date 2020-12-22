@@ -17,46 +17,55 @@ var blogList = [{
 }, {
     id: "leaflet100ThousandData",
     label: "leaflet加载10万数据",
-    url: "leaflet-100ThousandData/README.md"
+    // url: "leaflet-100ThousandData/README.md",
+    href: "https://blog.csdn.net/gisarmory/article/details/109672301"
 }, {
     id: "leafletMapCorrection",
     label: "leaflet互联网地图纠偏插件",
-    url: "leaflet-MapCorrection/README.md"
+    // url: "leaflet-MapCorrection/README.md",
+    href: "https://blog.csdn.net/gisarmory/article/details/108778991"
 }, {
     id: "LeafletShowHideLayerGroup",
     label: "Leaflet-通过LayerGroup控制大量、多种图层显示隐藏",
-    url: "leaflet-ShowHideLayerGroup/README.md"
+    // url: "leaflet-ShowHideLayerGroup/README.md",
+    href: "https://blog.csdn.net/gisarmory/article/details/109227597"
 }, {
     id: "LeafletPathDashFlow",
     label: "Leaflet-支持Canvas的Leaflet.Path.DashFlow动态流向线",
-    url: "leaflet-PathDashFlow/README.md"
+    // url: "leaflet-PathDashFlow/README.md",
+    href: "https://blog.csdn.net/gisarmory/article/details/109603123"
 }, {
     id: "LeafletPolylineDecorator",
-    label: "Leaflet带箭头的线",
-    url: "leaflet-PolylineDecorator/README.md"
+    // label: "Leaflet带箭头的线",
+    url: "leaflet-PolylineDecorator/README.md",
 }, {
     id: "maputnikGeoserverVectorTiles",
     label: "maputnik加载geoserver发布的tms矢量瓦片",
-    url: "maputnik-GeoserverVectorTiles/README.md"
+    // url: "maputnik-GeoserverVectorTiles/README.md",
+    href: "https://blog.csdn.net/gisarmory/article/details/109070732"
 }, {
     id: "postGISbuffer",
     label: "为什么PostGIS中对点进行buffer分析得到的是个椭圆",
-    url: "postGIS-buffer/README.md"
+    // url: "postGIS-buffer/README.md",
+    href: "https://blog.csdn.net/gisarmory/article/details/109646712"
 }, {
     id: "diviconError",
     label: "H5时代leaflet中还在用DivIcon，标签示例",
-    url: "leaflet-divIconError/README.md"
+    // url: "leaflet-divIconError/README.md",
+    href: "https://blog.csdn.net/gisarmory/article/details/110122798"
 }, {
     id: "LeafletOverlapMarkerPopup",
     label: "leaflet如何优雅的展示重叠点位的气泡窗口",
-    url: "leaflet-OverlapMarkerPopup/README.md"
+    // url: "leaflet-OverlapMarkerPopup/README.md",
+    href: "https://blog.csdn.net/gisarmory/article/details/110957473"
 }, {
     id: "OSMVectorTiles",
     label: "OSM地图本地发布（一）- 环境搭建",
-    url: "OSM-VectorTiles/README.md"
+    // url: "OSM-VectorTiles/README.md",
+    href: "https://blog.csdn.net/gisarmory/article/details/110931322"
 }, {
     id: "OSMOpenmaptiles",
     label: "OSM地图本地发布（二）- 自定义切图",
-    // url: "OSM-openmaptiles/README.md"
+    // url: "OSM-openmaptiles/README.md",
     href: "https://blog.csdn.net/gisarmory/article/details/111540803"
 }];

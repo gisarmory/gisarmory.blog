@@ -170,7 +170,7 @@
         mdContent.innerHTML = marked(mdText).replace(/<pre>/g, "<pre class='hljs'>");
       }
     }else if(blogObj.href){
-      window.open(blogObj.href,"_blank"); 
+      window.location.href = blogObj.href;
     }
   }
 

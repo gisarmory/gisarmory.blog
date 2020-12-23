@@ -53,7 +53,7 @@
 1. 检查docker是否启动
 
    ```
-   docker --version
+   docker run hello-world
    ```
 
 2. 如果没有启动，输入下面命令启动docker。如果有需要，后续可以自己把docker设置为开机自启动。

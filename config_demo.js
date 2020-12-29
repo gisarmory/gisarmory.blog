@@ -42,5 +42,9 @@ var demoList = [{
     id: "LeafletOverlapMarkerPopup3",
     label: "leaflet可自动避让的气泡窗口-点击显示气泡",
     url: "leaflet-OverlapMarkerPopup/demo3.html"
+}, {
+    id: "MapboxPolylineDecorator",
+    label: "mapboxgl类高德带箭头轨迹线",
+    url: "mapbox-PolylineDecorator/demo.html"
 }
 ];

@@ -58,4 +58,8 @@ var blogList = [{
     id: "OSMOpenmaptiles",
     label: "OSM地图本地发布（二）- 自定义切图",
     url: "OSM-openmaptiles/README.md"
+}, {
+    id: "MapboxPolylineDecorator",
+    label: "mapboxgl类高德带箭头轨迹线",
+    url: "mapbox-PolylineDecorator/README.md"
 }];

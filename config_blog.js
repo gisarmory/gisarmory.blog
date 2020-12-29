@@ -69,8 +69,8 @@ var blogList = [{
     // url: "OSM-openmaptiles/README.md",
     href: "https://blog.csdn.net/gisarmory/article/details/111540803"
 }, {
-    id: "MapboxPolylineDecorator",
+    id: "MapboxGLPolylineDecorator",
     label: "mapboxgl类高德带箭头轨迹线",
-    // url: "mapbox-PolylineDecorator/README.md",
-    href: "https://blog.csdn.net/gisarmory/article/details/110957473"
+    url: "mapboxgl-PolylineDecorator/README.md",
+    // href: "https://blog.csdn.net/gisarmory/article/details/110957473"
 }];

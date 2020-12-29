@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Display a map</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="../lib/mapboxgl/mapbox-gl.css" rel="stylesheet" />
+    <script src="../lib/mapboxgl/mapbox-gl.js"></script>
+    <script src="../lib/mapboxgl/turf.min.js"></script>
+    <script src="../lib/mapboxgl/patternUtils.js"></script>
+    <script src="../lib/jquery.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .menuBar {
+            position: relative;
+            top: 10px;
+            margin: 0 50px;
+            padding: 5px;
+            border-radius: 3px;
+            z-index: 999;
+            background-color: rgba(0, 168, 0, 0.7);
+        }
+
+        input[type=button] {
+            font-size: 16px;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* 删除mapbox logo */
+        .mapboxgl-ctrl {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <div class="menuBar">
+        <input type="button" value="开始" onclick="startClick()" />
+        <input type="button" value="暂停" onclick="pauseClick()" />
+        <input type="button" value="停止" onclick="stopClick()" />
+    </div>
+    <script>
+        mapboxgl.accessToken =
+            'pk.eyJ1IjoiZXRlcm5pdHkteHlmIiwiYSI6ImNqaDFsdXIxdTA1ODgycXJ5czdjNmF0ZTkifQ.zN7e588TqZOQMWfws-K0Yw';
+        var map = new mapboxgl.Map({
+            container: 'map', // container id
+            style: 'mapbox://styles/mapbox/streets-v11', // style URL
+            center: [116.390619, 39.924317], // starting position [lng, lat]
+            zoom: 13 // starting zoom
+        });
+        map.setStyle('mapbox://styles/mapbox/dark-v9');
+
+        // 箭头-右
+        var svgXML =
+        `<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"> 
+            <path d="M529.6128 512L239.9232 222.4128 384.7168 77.5168 819.2 512 384.7168 946.4832 239.9232 801.5872z" p-id="9085" fill="#ffffff"></path> 
+        </svg>
+        `
+        // 箭头-上
+        // var svgXML =
+        // `<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"> 
+        //     <path d="M957.3 543.4L870.7 630 512.1 271.5 152.3 631.3l-86.6-86.6L512.1 98.2z" p-id="9085" fill="#ffffff"></path> 
+        // </svg>
+        // `
+        //给图片对象写入base64编码的svg流
+        var svgBase64 = 'data:image/svg+xml;base64,' + window.btoa(unescape(encodeURIComponent(svgXML)));
+
+        map.on('load', function() {
+            let arrowIcon = new Image(20, 20)
+            arrowIcon.src = svgBase64
+            arrowIcon.onload = function() {
+                map.addImage('arrowIcon', arrowIcon)
+                map.loadImage('../img/car.png', function(error, carIcon) {
+                    if (carIcon) {
+                        map.addImage('carIcon', carIcon);
+                        getRouteData()
+                    }
+                })
+            }
+
+        })
+
+        map.on('moveend', function(e) {
+            setRotationAngle() //重新计算角度
+        });
+
+        var isPlay = false
+
+        var counter = 0
+        var steps = 0
+        let aLength = 0;
+        var routeGeoJson = routeGeoJson = {
+            "type": "FeatureCollection",
+            "features": [{
+                "type": "Feature",
+                "geometry": {
+                    "type": "LineString",
+                    "coordinates": [
+                        [116.391844, 39.898457],
+                        [116.377947, 39.898595],
+                        [116.368001, 39.898341],
+                        [116.357144, 39.898063],
+                        [116.351934, 39.899095],
+                        [116.35067, 39.905871],
+                        [116.3498, 39.922329],
+                        [116.349671, 39.931017],
+                        [116.349225, 39.939104],
+                        [116.34991, 39.942233],
+                        [116.366892, 39.947263],
+                        [116.387537, 39.947568],
+                        [116.401988, 39.947764],
+                        [116.410824, 39.947929],
+                        [116.42674, 39.947558],
+                        [116.427338, 39.9397],
+                        [116.427919, 39.932404],
+                        [116.428377, 39.923109],
+                        [116.429583, 39.907094],
+                        [116.41404, 39.906858],
+                        [116.405321, 39.906622],
+                        [116.394954, 39.906324],
+                        [116.391264, 39.906308],
+                        [116.390748, 39.916611]
+                    ]
+                }
+            }]
+        }
+        var newRouteGeoJson = {}
+        var realRouteGeoJson = {
+            "type": "FeatureCollection",
+            "features": [{
+                "type": "Feature",
+                "geometry": {
+                    "type": "LineString",
+                    "coordinates": []
+                }
+            }]
+        }
+        var arrowGeoJson = {
+            "type": "FeatureCollection",
+            "features": []
+        }
+        var animatePointGeoJson = {
+            'type': 'FeatureCollection',
+            'features': [{
+                'type': 'Feature',
+                'properties': {},
+                'geometry': {
+                    'type': 'Point',
+                    'coordinates': []
+                }
+            }]
+        }
+
+        // 获取轨迹数据
+        function getRouteData() {
+            animatePointGeoJson.features[0].geometry.coordinates = routeGeoJson.features[0].geometry.coordinates[0]
+            var route = routeGeoJson.features[0]
+            aLength = route.geometry.coordinates.length;
+            newRouteGeoJson = resetRoute(route, 1000, 'kilometers')
+            steps = newRouteGeoJson.geometry.coordinates.length
+
+            addRouteSource() // 添加轨迹线
+            addRealRouteSource() // 添加实时轨迹线
+            addArrowSource() // 添加箭头图层
+            addAnimatePointSource() // 添加动态点图层
+            setRotationAngle() // 设置箭头方向
+        }
+
+        // 添加轨迹线
+        function addRouteSource() {
+            map.addSource('routeSource', {
+                'type': 'geojson',
+                'lineMetrics': true,
+                'data': routeGeoJson
+            });
+            map.addLayer({
+                'id': 'routeLayer',
+                'type': 'line',
+                'source': 'routeSource',
+                'paint': {
+                    'line-width': 10,
+                    'line-opacity': 1,
+                    'line-color': '#009EFF',
+                }
+            });
+        }
+
+        // 添加实时轨迹线
+        function addRealRouteSource() {
+            map.addSource('realRouteSource', {
+                'type': 'geojson',
+                'lineMetrics': true,
+                'data': realRouteGeoJson
+            });
+            map.addLayer({
+                'id': 'realRouteLayer',
+                'type': 'line',
+                'source': 'realRouteSource',
+                'paint': {
+                    'line-width': 10,
+                    'line-opacity': 1,
+                    'line-color': '#FF9900',
+                }
+            });
+        }
+
+        // 添加箭头图层
+        function addArrowSource() {
+            map.addSource('arrowSource', {
+                'type': 'geojson',
+                'data': arrowGeoJson
+            });
+            map.addLayer({
+                'id': 'arrowLayer',
+                'type': 'symbol',
+                'source': 'arrowSource',
+                "layout": {
+                    "icon-image": "arrowIcon",
+                    "icon-size": 0.5,
+                    "icon-rotate": ["get", "bearing"],
+                    "icon-rotation-alignment": "map",
+                    "icon-allow-overlap": true,
+                    "icon-ignore-placement": true
+                }
+            });
+        }
+
+        // 添加动态点图层
+        function addAnimatePointSource() {
+            map.addSource('animatePointSource', {
+                'type': 'geojson',
+                'data': animatePointGeoJson
+            });
+            map.addLayer({
+                'id': 'animatePointLayer',
+                'type': 'symbol',
+                'source': 'animatePointSource',
+                "layout": {
+                    "icon-image": "carIcon",
+                    "icon-size": 0.5,
+                    "icon-rotate": ["get", "bearing"],
+                    "icon-rotation-alignment": "map",
+                    "icon-allow-overlap": true,
+                    "icon-ignore-placement": true
+                }
+            });
+            animate()
+        }
+
+        // 设置箭头位置即方向
+        function setRotationAngle() {
+            var pathAsPoints = []
+            var arrowFeatureList = []
+            routeGeoJson.features[0].geometry.coordinates.forEach(element => {
+                pathAsPoints.push(map.project(element))
+            });
+            var pattern = {
+                "offset": {
+                    "value": 20,
+                    "isInPixels": true
+                },
+                "endOffset": {
+                    "value": 0,
+                    "isInPixels": false
+                },
+                "repeat": {
+                    "value": 50,
+                    "isInPixels": true
+                }
+            }
+            // 调用patternUtils.js中方法，返回每个箭头的位置以及方向
+            var newPointList = projectPatternOnPointPath(pathAsPoints, pattern)
+            newPointList.forEach(element => {
+                var coordinate = map.unproject(element.pt)
+                arrowFeatureList.push({
+                    geometry: {
+                        type: 'Point',
+                        coordinates: [coordinate.lng, coordinate.lat]
+                    },
+                    properties: {
+                        bearing: element.heading - 90 + map.getBearing() //计算角度，根据箭头图片方向自行判断是否需要加减
+                    }
+                })
+            });
+            arrowGeoJson.features = arrowFeatureList
+            map.getSource('arrowSource').setData(arrowGeoJson);
+        }
+
+        function animate() {
+            if (counter >= steps) {
+                return
+            }
+            var startPnt, endPnt
+            if (counter == 0) {
+                realRouteGeoJson.features[0].geometry.coordinates = []
+                startPnt = newRouteGeoJson.geometry.coordinates[counter]
+                endPnt = newRouteGeoJson.geometry.coordinates[counter + 1]
+            } else if (counter !== 0) {
+                startPnt = newRouteGeoJson.geometry.coordinates[counter - 1]
+                endPnt = newRouteGeoJson.geometry.coordinates[counter]
+            }
+
+            animatePointGeoJson.features[0].properties.bearing = turf.bearing(
+                turf.point(startPnt),
+                turf.point(endPnt)
+            ) - 90;
+            animatePointGeoJson.features[0].geometry.coordinates = newRouteGeoJson.geometry.coordinates[counter];
+            realRouteGeoJson.features[0].geometry.coordinates.push(animatePointGeoJson.features[0].geometry.coordinates)
+
+            map.getSource('animatePointSource').setData(animatePointGeoJson);
+            map.getSource('realRouteSource').setData(realRouteGeoJson);
+            if (isPlay) {
+                requestAnimationFrame(animate);
+            }
+            counter = counter + 1;
+        }
+
+        function resetRoute(route, nstep, units) {
+            var newroute = {
+                "type": "Feature",
+                "geometry": {
+                    "type": "LineString",
+                    "coordinates": []
+                }
+            }
+            var lineDistance = turf.lineDistance(route);
+            var nDistance = lineDistance / nstep;
+            console.log(nstep, nDistance)
+            for (let i = 0; i < aLength - 1; i++) {
+                var from = turf.point(route.geometry.coordinates[i]);
+                var to = turf.point(route.geometry.coordinates[i + 1]);
+                let lDistance = turf.distance(from, to, units);
+                if (i == 0) {
+                    newroute.geometry.coordinates.push(route.geometry.coordinates[0])
+                }
+                if (lDistance > nDistance) {
+                    let rings = lineMore(from, to, lDistance, nDistance, units)
+                    newroute.geometry.coordinates = newroute.geometry.coordinates.concat(rings)
+                } else {
+                    newroute.geometry.coordinates.push(route.geometry.coordinates[i + 1])
+                }
+            }
+            return newroute
+        }
+
+        function lineMore(from, to, distance, splitLength, units) {
+            var step = parseInt(distance / splitLength)
+            var leftLength = distance - step * splitLength
+            var rings = []
+            var route = turf.linestring([from.geometry.coordinates, to.geometry.coordinates])
+            for (let i = 1; i <= step; i++) {
+                let nlength = i * splitLength
+                let pnt = turf.along(route, nlength, units);
+                rings.push(pnt.geometry.coordinates)
+            }
+            if (leftLength > 0) {
+                rings.push(to.geometry.coordinates)
+            }
+            return rings
+        }
+
+
+        function startClick() {
+            if (!isPlay) {
+                isPlay = true
+                animate()
+            }
+        }
+
+        function pauseClick() {
+            isPlay = false
+            animate()
+        }
+
+        function stopClick() {
+            isPlay = false
+            counter = 0
+            animate()
+        }
+    </script>
+
+</body>
+
+</html>

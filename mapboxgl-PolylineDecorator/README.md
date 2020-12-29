@@ -13,7 +13,7 @@
 
 **注意：**
 
-1. **通过`polylineDecorator`计算出的角度针对的是箭头朝向为上的图标，我用的箭头朝向是右侧，就需要在原角度的基础上`-90`；**
+1. **通过`polylineDecorator`计算出的角度针对的是箭头朝向为上的图标，我用的箭头朝向是右侧，就需要在原角度的基础上`-90`**
 2. **`polylineDecorator`计算的角度未考虑地图旋转，所以需要在原角度基础上加上地图旋转方向`map.getBearing()`**
 
 详细代码通过在线示例`F12`即可查看。
@@ -21,7 +21,7 @@
 ## 在线示例
 
 [在线示例](
-http://gisarmory.xyz/blog/index.html?demo=LeafletPolylineDecorator)
+http://gisarmory.xyz/blog/index.html?demo=MapboxGLPolylineDecorator)
 
 
 

@@ -93,7 +93,9 @@
         })
 
         map.on('moveend', function(e) {
-            setRotationAngle() //重新计算角度
+            if(map.getSource('arrowSource')){
+                setRotationAngle() //重新计算角度
+            }
         });
 
         var isPlay = false
@@ -337,7 +339,6 @@
             }
             var lineDistance = turf.lineDistance(route);
             var nDistance = lineDistance / nstep;
-            console.log(nstep, nDistance)
             for (let i = 0; i < aLength - 1; i++) {
                 var from = turf.point(route.geometry.coordinates[i]);
                 var to = turf.point(route.geometry.coordinates[i + 1]);

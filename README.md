@@ -32,6 +32,8 @@
 
 [OSM地图本地发布（二）- 自定义切图](http://gisarmory.xyz/blog/index.html?blog=OSMOpenmaptiles)
 
+[mapboxgl类高德带箭头轨迹线](http://gisarmory.xyz/blog/index.html?blog=MapboxPolylineDecorator)
+
 ## 三维GIS开发
 
 

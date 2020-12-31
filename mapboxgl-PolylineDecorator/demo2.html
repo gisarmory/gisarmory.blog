@@ -8,8 +8,6 @@
     <link href="../lib/mapboxgl/mapbox-gl.css" rel="stylesheet" />
     <script src="../lib/mapboxgl/mapbox-gl.js"></script>
     <script src="../lib/mapboxgl/turf.min.js"></script>
-    <script src="../lib/mapboxgl/patternUtils.js"></script>
-    <script src="../lib/jquery.min.js"></script>
     <style>
         body {
             margin: 0;
@@ -64,10 +62,10 @@
 
         // 箭头-右
         var svgXML =
-        `<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"> 
-            <path d="M529.6128 512L239.9232 222.4128 384.7168 77.5168 819.2 512 384.7168 946.4832 239.9232 801.5872z" p-id="9085" fill="#ffffff"></path> 
-        </svg>
-        `
+            `<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"> 
+                <path d="M529.6128 512L239.9232 222.4128 384.7168 77.5168 819.2 512 384.7168 946.4832 239.9232 801.5872z" p-id="9085" fill="#ffffff"></path> 
+            </svg>
+            `
         // 箭头-上
         // var svgXML =
         // `<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"> 
@@ -85,25 +83,17 @@
                 map.loadImage('../img/car.png', function(error, carIcon) {
                     if (carIcon) {
                         map.addImage('carIcon', carIcon);
-                        getRouteData()
+                        setRouteData()
                     }
                 })
             }
-
         })
 
-        map.on('moveend', function(e) {
-            if(map.getSource('arrowSource')){
-                setRotationAngle() //重新计算角度
-            }
-        });
-
         var isPlay = false
-
         var counter = 0
         var steps = 0
         let aLength = 0;
-        var routeGeoJson = routeGeoJson = {
+        var routeGeoJson = {
             "type": "FeatureCollection",
             "features": [{
                 "type": "Feature",
@@ -138,7 +128,7 @@
                 }
             }]
         }
-        var newRouteGeoJson = {}
+
         var realRouteGeoJson = {
             "type": "FeatureCollection",
             "features": [{
@@ -149,10 +139,7 @@
                 }
             }]
         }
-        var arrowGeoJson = {
-            "type": "FeatureCollection",
-            "features": []
-        }
+
         var animatePointGeoJson = {
             'type': 'FeatureCollection',
             'features': [{
@@ -166,31 +153,28 @@
         }
 
         // 获取轨迹数据
-        function getRouteData() {
+        function setRouteData() {
             animatePointGeoJson.features[0].geometry.coordinates = routeGeoJson.features[0].geometry.coordinates[0]
-            var route = routeGeoJson.features[0]
-            aLength = route.geometry.coordinates.length;
-            newRouteGeoJson = resetRoute(route, 1000, 'kilometers')
+            aLength = routeGeoJson.features[0].geometry.coordinates.length;
+            newRouteGeoJson = resetRoute(routeGeoJson.features[0], 1000, 'kilometers')
             steps = newRouteGeoJson.geometry.coordinates.length
 
-            addRouteSource() // 添加轨迹线
-            addRealRouteSource() // 添加实时轨迹线
-            addArrowSource() // 添加箭头图层
+            addRoutelayer() // 添加轨迹线图层
+            addRealRouteSource() // 添加实时轨迹线图层
+            addArrowlayer() // 添加箭头图层
             addAnimatePointSource() // 添加动态点图层
-            setRotationAngle() // 设置箭头方向
         }
 
-        // 添加轨迹线
-        function addRouteSource() {
-            map.addSource('routeSource', {
-                'type': 'geojson',
-                'lineMetrics': true,
-                'data': routeGeoJson
-            });
+        // 添加轨迹线图层
+        function addRoutelayer() {
             map.addLayer({
                 'id': 'routeLayer',
                 'type': 'line',
-                'source': 'routeSource',
+                'source': {
+                    'type': 'geojson',
+                    'lineMetrics': true,
+                    'data': routeGeoJson
+                },
                 'paint': {
                     'line-width': 10,
                     'line-opacity': 1,
@@ -201,15 +185,14 @@
 
         // 添加实时轨迹线
         function addRealRouteSource() {
-            map.addSource('realRouteSource', {
-                'type': 'geojson',
-                'lineMetrics': true,
-                'data': realRouteGeoJson
-            });
             map.addLayer({
                 'id': 'realRouteLayer',
                 'type': 'line',
-                'source': 'realRouteSource',
+                'source': {
+                    'type': 'geojson',
+                    'lineMetrics': true,
+                    'data': realRouteGeoJson
+                },
                 'paint': {
                     'line-width': 10,
                     'line-opacity': 1,
@@ -219,36 +202,33 @@
         }
 
         // 添加箭头图层
-        function addArrowSource() {
-            map.addSource('arrowSource', {
-                'type': 'geojson',
-                'data': arrowGeoJson
-            });
+        function addArrowlayer() {
             map.addLayer({
                 'id': 'arrowLayer',
                 'type': 'symbol',
-                'source': 'arrowSource',
+                'source': {
+                    'type': 'geojson',
+                    'data': routeGeoJson
+                },
                 "layout": {
+                    'symbol-placement': 'line',
+                    'symbol-spacing': 50,
                     "icon-image": "arrowIcon",
                     "icon-size": 0.5,
-                    "icon-rotate": ["get", "bearing"],
-                    "icon-rotation-alignment": "map",
-                    "icon-allow-overlap": true,
-                    "icon-ignore-placement": true
+                    // "icon-rotate": 90
                 }
             });
         }
 
         // 添加动态点图层
         function addAnimatePointSource() {
-            map.addSource('animatePointSource', {
-                'type': 'geojson',
-                'data': animatePointGeoJson
-            });
             map.addLayer({
                 'id': 'animatePointLayer',
                 'type': 'symbol',
-                'source': 'animatePointSource',
+                'source': {
+                    'type': 'geojson',
+                    'data': animatePointGeoJson
+                },
                 "layout": {
                     "icon-image": "carIcon",
                     "icon-size": 0.5,
@@ -258,46 +238,8 @@
                     "icon-ignore-placement": true
                 }
             });
-            animate()
-        }
 
-        // 设置箭头位置即方向
-        function setRotationAngle() {
-            var pathAsPoints = []
-            var arrowFeatureList = []
-            routeGeoJson.features[0].geometry.coordinates.forEach(element => {
-                pathAsPoints.push(map.project(element))
-            });
-            var pattern = {
-                "offset": {
-                    "value": 20,
-                    "isInPixels": true
-                },
-                "endOffset": {
-                    "value": 0,
-                    "isInPixels": false
-                },
-                "repeat": {
-                    "value": 50,
-                    "isInPixels": true
-                }
-            }
-            // 调用patternUtils.js中方法，返回每个箭头的位置以及方向
-            var newPointList = projectPatternOnPointPath(pathAsPoints, pattern)
-            newPointList.forEach(element => {
-                var coordinate = map.unproject(element.pt)
-                arrowFeatureList.push({
-                    geometry: {
-                        type: 'Point',
-                        coordinates: [coordinate.lng, coordinate.lat]
-                    },
-                    properties: {
-                        bearing: element.heading - 90 + map.getBearing() //计算角度，根据箭头图片方向自行判断是否需要加减
-                    }
-                })
-            });
-            arrowGeoJson.features = arrowFeatureList
-            map.getSource('arrowSource').setData(arrowGeoJson);
+            animate()
         }
 
         function animate() {
@@ -321,8 +263,8 @@
             animatePointGeoJson.features[0].geometry.coordinates = newRouteGeoJson.geometry.coordinates[counter];
             realRouteGeoJson.features[0].geometry.coordinates.push(animatePointGeoJson.features[0].geometry.coordinates)
 
-            map.getSource('animatePointSource').setData(animatePointGeoJson);
-            map.getSource('realRouteSource').setData(realRouteGeoJson);
+            map.getSource('animatePointLayer').setData(animatePointGeoJson);
+            map.getSource('realRouteLayer').setData(realRouteGeoJson);
             if (isPlay) {
                 requestAnimationFrame(animate);
             }
@@ -371,7 +313,6 @@
             }
             return rings
         }
-
 
         function startClick() {
             if (!isPlay) {

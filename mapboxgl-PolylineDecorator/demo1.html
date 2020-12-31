@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Display a map</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="../lib/mapboxgl/mapbox-gl.css" rel="stylesheet" />
+    <script src="../lib/mapboxgl/mapbox-gl.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* 删除mapbox logo */
+        .mapboxgl-ctrl {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <script>
+        mapboxgl.accessToken =
+            'pk.eyJ1IjoiZXRlcm5pdHkteHlmIiwiYSI6ImNqaDFsdXIxdTA1ODgycXJ5czdjNmF0ZTkifQ.zN7e588TqZOQMWfws-K0Yw';
+        var map = new mapboxgl.Map({
+            container: 'map', // container id
+            style: 'mapbox://styles/mapbox/streets-v11', // style URL
+            center: [116.390619, 39.924317], // starting position [lng, lat]
+            zoom: 13 // starting zoom
+        });
+        map.setStyle('mapbox://styles/mapbox/dark-v9');
+
+        // 箭头-右
+        var svgXML =
+            `<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"> 
+            <path d="M529.6128 512L239.9232 222.4128 384.7168 77.5168 819.2 512 384.7168 946.4832 239.9232 801.5872z" p-id="9085" fill="#ffffff"></path> 
+        </svg>
+        `
+        //给图片对象写入base64编码的svg流
+        var svgBase64 = 'data:image/svg+xml;base64,' + window.btoa(unescape(encodeURIComponent(svgXML)));
+
+        map.on('load', function() {
+            let arrowIcon = new Image(20, 20)
+            arrowIcon.src = svgBase64
+            arrowIcon.onload = function() {
+                map.addImage('arrowIcon', arrowIcon)
+                setRouteData()
+            }
+        })
+        var routeGeoJson = {
+            "type": "FeatureCollection",
+            "features": [{
+                "type": "Feature",
+                "geometry": {
+                    "type": "LineString",
+                    "coordinates": [
+                        [116.391844, 39.898457],
+                        [116.377947, 39.898595],
+                        [116.368001, 39.898341],
+                        [116.357144, 39.898063],
+                        [116.351934, 39.899095],
+                        [116.35067, 39.905871],
+                        [116.3498, 39.922329],
+                        [116.349671, 39.931017],
+                        [116.349225, 39.939104],
+                        [116.34991, 39.942233],
+                        [116.366892, 39.947263],
+                        [116.387537, 39.947568],
+                        [116.401988, 39.947764],
+                        [116.410824, 39.947929],
+                        [116.42674, 39.947558],
+                        [116.427338, 39.9397],
+                        [116.427919, 39.932404],
+                        [116.428377, 39.923109],
+                        [116.429583, 39.907094],
+                        [116.41404, 39.906858],
+                        [116.405321, 39.906622],
+                        [116.394954, 39.906324],
+                        [116.391264, 39.906308],
+                        [116.390748, 39.916611]
+                    ]
+                }
+            }]
+        }
+
+        // 获取轨迹数据
+        function setRouteData() {
+            addRoutelayer() // 添加轨迹线图层
+            addArrowlayer() // 添加箭头图层
+        }
+
+        // 添加轨迹线图层
+        function addRoutelayer() {
+            map.addLayer({
+                'id': 'routeLayer',
+                'type': 'line',
+                'source': {
+                    'type': 'geojson',
+                    'lineMetrics': true,
+                    'data': routeGeoJson
+                },
+                'paint': {
+                    'line-width': 10,
+                    'line-opacity': 1,
+                    'line-color': '#009EFF',
+                }
+            });
+        }
+
+        // 添加箭头图层
+        function addArrowlayer() {
+            map.addLayer({
+                'id': 'arrowLayer',
+                'type': 'symbol',
+                'source': {
+                    'type': 'geojson',
+                    'data': routeGeoJson
+                },
+                "layout": {
+                    'symbol-placement': 'line',
+                    'symbol-spacing': 50,
+                    "icon-image": "arrowIcon",
+                    "icon-size": 0.5,
+                    // "icon-rotate": 90
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>

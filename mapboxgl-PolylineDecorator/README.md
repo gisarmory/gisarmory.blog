@@ -1,7 +1,5 @@
 # mapboxgl 实现带箭头轨迹线
-最近在使用mapboxgl实现轨迹展示时，想实现类似高德地图导航轨迹效果，然而并未在网上找到类似示例，经一番尝试，最终实现如下效果。
-
-效果如下：
+最近在使用mapboxgl实现轨迹展示时，想实现类似高德地图导航轨迹效果，然而并未在网上找到类似示例。经一番研究与尝试，最终实现如下效果。
 
 ![202012310104](https://blogimage.gisarmory.xyz/202012310104.gif)
 
@@ -37,19 +35,19 @@ function addArrowlayer() {
 
 重新查看`mapboxgl API`，发现将`layout`中的`symbol-placement`设置为`line`，即可实现沿着线的方向绘制箭头。
 
-注意，
+**注意：**
 
 1. 我所用图标为**右侧方向箭头**，结果与实际方向相符，如果图标为向上箭头，需修改`icon-rotate`为90。
-2. 只是把`symbol-placement`设置为`line`，箭头位置过于稀疏；`symbol-spacing`默认值为250，调整为50即可实现文章首页图片效果。
+2. 只把`symbol-placement`设置为`line`，箭头间距过于稀疏；需要设置下`symbol-spacing`参数，`symbol-spacing`默认值为250，修改为50即可实现文章首页图片效果。
 
 
 ## 在线示例
 
+在线示例：[http://gisarmory.xyz/blog/index.html?demo=MapboxGLPolylineDecorator](http://gisarmory.xyz/blog/index.html?demo=MapboxGLPolylineDecorator)
+
+代码地址：[https://github.com/gisarmory/gisarmory.blog/tree/master/mapboxgl-PolylineDecorator/demo.html](https://github.com/gisarmory/gisarmory.blog/tree/master/mapboxgl-PolylineDecorator/demo.html)
 
 
-在线示例：http://gisarmory.xyz/blog/index.html?demo=MapboxGLPolylineDecorator
-
-示例代码地址：https://github.com/gisarmory/gisarmory.blog/tree/master/mapboxgl-PolylineDecorator/demo.html
 
 * * *
 

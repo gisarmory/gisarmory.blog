@@ -14,7 +14,7 @@
    ./quickstart.sh china 
    ```
 
-3. 上面命令，需要耐心等待，我电脑4核8G，用了16个小时左右。最终得到了中国大陆地区，0-7级的矢量瓦片数据。
+3. 上面命令，需要耐心等待，我电脑4核8G，用了16个小时左右。最终得到了中国大陆地区，0-7级的矢量瓦片数据。如果是0-14级，前面的配置需要52个小时左右。
 
 4. `openmaptiles`主要是从[geofabrik](https://download.geofabrik.de/)网站下载OSM数据，geofabrik在中国地区下载的最小颗粒度是中国大陆和台湾，没有办法按大陆地区的省，或按自定义区域进行下载。
 
@@ -105,7 +105,7 @@
 1. 输入下面命令，生成瓦片
 
    ```
-   make generate-tiles
+   make generate-tiles area=china
    ```
 
 2. 生成的结果是`tiles.mbtiles`文件，在`data`文件夹中

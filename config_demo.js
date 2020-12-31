@@ -43,12 +43,8 @@ var demoList = [{
     label: "leaflet可自动避让的气泡窗口-点击显示气泡",
     url: "leaflet-OverlapMarkerPopup/demo3.html"
 }, {
-    id: "MapboxGLPolylineDecorator1",
+    id: "MapboxGLPolylineDecorator",
     label: "mapboxgl实现带箭头轨迹线",
-    url: "mapboxgl-PolylineDecorator/demo1.html"
-}, {
-    id: "MapboxGLPolylineDecorator2",
-    label: "mapboxgl实现带箭头轨迹线",
-    url: "mapboxgl-PolylineDecorator/demo2.html"
+    url: "mapboxgl-PolylineDecorator/demo.html"
 }
 ];

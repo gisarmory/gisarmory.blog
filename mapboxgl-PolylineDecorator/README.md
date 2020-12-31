@@ -45,8 +45,9 @@ function addArrowlayer() {
 
 ## 在线示例
 
-[轨迹显示以及动态播放示例](
-http://gisarmory.xyz/blog/index.html?demo=MapboxGLPolylineDecorator2)
+
+
+在线示例：http://gisarmory.xyz/blog/index.html?demo=MapboxGLPolylineDecorator
 
 示例代码地址：https://github.com/gisarmory/gisarmory.blog/tree/master/mapboxgl-PolylineDecorator/demo.html
 

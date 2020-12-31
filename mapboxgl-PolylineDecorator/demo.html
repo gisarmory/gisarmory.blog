@@ -94,12 +94,12 @@
         var steps = 0
         let aLength = 0;
         var routeGeoJson = {
-            "type": "FeatureCollection",
-            "features": [{
-                "type": "Feature",
-                "geometry": {
-                    "type": "LineString",
-                    "coordinates": [
+            'type': 'FeatureCollection',
+            'features': [{
+                'type': 'Feature',
+                'geometry': {
+                    'type': 'LineString',
+                    'coordinates': [
                         [116.391844, 39.898457],
                         [116.377947, 39.898595],
                         [116.368001, 39.898341],
@@ -130,12 +130,12 @@
         }
 
         var realRouteGeoJson = {
-            "type": "FeatureCollection",
-            "features": [{
-                "type": "Feature",
-                "geometry": {
-                    "type": "LineString",
-                    "coordinates": []
+            'type': 'FeatureCollection',
+            'features': [{
+                'type': 'Feature',
+                'geometry': {
+                    'type': 'LineString',
+                    'coordinates': []
                 }
             }]
         }
@@ -201,24 +201,23 @@
             });
         }
 
-        // 添加箭头图层
-        function addArrowlayer() {
-            map.addLayer({
-                'id': 'arrowLayer',
-                'type': 'symbol',
-                'source': {
-                    'type': 'geojson',
-                    'data': routeGeoJson
-                },
-                "layout": {
-                    'symbol-placement': 'line',
-                    'symbol-spacing': 50,
-                    "icon-image": "arrowIcon",
-                    "icon-size": 0.5,
-                    // "icon-rotate": 90
-                }
-            });
+// 添加箭头图层
+function addArrowlayer() {
+    map.addLayer({
+        'id': 'arrowLayer',
+        'type': 'symbol',
+        'source': {
+            'type': 'geojson',
+            'data': routeGeoJson //轨迹geojson格式数据
+        },
+        'layout': {
+            'symbol-placement': 'line',
+            'symbol-spacing': 50, // 图标间隔，默认为250
+            'icon-image': 'arrowIcon', //箭头图标
+            'icon-size': 0.5
         }
+    });
+}
 
         // 添加动态点图层
         function addAnimatePointSource() {
@@ -229,13 +228,13 @@
                     'type': 'geojson',
                     'data': animatePointGeoJson
                 },
-                "layout": {
-                    "icon-image": "carIcon",
-                    "icon-size": 0.5,
-                    "icon-rotate": ["get", "bearing"],
-                    "icon-rotation-alignment": "map",
-                    "icon-allow-overlap": true,
-                    "icon-ignore-placement": true
+                'layout': {
+                    'icon-image': 'carIcon',
+                    'icon-size': 0.5,
+                    'icon-rotate': ['get', 'bearing'],
+                    'icon-rotation-alignment': 'map',
+                    'icon-allow-overlap': true,
+                    'icon-ignore-placement': true
                 }
             });
 
@@ -273,10 +272,10 @@
 
         function resetRoute(route, nstep, units) {
             var newroute = {
-                "type": "Feature",
-                "geometry": {
-                    "type": "LineString",
-                    "coordinates": []
+                'type': 'Feature',
+                'geometry': {
+                    'type': 'LineString',
+                    'coordinates': []
                 }
             }
             var lineDistance = turf.lineDistance(route);

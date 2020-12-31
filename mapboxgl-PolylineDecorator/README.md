@@ -1,5 +1,5 @@
 # mapboxgl 实现带箭头轨迹线
-最近在使用mapboxgl实现轨迹展示时，想实现类似高德地图导航轨迹效果，然而并未在网上找到类似示例。经一番研究与尝试，最终实现如下效果。
+最近在使用mapboxgl实现轨迹展示时，想实现类似高德地图导航轨迹效果，然而并未在网上找到类似示例。经一番研究与尝试，最终解决，效果如下。
 
 ![202012310104](https://blogimage.gisarmory.xyz/202012310104.gif)
 
@@ -45,7 +45,7 @@ function addArrowlayer() {
 
 在线示例：[http://gisarmory.xyz/blog/index.html?demo=MapboxGLPolylineDecorator](http://gisarmory.xyz/blog/index.html?demo=MapboxGLPolylineDecorator)
 
-代码地址：[https://github.com/gisarmory/gisarmory.blog/tree/master/mapboxgl-PolylineDecorator/demo.html](https://github.com/gisarmory/gisarmory.blog/tree/master/mapboxgl-PolylineDecorator/demo.html)
+代码地址：[http://gisarmory.xyz/blog/index.html?source=MapboxGLPolylineDecorator](http://gisarmory.xyz/blog/index.html?source=MapboxGLPolylineDecorator)
 
 
 

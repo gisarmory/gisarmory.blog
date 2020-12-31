@@ -201,23 +201,23 @@
             });
         }
 
-// 添加箭头图层
-function addArrowlayer() {
-    map.addLayer({
-        'id': 'arrowLayer',
-        'type': 'symbol',
-        'source': {
-            'type': 'geojson',
-            'data': routeGeoJson //轨迹geojson格式数据
-        },
-        'layout': {
-            'symbol-placement': 'line',
-            'symbol-spacing': 50, // 图标间隔，默认为250
-            'icon-image': 'arrowIcon', //箭头图标
-            'icon-size': 0.5
+        // 添加箭头图层
+        function addArrowlayer() {
+            map.addLayer({
+                'id': 'arrowLayer',
+                'type': 'symbol',
+                'source': {
+                    'type': 'geojson',
+                    'data': routeGeoJson //轨迹geojson格式数据
+                },
+                'layout': {
+                    'symbol-placement': 'line',
+                    'symbol-spacing': 50, // 图标间隔，默认为250
+                    'icon-image': 'arrowIcon', //箭头图标
+                    'icon-size': 0.5
+                }
+            });
         }
-    });
-}
 
         // 添加动态点图层
         function addAnimatePointSource() {

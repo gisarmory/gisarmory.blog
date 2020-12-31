@@ -34,4 +34,8 @@ var sourceList = [{
     id: "LeafletOverlapMarkerPopup",
     label: "leaflet如何优雅的展示重叠点位的气泡窗口",
     url: "https://github.com/gisarmory/Leaflet.OverlapMarkerPopup"
+}, {
+    id: "LeafletOverlapMarkerPopup",
+    label: "mapboxgl实现带箭头轨迹线",
+    url: "https://github.com/gisarmory/gisarmory.blog/tree/master/mapboxgl-PolylineDecorator/demo.html"
 }];

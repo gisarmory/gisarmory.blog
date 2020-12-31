@@ -44,11 +44,11 @@ var demoList = [{
     url: "leaflet-OverlapMarkerPopup/demo3.html"
 }, {
     id: "MapboxGLPolylineDecorator1",
-    label: "mapboxgl类高德带箭头轨迹线",
+    label: "mapboxgl实现带箭头轨迹线",
     url: "mapboxgl-PolylineDecorator/demo1.html"
 }, {
     id: "MapboxGLPolylineDecorator2",
-    label: "mapboxgl类高德带箭头轨迹线",
+    label: "mapboxgl实现带箭头轨迹线",
     url: "mapboxgl-PolylineDecorator/demo2.html"
 }
 ];

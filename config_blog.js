@@ -70,7 +70,7 @@ var blogList = [{
     href: "https://blog.csdn.net/gisarmory/article/details/111540803"
 }, {
     id: "MapboxGLPolylineDecorator",
-    label: "mapboxgl类高德带箭头轨迹线",
+    label: "mapboxgl实现带箭头轨迹线",
     url: "mapboxgl-PolylineDecorator/README.md",
     // href: "https://blog.csdn.net/gisarmory/article/details/110957473"
 }];

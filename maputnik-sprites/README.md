@@ -18,23 +18,23 @@
 
 9. spritezero-docker使用方法（linux系统）
 
-  1. 克隆库 
+    - 克隆库 
 
-     ```
-     docker pull dolomate/spritezero
-     ```
+        ```
+        docker pull dolomate/spritezero
+        ```
 
-  2. 在当前目录创建 `./data/sprites/_svg`  文件夹
+    - 在当前目录创建 `./data/sprites/_svg`  文件夹
 
-  3. 把svg文件放在 `./data/sprites/_svg` 文件夹中，svg文件的名称不要太随意，名称会被写入json配置文件，后续使用时会用到。
+    - 把svg文件放在 `./data/sprites/_svg` 文件夹中，svg文件的名称不要太随意，名称会被写入json配置文件，后续使用时会用到。
 
-  4. 在当前目录执行命令，生成精灵图：
+    - 在当前目录执行命令，生成精灵图：
 
-     ```
-     docker run -it -e FOLDER=_svg -e THEME=sprites -v ${PWD}/data:/data dolomate/spritezero
-     ```
+        ```
+        docker run -it -e FOLDER=_svg -e THEME=sprites -v ${PWD}/data:/data dolomate/spritezero
+        ```
 
-  5. 生成的精灵图会存放在 `./data/sprites` 文件夹中
+    - 生成的精灵图会存放在 `./data/sprites` 文件夹中
 
 10. 查看生成的精灵图，你可能会碰上下图中的问题：只有黑色轮廓
     ![](http://blogimage.gisarmory.xyz/20210106175424.png)
@@ -51,10 +51,10 @@
 
 13. 在 maputnik 中使用生成的精灵图
 
-    1. 把生成的精灵图用web服务器发布出来，我用的tomcat。记得解决web服务器的跨域问题，不然调用时会报错。
-    2. 配置精灵图发布的路径，如下图
-       ![](http://blogimage.gisarmory.xyz/20210106175442.png)
-    3. 选择一个symbol类型的符号，在 Image 选项的下拉框中，会直接显示精灵图中的图片名称。![](http://blogimage.gisarmory.xyz/20210106175445.png)
+    - 把生成的精灵图用web服务器发布出来，我用的tomcat。记得解决web服务器的跨域问题，不然调用时会报错。
+    - 配置精灵图发布的路径，如下图
+      ![](http://blogimage.gisarmory.xyz/20210106175442.png)
+    - 选择一个symbol类型的符号，在 Image 选项的下拉框中，会直接显示精灵图中的图片名称。![](http://blogimage.gisarmory.xyz/20210106175445.png)
 
 
 

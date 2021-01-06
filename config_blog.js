@@ -73,4 +73,9 @@ var blogList = [{
     label: "mapboxgl实现带箭头轨迹线",
     // url: "mapboxgl-PolylineDecorator/README.md",
     href: "https://blog.csdn.net/gisarmory/article/details/112034622"
+}, {
+    id: "maputnikSprites",
+    label: "如何创建 mapbox 精灵图",
+    href: "https://blog.csdn.net/gisarmory/article/details/112288609"
 }];
+

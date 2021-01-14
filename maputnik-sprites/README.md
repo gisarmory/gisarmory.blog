@@ -31,6 +31,7 @@ mapbox开源了一个精灵图制作工具 [spritezero](https://github.com/mapbo
 2. 在当前目录创建 `./data/sprites/_svg`  文件夹
 
 3. 把svg文件放在 `./data/sprites/_svg` 文件夹中，svg文件的名称不要太随意，名称会被写入json配置文件，后续使用时会用到。
+    ![](http://blogimage.gisarmory.xyz/20210114121214.png)
 
 4. 在当前目录执行命令，生成精灵图：
 
@@ -91,9 +92,9 @@ mapbox开源了一个精灵图制作工具 [spritezero](https://github.com/mapbo
 ## 相关连接：
 
 1. *如何在本地发布OSM数据：[http://gisarmory.xyz/blog/index.html?blog=OSMVectorTiles](http://gisarmory.xyz/blog/index.html?blog=OSMVectorTiles)*
-2. *spritezero库github地址：[https://github.com/mapbox/spritezero*
-3. *spritezero库安装报错的问题：[https://github.com/mapbox/spritezero/issues/84*
-4. *spritezero-docker库github地址：[https://github.com/macteo/spritezero-docker*
+2. *spritezero库github地址：[https://github.com/mapbox/spritezero](https://github.com/mapbox/spritezero)*
+3. *spritezero库安装报错的问题：[https://github.com/mapbox/spritezero/issues/84](https://github.com/mapbox/spritezero/issues/84)*
+4. *spritezero-docker库github地址：[https://github.com/macteo/spritezero-docker](https://github.com/macteo/spritezero-docker)*
 5. *如何正确用AI导出SVG文件：[https://cloud.tencent.com/developer/article/1007666](https://cloud.tencent.com/developer/article/1007666)*
 
 

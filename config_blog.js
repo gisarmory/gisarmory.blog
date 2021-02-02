@@ -77,5 +77,9 @@ var blogList = [{
     id: "maputnikSprites",
     label: "如何创建 mapbox 精灵图",
     href: "https://blog.csdn.net/gisarmory/article/details/112288609"
+}, {
+    id: "GISerMission",
+    label: "一个GISer的使命",
+    href: "https://blog.csdn.net/gisarmory/article/details/113549538"
 }];
 

@@ -81,5 +81,9 @@ var blogList = [{
     id: "GISerMission",
     label: "一个GISer的使命",
     href: "https://blog.csdn.net/gisarmory/article/details/113549538"
+}, {
+    id: "LeafletRouteAnimate",
+    label: "Leaflet带箭头轨迹以及沿轨迹带方向的动态marker",
+    href: "https://blog.csdn.net/gisarmory/article/details/112034622"
 }];
 

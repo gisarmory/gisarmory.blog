@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>GIS兵器库</title>
+
+    <script src="config_blog.js"></script>
+    <script src="config_demo.js"></script>
+    <script src="config_source.js"></script>
+    <script src="config_download.js"></script>
+
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            min-width: 800px;
+        }
+
+        .content {
+            position: absolute;
+            margin-top: 300px;
+            margin-left: calc(50% - 300px);
+            font-size: 36px;
+            font-weight: 1000;
+        }
+
+        .contentTitle {
+            width: 600px;
+            height: 60px;
+            text-align: center;
+        }
+
+        .contentUrl {
+            width: 600px;
+            height: 60px;
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="content">
+        <div class="contentTitle">
+            <span>微信公众号：GIS兵器库</span>
+        </div>
+        <div class="contentUrl">
+            <span>http://gisarmory.xyz</span>
+        </div>
+    </div>
+</body>
+
+<script>
+    init();
+    //初始化
+    function init() {
+        var urlArg = getUrlArgObject();
+        if (urlArg && urlArg.blog) {
+            loadUrl(urlArg.blog, blogList)
+        } else if (urlArg && urlArg.demo) {
+            loadUrl(urlArg.demo, demoList)
+        } else if (urlArg && urlArg.source) {
+            loadUrl(urlArg.source, sourceList)
+        } else if (urlArg && urlArg.download) {
+            loadUrl(urlArg.download, downloadList)
+        } else {
+            window.location.href = './index.html'
+        }
+    }
+
+    function loadUrl(urlId, dataList) {
+        for (var i = 0; i < dataList.length; i++) {
+            var dataObj = dataList[i];
+            if (dataObj.id == urlId) {
+                var href = ''
+                if (dataObj.href) {
+                    href = dataObj.href;
+                } else if (dataObj.url) {
+                    href = dataObj.url;
+                }
+                setTimeout(() => {
+                    window.location.href = href
+                }, 500);
+            }
+        }
+    }
+
+    //返回的是对象形式的参数
+    function getUrlArgObject() {
+        var args = new Object();
+        var query = location.search.substring(1); //获取查询串
+        var pairs = query.split(","); //在逗号处断开
+        for (var i = 0; i < pairs.length; i++) {
+            var pos = pairs[i].indexOf('='); //查找name=value
+            if (pos == -1) { //如果没有找到就跳过
+                continue;
+            }
+            var argname = pairs[i].substring(0, pos); //提取name
+            var value = pairs[i].substring(pos + 1); //提取value
+            args[argname] = unescape(value); //存为属性
+        }
+        return args; //返回对象
+    }
+</script>
+
+</html>

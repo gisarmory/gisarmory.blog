@@ -3,7 +3,7 @@
 
 下图是我基于leaflet实现的效果。
 
-![202101280101](F:\myself\gisarmory\Leaflet.PolylineDecorator\202101280101.gif)
+![202101280101](https://blogimage.gisarmory.xyz/202101280101.gif)
 
 接下来分享一下在我基于leaflet实现该效果时一些思路以及踩到的坑。
 
@@ -13,7 +13,7 @@ leaflet无法像`mapboxgl`似的直接通过样式实现轨迹箭头效果，需
 
 注意：此处添加箭头图层应在轨迹线和实时轨迹线之后，不然箭头会被覆盖。
 
-![20210204103224](F:\myself\gisarmory\Leaflet.PolylineDecorator\20210204103224.png)
+![20210204103224](https://blogimage.gisarmory.xyz/20210204103224.png)
 
 
 
@@ -27,19 +27,19 @@ leaflet无法像`mapboxgl`似的直接通过样式实现轨迹箭头效果，需
 
 但是该插件并未考虑marker角度的问题，于是我添加了角度计算的方法。
 
-![20210204100857](F:\myself\gisarmory\Leaflet.PolylineDecorator\20210204100857.png)
+![20210204100857](https://blogimage.gisarmory.xyz/20210204100857.png)
 
 另外这里只是实现了marker的动态效果，对于轨迹线的动态绘制并未考虑，而且，在动态播放的过程中缩放地图，标记点由于播放延迟，会出现偏离轨迹线的问题。
 
 于是又回到最初实现方式，将线打断，只是这次我们不需要打断的过于精细，因为播放时marker会遮盖一部分线，整体线播放的效果不会出现跳动播放效果即可，然后在播放时动态调用展示即可。
 
-![20210205163653](F:\myself\gisarmory\Leaflet.PolylineDecorator\20210205163653.png)
+![20210205163653](https://blogimage.gisarmory.xyz/20210205163653.png)
 
-![20210204102055](F:\myself\gisarmory\Leaflet.PolylineDecorator\20210204102055.png)
+![20210204102055](https://blogimage.gisarmory.xyz/20210204102055.png)
 
 解决了角度问题以及轨迹线动态绘制问题，我们将`Leaflet.AnimatedMarker`重新封装，方便在做轨迹相关展示效果时使用。
 
-![20210205162238](F:\myself\gisarmory\Leaflet.PolylineDecorator\20210205162238.png)
+![20210205162238](https://blogimage.gisarmory.xyz/20210205162238.png)
 
 至此，我们已经基于`leaflet`实现了文章开头的轨迹带箭头以及沿轨迹线带方向的动态`marker`
 
@@ -57,15 +57,15 @@ leaflet无法像`mapboxgl`似的直接通过样式实现轨迹箭头效果，需
 
 ## 在线示例
 
-在线示例：[http://gisarmory.xyz/blog/index.html?demo=LeafletRouteAnimate](http://gisarmory.xyz/blog/index.html?demo=LeafletRouteAnimate)
+在线示例：[http://gisarmory.xyz/blog/index.html?demo=LeafletRouteAnimate](http://gisarmory.xyz/blog/index1.html?demo=LeafletRouteAnimate)
 
-代码地址：[http://gisarmory.xyz/blog/index.html?source=LeafletRouteAnimate](http://gisarmory.xyz/blog/index.html?source=LeafletRouteAnimate)
+代码地址：[http://gisarmory.xyz/blog/index.html?source=LeafletRouteAnimate](http://gisarmory.xyz/blog/index1.html?source=LeafletRouteAnimate)
 
 
 
 * * *
 
-原文地址：[http://gisarmory.xyz/blog/index.html?blog=LeafletRouteAnimate](http://gisarmory.xyz/blog/index.html?blog=MapboxGLPolylineDecorator)。
+原文地址：[http://gisarmory.xyz/blog/index.html?blog=LeafletRouteAnimate](http://gisarmory.xyz/blog/index1.html?blog=MapboxGLPolylineDecorator)。
 
 
 

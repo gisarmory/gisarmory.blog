@@ -10,6 +10,7 @@
 
     <!-- 引入PolylineDecorator插件 -->
     <script src="../lib/leaflet/plugins/leaflet.polylineDecorator.js"></script>
+    <!-- <script src="../lib/mapboxgl/turf.min.js"></script> -->
 
     <style>
         body {
@@ -39,6 +40,11 @@
 
 <body>
     <div class="map" id="map"></div>
+    <div class="menuBar">
+        <input type="button" value="开始" onclick="startClick()" />
+        <input type="button" value="暂停" onclick="pauseClick()" />
+        <input type="button" value="停止" onclick="stopClick()" />
+    </div>
 </body>
 
 <script>
@@ -51,23 +57,164 @@
     // 添加底图
     var tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
 
-    var latlngs = [ [39.898457, 116.391844], [39.898595, 116.377947], [39.898341, 116.368001], [39.898063, 116.357144], [39.899095, 116.351934], [39.905871, 116.350670], [39.922329, 116.349800], [39.931017, 116.349671], [39.939104, 116.349225], [39.942233, 116.349910], [39.947263, 116.366892], [39.947568, 116.387537], [39.947764, 116.401988], [39.947929, 116.410824], [39.947558, 116.426740], [39.939700, 116.427338], [39.932404, 116.427919], [39.923109, 116.428377], [39.907094, 116.429583], [39.906858, 116.414040], [39.906622, 116.405321], [39.906324, 116.394954], [39.906308, 116.391264], [39.916611, 116.390748] ];
-
-    var polyline = L.polyline(latlngs).addTo(map);
-    var decorator = L.polylineDecorator(polyline, {
+    var latlngs = [
+        [39.898457, 116.391844],
+        [39.898595, 116.377947],
+        [39.898341, 116.368001],
+        [39.898063, 116.357144],
+        [39.899095, 116.351934],
+        [39.905871, 116.350670],
+        [39.922329, 116.349800],
+        [39.931017, 116.349671],
+        [39.939104, 116.349225],
+        [39.942233, 116.349910],
+        [39.947263, 116.366892],
+        [39.947568, 116.387537],
+        [39.947764, 116.401988],
+        [39.947929, 116.410824],
+        [39.947558, 116.426740],
+        [39.939700, 116.427338],
+        [39.932404, 116.427919],
+        [39.923109, 116.428377],
+        [39.907094, 116.429583],
+        [39.906858, 116.414040],
+        [39.906622, 116.405321],
+        [39.906324, 116.394954],
+        [39.906308, 116.391264],
+        [39.916611, 116.390748]
+    ];
+    // 轨迹线
+    var routeLine = L.polyline(latlngs, {
+        weight: 8
+    }).addTo(map);
+    // 轨迹方向箭头
+    var decorator = L.polylineDecorator(routeLine, {
         patterns: [{
-            offset: 0,
             repeat: 50,
             symbol: L.Symbol.arrowHead({
-                pixelSize: 10,
-                headAngle: 45,
+                pixelSize: 5,
+                headAngle: 75,
                 polygon: false,
                 pathOptions: {
-                    stroke: true
+                    stroke: true,
+                    weight: 2,
+                    color: '#FFFFFF'
                 }
             })
         }]
     }).addTo(map);
+
+
+    // 动态播放图标
+    var carMarker = L.marker(latlngs[0], {
+        icon: L.icon({
+            iconSize: [37, 26],
+            iconAnchor: [19, 13],
+            iconUrl: '../img/car.png'
+        })
+    }).addTo(map)
+    // 已播放轨迹线
+    var realRouteLine = L.polyline([], {
+        weight: 8,
+        color: '#FF9900'
+    }).addTo(map);
+
+    var isPlay = false
+    var counter = 0
+    var steps = 0
+    var realLatlngs = []
+    var newLatlngs = chunk(routeLine.getLatLngs(), 10) //将轨迹线分割，以便流畅播放
+    steps = newLatlngs.length
+
+
+    // 动态播放
+    animate()
+
+    function animate() {
+        if (counter >= steps) {
+            return
+        }
+        var startPnt, endPnt
+        if (counter == 0) {
+            realLatlngs = []
+            realRouteLine.setLatLngs([])
+            startPnt = newLatlngs[counter]
+            endPnt = newLatlngs[counter + 1]
+        } else if (counter !== 0) {
+            startPnt = newLatlngs[counter - 1]
+            endPnt = newLatlngs[counter]
+        }
+
+        // 更新播放图标
+        var rotation = getRotation(startPnt, endPnt) // 获取角度
+        carMarker.setLatLng(newLatlngs[counter])
+        // 设置图标偏移量
+        carMarker._icon.style[L.DomUtil.TRANSFORM + 'Origin'] = carMarker.options.rotationOrigin;
+        // 设置图标角度
+        carMarker._icon.style[L.DomUtil.TRANSFORM] += 'rotateZ(-' + rotation + 'deg)';
+        realLatlngs.push(newLatlngs[counter])
+        realRouteLine.setLatLngs(realLatlngs)
+
+        if (isPlay) {
+            requestAnimationFrame(animate);
+        }
+        counter = counter + 1;
+    }
+
+    function getRotation(start, end) {
+        var dx = end.lng - start.lng;
+        var dy = end.lat - start.lat;
+        var radian = Math.atan2(dy, dx); //弧度值
+        var rotation = 180 * radian / Math.PI //转换为角度值
+        if (rotation > -180 && rotation < 0) {
+            rotation = 360 + rotation;
+        }
+        return rotation
+    }
+
+    function chunk(latlngs, distance) {
+        var i,
+            len = latlngs.length,
+            chunkedLatLngs = [];
+        for (i = 1; i < len; i++) {
+            var cur = latlngs[i - 1],
+                next = latlngs[i],
+                dist = cur.distanceTo(next),
+                factor = distance / dist,
+                dLat = factor * (next.lat - cur.lat),
+                dLng = factor * (next.lng - cur.lng);
+            if (dist > distance) {
+                chunkedLatLngs.push(cur);
+                while (dist > distance) {
+                    cur = new L.LatLng(cur.lat + dLat, cur.lng + dLng);
+                    dist = cur.distanceTo(next);
+                    chunkedLatLngs.push(cur);
+                }
+            } else {
+                chunkedLatLngs.push(cur);
+            }
+        }
+        chunkedLatLngs.push(latlngs[len - 1]);
+        return chunkedLatLngs;
+    }
+
+    function startClick() {
+        if (!isPlay) {
+            isPlay = true
+            animate()
+        }
+    }
+
+    function pauseClick() {
+        isPlay = false
+        animate()
+    }
+
+    function stopClick() {
+        isPlay = false
+        counter = 0
+        animate()
+    }
 </script>
 
 </html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Leaflet.RouteAnimate</title>
+    <meta charset="utf-8" />
+    <!-- 引入leafletapi -->
+    <link rel="stylesheet" href="../lib/leaflet/leaflet.css" />
+    <script src="../lib/leaflet/leaflet.js"></script>
+
+    <!-- 引入插件 -->
+    <script src="../lib/leaflet/plugins/leaflet.polylineDecorator.js"></script>
+    <script src="../lib/leaflet/plugins/Leaflet.AnimatedMarker.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .map {
+            position: absolute;
+            height: 100%;
+            right: 0;
+            left: 0;
+        }
+
+        .menuBar {
+            position: relative;
+            text-align: center;
+            top: 10px;
+            margin: 0 50px;
+            padding: 5px;
+            border-radius: 3px;
+            z-index: 999;
+            color: #ffffff;
+            background-color: rgba(0, 168, 0, 1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="map" id="map"></div>
+    <div class="menuBar">
+        <input type="button" value="开始" onclick="startClick()" />
+        <input type="button" value="暂停" onclick="pauseClick()" />
+        <input type="button" value="停止" onclick="stopClick()" />
+    </div>
+</body>
+
+<script>
+    // 初始化地图
+    var map = L.map('map', {
+        center: [39.924317, 116.390619],
+        zoom: 14,
+        preferCanvas: true // 使用canvas模式渲染矢量图形 
+    });
+    // 添加底图
+    var tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
+
+    var latlngs = [
+        [39.898457, 116.391844],
+        [39.898595, 116.377947],
+        [39.898341, 116.368001],
+        [39.898063, 116.357144],
+        [39.899095, 116.351934],
+        [39.905871, 116.350670],
+        [39.922329, 116.349800],
+        [39.931017, 116.349671],
+        [39.939104, 116.349225],
+        [39.942233, 116.349910],
+        [39.947263, 116.366892],
+        [39.947568, 116.387537],
+        [39.947764, 116.401988],
+        [39.947929, 116.410824],
+        [39.947558, 116.426740],
+        [39.939700, 116.427338],
+        [39.932404, 116.427919],
+        [39.923109, 116.428377],
+        [39.907094, 116.429583],
+        [39.906858, 116.414040],
+        [39.906622, 116.405321],
+        [39.906324, 116.394954],
+        [39.906308, 116.391264],
+        [39.916611, 116.390748]
+    ];
+    // 轨迹线
+    var routeLine = L.polyline(latlngs, {
+        weight: 8
+    }).addTo(map);
+    // 实时轨迹线
+    var realRouteLine = L.polyline([], {
+        weight: 8,
+        color: '#FF9900'
+    }).addTo(map);
+    // 轨迹方向箭头
+    var decorator = L.polylineDecorator(routeLine, {
+        patterns: [{
+            repeat: 50,
+            symbol: L.Symbol.arrowHead({
+                pixelSize: 5,
+                headAngle: 75,
+                polygon: false,
+                pathOptions: {
+                    stroke: true,
+                    weight: 2,
+                    color: '#FFFFFF'
+                }
+            })
+        }]
+    }).addTo(map);
+
+    var markers = [];
+    var carIcon = L.icon({
+        iconSize: [37, 26],
+        iconAnchor: [19, 13],
+        iconUrl: '../img/car.png'
+    })
+
+    var animatedMarker = L.animatedMarker(routeLine.getLatLngs(), {
+        icon: carIcon,
+        isRotate: true, //marker沿线方向旋转
+        playCall: updateRealLine
+    }).addTo(map)
+    var newLatlngs = animatedMarker.getNewLine()
+
+    function updateRealLine(index) {
+        if (newLatlngs && newLatlngs.length > 0) {
+            var realLatlngs = newLatlngs.slice(0, index)
+            realRouteLine.setLatLngs(realLatlngs)
+        }
+    }
+
+    function startClick() {
+        animatedMarker.start();
+    }
+
+    function pauseClick() {
+        animatedMarker.pause();
+    }
+
+    function stopClick() {
+        animatedMarker.stop();
+    }
+</script>
+
+</html>

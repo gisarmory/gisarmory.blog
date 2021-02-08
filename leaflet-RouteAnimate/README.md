@@ -25,23 +25,29 @@ leaflet无法像`mapboxgl`似的直接通过样式实现轨迹箭头效果，需
 
 该插件主要是使用CSS3动画来实现marker在线段间的移动，所以效果比较流畅。
 
-但是该插件并未考虑marker角度的问题，于是我添加了角度计算的方法。
+但是该插件并未考虑marker角度的问题，而且在做地图缩放的时候会有`marker`偏移轨迹的问题。查找相关资料时，发现有人也尝试解决此问题[leaflet-moving-marker](https://github.com/mohsen1/leaflet-moving-marker)。
 
-![20210204100857](https://blogimage.gisarmory.xyz/20210204100857.png)
+但这里对于轨迹线的动态绘制并未考虑。
 
-另外这里只是实现了marker的动态效果，对于轨迹线的动态绘制并未考虑，而且，在动态播放的过程中缩放地图，标记点由于播放延迟，会出现偏离轨迹线的问题。
+参考[Leaflet.AnimatedMarker](https://github.com/openplans/Leaflet.AnimatedMarker)、[leaflet-moving-marker](https://github.com/mohsen1/leaflet-moving-marker)中核心代码并考虑我们要实现的效果，最终解决了角度问题以及轨迹线动态绘制问题。
 
-于是又回到最初实现方式，将线打断，只是这次我们不需要打断的过于精细，因为播放时marker会遮盖一部分线，整体线播放的效果不会出现跳动播放效果即可，然后在播放时动态调用展示即可。
+![20210208152058](F:\myself\gisarmory\Leaflet.PolylineDecorator\20210208152058.png)
 
-![20210205163653](https://blogimage.gisarmory.xyz/20210205163653.png)
+另外，在播放过程中当前后两个点位角度变化超过180度时，会出现`marker`旋转的问题。
 
-![20210204102055](https://blogimage.gisarmory.xyz/20210204102055.png)
+![202102080101](F:\myself\gisarmory\Leaflet.PolylineDecorator\202102080101.gif)
 
-解决了角度问题以及轨迹线动态绘制问题，我们将`Leaflet.AnimatedMarker`重新封装，方便在做轨迹相关展示效果时使用。
+通过如下代码我们解决了此问题。
 
-![20210205162238](https://blogimage.gisarmory.xyz/20210205162238.png)
+![20210208152905](F:\myself\gisarmory\Leaflet.PolylineDecorator\20210208152905.png)
 
-至此，我们已经基于`leaflet`实现了文章开头的轨迹带箭头以及沿轨迹线带方向的动态`marker`
+我们把代码重新封装，简单调用即可实现了文章开头的轨迹带箭头以及沿轨迹线带方向的动态`marker`。
+
+![20210208145619](F:\myself\gisarmory\Leaflet.PolylineDecorator\20210208145619.png)
+
+
+
+注意：在动态播放的过程中缩放地图，标记点由于播放延迟，有时仍然会出现偏离轨迹线的问题，目前该问题暂未解决，后续解决后更新。
 
 
 
@@ -51,21 +57,22 @@ leaflet无法像`mapboxgl`似的直接通过样式实现轨迹箭头效果，需
 2. `Leaflet.AnimatedMarker`插件可以更流畅的实现marker沿线播放。
 3. `Leaflet.AnimatedMarker`插件没有考虑`marker`角度问题。
 4. `Leaflet.AnimatedMarker`插件没有考虑轨迹线的动态绘制。
-5. 解决角度问题以及轨迹线动态绘制问题，将`Leaflet.AnimatedMarker`重新封装。
+5. 参考[Leaflet.AnimatedMarker](https://github.com/openplans/Leaflet.AnimatedMarker)、[leaflet-moving-marker](https://github.com/mohsen1/leaflet-moving-marker)中核心代码，解决角度问题以及轨迹线动态绘制等问题。
+6. 将代码重新封装成插件，方便调用。
 
 
 
 ## 在线示例
 
-在线示例：[http://gisarmory.xyz/blog/index.html?demo=LeafletRouteAnimate](http://gisarmory.xyz/blog/index1.html?demo=LeafletRouteAnimate)
+在线示例：[http://gisarmory.xyz/blog/index.html?demo=LeafletRouteAnimate](http://gisarmory.xyz/blog/index.html?demo=LeafletRouteAnimate)
 
-代码地址：[http://gisarmory.xyz/blog/index.html?source=LeafletRouteAnimate](http://gisarmory.xyz/blog/index1.html?source=LeafletRouteAnimate)
+代码地址：[http://gisarmory.xyz/blog/index.html?source=LeafletRouteAnimate](http://gisarmory.xyz/blog/index.html?source=LeafletRouteAnimate)
 
 
 
 * * *
 
-原文地址：[http://gisarmory.xyz/blog/index.html?blog=LeafletRouteAnimate](http://gisarmory.xyz/blog/index1.html?blog=MapboxGLPolylineDecorator)。
+原文地址：[http://gisarmory.xyz/blog/index.html?blog=LeafletRouteAnimate](http://gisarmory.xyz/blog/index.html?blog=MapboxGLPolylineDecorator)。
 
 
 

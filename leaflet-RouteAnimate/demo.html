@@ -109,25 +109,22 @@
         }]
     }).addTo(map);
 
-    var markers = [];
     var carIcon = L.icon({
         iconSize: [37, 26],
         iconAnchor: [19, 13],
         iconUrl: '../img/car.png'
     })
-
+    // 动态marker
     var animatedMarker = L.animatedMarker(routeLine.getLatLngs(), {
         icon: carIcon,
-        isRotate: true, //marker沿线方向旋转
         playCall: updateRealLine
     }).addTo(map)
-    var newLatlngs = animatedMarker.getNewLine()
+    var newLatlngs = [routeLine.getLatLngs()[0]]
 
-    function updateRealLine(index) {
-        if (newLatlngs && newLatlngs.length > 0) {
-            var realLatlngs = newLatlngs.slice(0, index)
-            realRouteLine.setLatLngs(realLatlngs)
-        }
+    // 绘制实时轨迹线
+    function updateRealLine(latlng) {
+        newLatlngs.push(latlng)
+        realRouteLine.setLatLngs(newLatlngs)
     }
 
     function startClick() {
@@ -139,6 +136,7 @@
     }
 
     function stopClick() {
+        newLatlngs = []
         animatedMarker.stop();
     }
 </script>

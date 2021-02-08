@@ -34,6 +34,8 @@
 
 [mapboxgl类高德带箭头轨迹线](http://gisarmory.xyz/blog/index.html?blog=MapboxGLPolylineDecorator)
 
+[Leaflet 带箭头轨迹以及沿轨迹带方向的动态marker](http://gisarmory.xyz/blog/index.html?blog=LeafletRouteAnimate)
+
 ## 三维GIS开发
 
 

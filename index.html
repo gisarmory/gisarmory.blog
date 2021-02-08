@@ -2,234 +2,110 @@
 <html>
 
 <head>
-  <meta charset="utf-8" />
-  <title>GIS兵器库</title>
-  <link href="lib/markdown/atom-one-dark.css" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet">
+    <meta charset="utf-8" />
+    <title>GIS兵器库</title>
 
-  <script src="lib/markdown/marked.min.js"></script>
-  <script src="lib/markdown/highlight.min.js"></script>
-  <script src="lib/jquery.min.js"></script>
-  <script src="lib/jquery.nicescroll.min.js"></script>
+    <script src="config_blog.js"></script>
+    <script src="config_demo.js"></script>
+    <script src="config_source.js"></script>
+    <script src="config_download.js"></script>
 
-  <script src="config_blog.js"></script>
-  <script src="config_demo.js"></script>
-  <script src="config_source.js"></script>
-  <script src="config_download.js"></script>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            min-width: 800px;
+        }
+
+        .content {
+            position: absolute;
+            margin-top: 300px;
+            margin-left: calc(50% - 300px);
+            font-size: 36px;
+            font-weight: 1000;
+        }
+
+        .contentTitle {
+            width: 600px;
+            height: 60px;
+            text-align: center;
+        }
+
+        .contentUrl {
+            width: 600px;
+            height: 60px;
+            text-align: center;
+        }
+    </style>
 
 </head>
 
 <body>
-  <nav class="navbar zs_navbar">
-    <div class="container">
-      <div class="navbar-header">
-        <a class="navbar-brand zs_logo" href="index.html">
-          <img src="img/logo.png" alt="">
-          <span>GIS兵器库</span>
-        </a>
-      </div>
-      <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li class="active" data-id="blogList">
-            <a>博客</a>
-          </li>
-          <li data-id="wechat">
-            <a>公众号</a>
-          </li>
-          <li data-id="github">
-            <a>github</a>
-          </li>
-          <li id="aboutus-li" data-id="aboutUs">
-            <a>关于我们</a>
-          </li>
-        </ul>
-      </div>
+    <div class="content">
+        <div class="contentTitle">
+            <span>微信公众号：GIS兵器库</span>
+        </div>
+        <!-- <div class="contentUrl">
+            <span>http://gisarmory.xyz</span>
+        </div> -->
     </div>
-  </nav>
-  <div id="content">
-    <div id="mainContent"></div>
-    <div id="bottomContent">
-      <span class="aboutus-span" onclick="aboutusClick()">关于我们</span>&nbsp;&nbsp;&nbsp;
-      <span>技术支持：GIS兵器库</span>
-    </div>
-  </div>
 </body>
 
 <script>
-  //配置marked插件
-  configMarked();
-  init();
-  changeSelect()
-
-  //初始化
-  function init() {
-
-    $("#content").niceScroll();
-    var urlArg = getUrlArgObject();
-    if (urlArg && urlArg.blog) {
-      loadMarkdown(urlArg.blog)
-    } else if (urlArg && urlArg.demo) {
-      loadDemo(urlArg.demo)
-    } else if (urlArg && urlArg.source) {
-      loadSource(urlArg.source)
-    } else if (urlArg && urlArg.download) {
-      downloadFile(urlArg.download)
-    } else {
-      loadMarkdown("blogList")
+    init();
+    //初始化
+    function init() {
+        var urlArg = getUrlArgObject();
+        if (urlArg && urlArg.blog) {
+            loadUrl(urlArg.blog, blogList)
+        } else if (urlArg && urlArg.demo) {
+            loadUrl(urlArg.demo, demoList)
+        } else if (urlArg && urlArg.source) {
+            loadUrl(urlArg.source, sourceList)
+        } else if (urlArg && urlArg.download) {
+            loadUrl(urlArg.download, downloadList)
+        } else {
+            window.location.href = './main.html'
+        }
     }
-  }
 
-  function aboutusClick(){
-    doChangeSelect('#aboutus-li')
-  }
-
-  function changeSelect() {
-    $(".navbar-nav li").click(function() {
-      doChangeSelect(this)
-    });
-  }
-
-  function doChangeSelect(_this){
-    $(_this).siblings('li').removeClass('active'); // 删除其他兄弟元素的样式
-    $(_this).addClass('active'); // 添加当前元素的样式
-    var blogid = $(_this).attr("data-id");
-    var blogObj = getBlogConfigById(blogid);
-    if(blogObj.href){
-      window.open(blogObj.href,"_blank"); 
-    }else if(blogObj.url){
-      loadMarkdown(blogid);
+    function loadUrl(urlId, dataList) {
+        for (var i = 0; i < dataList.length; i++) {
+            var dataObj = dataList[i];
+            if (dataObj.id == urlId) {
+                var href = ''
+                if (dataObj.href) {
+                    href = dataObj.href;
+                } else if (dataObj.url) {
+                    href = dataObj.url;
+                }
+                setTimeout(() => {
+                    window.location.href = href
+                }, 800);
+            }
+        }
     }
-    
 
-    setTimeout(function(){
-      $("#content").niceScroll();
-      $("#content").getNiceScroll().resize();
-    },200)
-  }
-
-  //加载demo示例
-  function loadDemo(demoId) {
-    var demoObj = getDemoConfigById(demoId);
-    if (demoObj) {
-      window.location.href = demoObj.url;
+    //返回的是对象形式的参数
+    function getUrlArgObject() {
+        var args = new Object();
+        var query = location.search.substring(1); //获取查询串
+        var pairs = query.split(","); //在逗号处断开
+        for (var i = 0; i < pairs.length; i++) {
+            var pos = pairs[i].indexOf('='); //查找name=value
+            if (pos == -1) { //如果没有找到就跳过
+                continue;
+            }
+            var argname = pairs[i].substring(0, pos); //提取name
+            var value = pairs[i].substring(pos + 1); //提取value
+            args[argname] = unescape(value); //存为属性
+        }
+        return args; //返回对象
     }
-  }
-
-  //加载loadSource示例
-  function loadSource(sourceId) {
-    var sourceObj = getSourceConfigById(sourceId);
-    if (sourceObj) {
-      window.location.href = sourceObj.url;
-    }
-  }
-
-  //加载download示例
-  function downloadFile(downloadId) {
-    var downloadObj = getDownloadConfigById(downloadId);
-    if (downloadObj) {
-      window.location.href = downloadObj.url;
-    }
-  }
-
-  
-
-
-
-  //配置marked插件
-  function configMarked() {
-    hljs.initHighlightingOnLoad();
-    var rendererMD = new marked.Renderer();
-    marked.setOptions({
-      renderer: rendererMD,
-      gfm: true,
-      tables: true,
-      breaks: false,
-      pedantic: false,
-      sanitize: false,
-      smartLists: true,
-      smartypants: false
-    });
-    marked.setOptions({
-      highlight: function(code) {
-        return hljs.highlightAuto(code).value;
-      }
-    });
-  }
-
-  //加载markdown文件
-  function loadMarkdown(blogid) {
-    var blogObj = getBlogConfigById(blogid);
-    if (blogObj.url) {
-      xhr = new XMLHttpRequest();
-      xhr.open('get', blogObj.url);
-      xhr.send('')
-      xhr.onload = function() {
-        var mdText = xhr.responseText;
-        var mdContent = document.getElementById('mainContent');
-        //replace是解决代码不显示黑色背景的问题
-        mdContent.innerHTML = marked(mdText).replace(/<pre>/g, "<pre class='hljs'>");
-      }
-    }else if(blogObj.href){
-      window.location.href = blogObj.href;
-    }
-  }
-
-  //根据blogid获取blog配置
-  function getBlogConfigById(blogId) {
-    for (var i = 0; i < blogList.length; i++) {
-      var blogObj = blogList[i];
-      if (blogObj.id == blogId) {
-        return blogObj;
-      }
-    }
-  }
-
-  //根据demoid获取demo配置
-  function getDemoConfigById(demoId) {
-    for (var i = 0; i < demoList.length; i++) {
-      var demoObj = demoList[i];
-      if (demoObj.id == demoId) {
-        return demoObj;
-      }
-    }
-  }
-
-  //根据sourceid获取source配置
-  function getSourceConfigById(sourceId) {
-    for (var i = 0; i < sourceList.length; i++) {
-      var sourceObj = sourceList[i];
-      if (sourceObj.id == sourceId) {
-        return sourceObj;
-      }
-    }
-  }
-
-//根据downloadId获取download配置
-function getDownloadConfigById(downloadId) {
-  for (var i = 0; i < downloadList.length; i++) {
-    var downloadObj = downloadList[i];
-    if (downloadObj.id == downloadId) {
-      return downloadObj;
-    }
-  }
-}
-
-  //返回的是对象形式的参数
-  function getUrlArgObject() {
-    var args = new Object();
-    var query = location.search.substring(1); //获取查询串
-    var pairs = query.split(","); //在逗号处断开
-    for (var i = 0; i < pairs.length; i++) {
-      var pos = pairs[i].indexOf('='); //查找name=value
-      if (pos == -1) { //如果没有找到就跳过
-        continue;
-      }
-      var argname = pairs[i].substring(0, pos); //提取name
-      var value = pairs[i].substring(pos + 1); //提取value
-      args[argname] = unescape(value); //存为属性
-    }
-    return args; //返回对象
-  }
 </script>
 
 </html>

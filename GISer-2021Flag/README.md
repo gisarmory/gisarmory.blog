@@ -28,7 +28,7 @@
 
 原文地址：[http://gisarmory.xyz/blog/index.html?blog=GISer2021Flag](http://gisarmory.xyz/blog/index.html?blog=GISer2021Flag)
 
-关注公众号《[GIS兵器库](http://gisarmory.xyz/blog/index.html?blog=wechat)》， 第一时间获得更多高质量GIS文章。
+关注《[GIS兵器库](http://gisarmory.xyz/blog/index.html?blog=wechat)》公众号， 第一时间获得更多高质量GIS文章。
 
 ![](http://blogimage.gisarmory.xyz/20200923063756.png)
 

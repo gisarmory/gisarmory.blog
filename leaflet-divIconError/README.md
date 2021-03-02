@@ -30,11 +30,11 @@ Canvas-Markers插件的创作目的是为了解决，大批量数据展示的性
 
 标签功能：
 
-![image-20201121164957140](http://blogimage.gisarmory.xyz/20201123122419.png)
+![image-20201121164957140](http://blogimage.gisarmory.xyz/20201123122419.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
 文字标注功能：
 
-![image-20201121165508761](http://blogimage.gisarmory.xyz/20201123122423.png)
+![image-20201121165508761](http://blogimage.gisarmory.xyz/20201123122423.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
 
 
@@ -52,11 +52,11 @@ Canvas-Markers插件通过Icon获取图片的地址和图片的偏移位置等�
 
 打开Canvas-Markers插件的代码，在下图位置增加一个绘制文字的方法。
 
-![image-20201121172659282](http://blogimage.gisarmory.xyz/20201123122427.png)
+![image-20201121172659282](http://blogimage.gisarmory.xyz/20201123122427.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
 再在下图中的三个位置，增加上面新增方法的调用
 
-![image-20201121173254912](http://blogimage.gisarmory.xyz/20201123122430.png)
+![image-20201121173254912](http://blogimage.gisarmory.xyz/20201123122430.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
 这样就可以实现标签功能了，看效果
 
@@ -72,7 +72,7 @@ Canvas-Markers插件通过Icon获取图片的地址和图片的偏移位置等�
 
 LabelTextCollision插件创作的目的，是为了实现的文字标注的自动避让功能，实现方式是Canvas，文字标注功能是它顺带解决的问题。
 
-![image-20201121182405099](http://blogimage.gisarmory.xyz/20201123122439.png)
+![image-20201121182405099](http://blogimage.gisarmory.xyz/20201123122439.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
 测试时，发现了它一个问题，1万条数据，在缩小地图时，显示很流畅，但放大地图时，会出现卡顿的现象，而且地图越放大，卡顿的就越厉害。
 
@@ -88,7 +88,7 @@ LabelTextCollision插件创作的目的，是为了实现的文字标注的自�
 
 那我们就来给它加上，在下图中的两个地方添加对屏幕显示范围的判断，只显示当前能看到的数据。
 
-![image-20201121193759514](http://blogimage.gisarmory.xyz/20201123122442.png)
+![image-20201121193759514](http://blogimage.gisarmory.xyz/20201123122442.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
 再试一下，哈哈，搞定
 
@@ -138,7 +138,7 @@ LabelTextCollision插件创作的目的，是为了实现的文字标注的自�
 
 关注《[GIS兵器库](http://gisarmory.xyz/blog/index.html?blog=wechat)》公众号， 第一时间获得更多高质量GIS文章。
 
-![](http://blogimage.gisarmory.xyz/20200923063756.png)
+![](http://blogimage.gisarmory.xyz/20200923063756.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
 本文章采用 [知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议 ](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)进行许可。欢迎转载、使用、重新发布，但务必保留文章署名《GIS兵器库》（包含链接：  [http://gisarmory.xyz/blog/](http://gisarmory.xyz/blog/)），不得用于商业目的，基于本文修改后的作品务必以相同的许可发布。
 

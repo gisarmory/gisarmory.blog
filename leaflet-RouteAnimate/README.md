@@ -29,7 +29,7 @@ leaflet无法像`mapboxgl`似的直接通过样式实现轨迹箭头效果，需
 
 但这里对于轨迹线的动态绘制并未考虑。
 
-参考[Leaflet.AnimatedMarker](http://gisarmory.xyz/blog/index.html?source=LeafletAnimatedMarker)、[leaflet-moving-marker](https://github.com/mohsen1/leaflet-moving-marker)中核心代码并考虑我们要实现的效果，最终解决了角度问题以及轨迹线动态绘制问题。
+参考[Leaflet.AnimatedMarker](https://github.com/openplans/Leaflet.AnimatedMarker)、[leaflet-moving-marker](https://github.com/mohsen1/leaflet-moving-marker)中核心代码并考虑我们要实现的效果，最终解决了角度问题以及轨迹线动态绘制问题。
 
 ![20210208152058](https://blogimage.gisarmory.xyz/20210208152058.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
@@ -68,7 +68,7 @@ leaflet无法像`mapboxgl`似的直接通过样式实现轨迹箭头效果，需
 
 代码地址：[http://gisarmory.xyz/blog/index.html?source=LeafletRouteAnimate](http://gisarmory.xyz/blog/index.html?source=LeafletRouteAnimate)
 
-
+插件地址：http://gisarmory.xyz/blog/index.html?source=LeafletAnimatedMarker
 
 
 

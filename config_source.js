@@ -42,4 +42,8 @@ var sourceList = [{
     id: "LeafletRouteAnimate",
     label: "Leaflet带箭头轨迹以及沿轨迹带方向的动态marker",
     url: "https://github.com/gisarmory/gisarmory.blog/tree/master/leaflet-RouteAnimate/demo.html"
+}, {
+    id: "LeafletAnimatedMarker",
+    label: "Leaflet动态marker",
+    url: "https://github.com/gisarmory/Leaflet.AnimatedMarker"
 }];

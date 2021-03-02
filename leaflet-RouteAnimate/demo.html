@@ -121,20 +121,23 @@
     }).addTo(map)
     var newLatlngs = [routeLine.getLatLngs()[0]]
 
-    // 绘制实时轨迹线
+    // 绘制已行走轨迹线（橙色那条）
     function updateRealLine(latlng) {
         newLatlngs.push(latlng)
         realRouteLine.setLatLngs(newLatlngs)
     }
 
+    // 开始
     function startClick() {
         animatedMarker.start();
     }
 
+    // 暂停
     function pauseClick() {
         animatedMarker.pause();
     }
 
+    // 停止
     function stopClick() {
         newLatlngs = []
         animatedMarker.stop();

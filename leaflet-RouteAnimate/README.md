@@ -29,7 +29,7 @@ leaflet无法像`mapboxgl`似的直接通过样式实现轨迹箭头效果，需
 
 但这里对于轨迹线的动态绘制并未考虑。
 
-参考[Leaflet.AnimatedMarker](https://github.com/openplans/Leaflet.AnimatedMarker)、[leaflet-moving-marker](https://github.com/mohsen1/leaflet-moving-marker)中核心代码并考虑我们要实现的效果，最终解决了角度问题以及轨迹线动态绘制问题。
+参考`Leaflet.AnimatedMarker`、`leaflet-moving-marker`中核心代码并考虑我们要实现的效果，最终解决了角度问题以及轨迹线动态绘制问题。
 
 ![20210208152058](https://blogimage.gisarmory.xyz/20210208152058.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
@@ -43,7 +43,7 @@ leaflet无法像`mapboxgl`似的直接通过样式实现轨迹箭头效果，需
 
 我们把代码重新封装，简单调用即可实现了文章开头的轨迹带箭头以及沿轨迹线带方向的动态`marker`。
 
-![20210208145619](https://blogimage.gisarmory.xyz/20210208145619.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
+![20210302124540](https://blogimage.gisarmory.xyz/20210302124540.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
 
 
@@ -54,10 +54,8 @@ leaflet无法像`mapboxgl`似的直接通过样式实现轨迹箭头效果，需
 ## 总结
 
 1. 使用用`L.polylineDecorator`插件可以实现轨迹带箭头效果。
-2. `Leaflet.AnimatedMarker`插件可以更流畅的实现marker沿线播放。
-3. `Leaflet.AnimatedMarker`插件没有考虑`marker`角度问题。
-4. `Leaflet.AnimatedMarker`插件没有考虑轨迹线的动态绘制。
-5. 参考[Leaflet.AnimatedMarker](https://github.com/openplans/Leaflet.AnimatedMarker)、[leaflet-moving-marker](https://github.com/mohsen1/leaflet-moving-marker)中核心代码，解决角度问题以及轨迹线动态绘制等问题。
+2. `Leaflet.AnimatedMarker`插件可以更流畅的实现marker沿线播放，但是没有考虑`marker`角度和轨迹线的动态绘制。
+5. 参考`Leaflet.AnimatedMarker`、`leaflet-moving-marker`中核心代码，解决角度问题以及轨迹线动态绘制等问题。
 6. 将代码重新封装成插件，方便调用。
 
 
@@ -66,9 +64,9 @@ leaflet无法像`mapboxgl`似的直接通过样式实现轨迹箭头效果，需
 
 在线示例：[http://gisarmory.xyz/blog/index.html?demo=LeafletRouteAnimate](http://gisarmory.xyz/blog/index.html?demo=LeafletRouteAnimate)
 
-代码地址：[http://gisarmory.xyz/blog/index.html?source=LeafletRouteAnimate](http://gisarmory.xyz/blog/index.html?source=LeafletRouteAnimate)
+示例代码地址：[http://gisarmory.xyz/blog/index.html?source=LeafletRouteAnimate](http://gisarmory.xyz/blog/index.html?source=LeafletRouteAnimate)
 
-插件地址：http://gisarmory.xyz/blog/index.html?source=LeafletAnimatedMarker
+插件地址：[http://gisarmory.xyz/blog/index.html?source=LeafletAnimatedMarker](http://gisarmory.xyz/blog/index.html?source=LeafletAnimatedMarker)
 
 
 
@@ -78,7 +76,7 @@ leaflet无法像`mapboxgl`似的直接通过样式实现轨迹箭头效果，需
 
 
 
-关注WX《[GIS兵器库](http://gisarmory.xyz/blog/index.html?blog=wechat)》， 第一时间获得更多高质量GIS文章。
+关注《[GIS兵器库](http://gisarmory.xyz/blog/index.html?blog=wechat)》， 第一时间获得更多高质量GIS文章。
 
 ![](http://blogimage.gisarmory.xyz/20200923063756.png)
 

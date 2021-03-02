@@ -13,7 +13,7 @@ leaflet无法像`mapboxgl`似的直接通过样式实现轨迹箭头效果，需
 
 注意：此处添加箭头图层应在轨迹线和实时轨迹线之后，不然箭头会被覆盖。
 
-![20210204103224](https://blogimage.gisarmory.xyz/20210204103224.png)
+![20210204103224](https://blogimage.gisarmory.xyz/20210204103224.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
 
 
@@ -31,7 +31,7 @@ leaflet无法像`mapboxgl`似的直接通过样式实现轨迹箭头效果，需
 
 参考[Leaflet.AnimatedMarker](https://github.com/openplans/Leaflet.AnimatedMarker)、[leaflet-moving-marker](https://github.com/mohsen1/leaflet-moving-marker)中核心代码并考虑我们要实现的效果，最终解决了角度问题以及轨迹线动态绘制问题。
 
-![20210208152058](https://blogimage.gisarmory.xyz/20210208152058.png)
+![20210208152058](https://blogimage.gisarmory.xyz/20210208152058.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
 另外，在播放过程中当前后两个点位角度变化超过180度时，会出现`marker`旋转的问题。
 
@@ -39,11 +39,11 @@ leaflet无法像`mapboxgl`似的直接通过样式实现轨迹箭头效果，需
 
 通过如下代码我们解决了此问题。
 
-![20210208152905](https://blogimage.gisarmory.xyz/20210208152905.png)
+![20210208152905](https://blogimage.gisarmory.xyz/20210208152905.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
 我们把代码重新封装，简单调用即可实现了文章开头的轨迹带箭头以及沿轨迹线带方向的动态`marker`。
 
-![20210208145619](https://blogimage.gisarmory.xyz/20210208145619.png)
+![20210208145619](https://blogimage.gisarmory.xyz/20210208145619.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
 
 

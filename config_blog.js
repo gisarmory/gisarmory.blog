@@ -84,7 +84,7 @@ var blogList = [{
 }, {
     id: "LeafletRouteAnimate",
     label: "Leaflet带箭头轨迹以及沿轨迹带方向的动态marker",
-    url: "leaflet-RouteAnimate/README.md",
+    url: "https://blog.csdn.net/gisarmory/article/details/114290334",
     // href: "https://blog.csdn.net/gisarmory/article/details/112034622"
 }, {
     id: "GISer2021Flag",

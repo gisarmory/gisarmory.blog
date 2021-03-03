@@ -1,6 +1,8 @@
 # Leaflet 带箭头轨迹以及沿轨迹带方向的动态marker
 前面写了篇文章，[mapboxgl实现带箭头轨迹线](http://gisarmory.xyz/blog/index.html?blog=MapboxGLPolylineDecorator)，介绍了如何基于mapboxgl实现类似高德地图导航轨迹效果。
 
+近期有基于Leaflet实现轨迹回放的需求，于是研究了下如何基于leaflet来实现。
+
 下图是我基于leaflet实现的效果。
 
 ![202101280101](https://blogimage.gisarmory.xyz/202101280101.gif?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)

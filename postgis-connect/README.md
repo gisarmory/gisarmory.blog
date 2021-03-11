@@ -6,15 +6,15 @@
 
 2. 创建拓扑，生成`pipe_vertices_pgr`
 
-   ![20210303001](F:\myself\gisarmory\20210303001.png)
+   ![20210303001](https://blogimage.gisarmory.xyz/20210303001.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
 3. 根据起点坐标、终点坐标从`pipe_vertices_pgr`查询最近的起点、终点标识
 
-   ![20210303002](F:\myself\gisarmory\20210303002.png)
+   ![20210303002](https://blogimage.gisarmory.xyz/20210303002.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
 4. 调用pgr_kdijkstraPath函数，查询出起点、终点联通的线
 
-   ![20210303003](F:\myself\gisarmory\20210303003.png)
+   ![20210303003](https://blogimage.gisarmory.xyz/20210303003.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
 
 

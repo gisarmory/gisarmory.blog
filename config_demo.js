@@ -50,5 +50,9 @@ var demoList = [{
     id: "LeafletRouteAnimate",
     label: "Leaflet带箭头轨迹以及沿轨迹带方向的动态marker",
     url: "leaflet-RouteAnimate/demo.html"
+}, {
+    id: "PostGISConnect",
+    label: "为什么PostGIS中对点进行buffer分析得到的是个椭圆",
+    url: "postgis-connect/index.html"
 }
 ];

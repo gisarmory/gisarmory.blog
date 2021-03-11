@@ -46,4 +46,16 @@ var sourceList = [{
     id: "LeafletAnimatedMarker",
     label: "Leaflet动态marker",
     url: "https://github.com/gisarmory/Leaflet.AnimatedMarker"
+}, {
+    id: "PostGISConnect",
+    label: "PostGIS管网连通性分析脚本",
+    url: "https://github.com/gisarmory/gisarmory.blog/blob/master/postgis-connect/analysis_connect.sql"
+}, {
+    id: "PostGISUpdateTopology",
+    label: "PostGIS更新管网拓扑",
+    url: "https://github.com/gisarmory/gisarmory.blog/blob/master/postgis-connect/analysis_updatetopology.sql"
+}, {
+    id: "PostGISPipeTest",
+    label: "PostGIS管网测试库",
+    url: "https://github.com/gisarmory/gisarmory.blog/blob/master/postgis-connect/data/postgis_pipetest.bak"
 }];

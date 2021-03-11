@@ -90,5 +90,10 @@ var blogList = [{
     id: "GISer2021Flag",
     label: "2021给自己立个Flag",
     href: "https://blog.csdn.net/gisarmory/article/details/113850304"
+}, {
+    id: "PostGISConnect",
+    label: "PostGIS管网连通性分析",
+    url: "postGIS-connect/README.md",
+    // href: "https://blog.csdn.net/gisarmory/article/details/109646712"
 }];
 

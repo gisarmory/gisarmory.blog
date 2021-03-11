@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="http://192.168.200.30:7003/mapapi/v2/leaflet-rmap.js"></script>
+    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .map {
+            position: absolute;
+            height: 100%;
+            right: 0;
+            left: 0;
+        }
+
+        .menuBar {
+            position: relative;
+            top: 10px;
+            margin: 0 50px;
+            padding: 5px;
+            border-radius: 3px;
+            z-index: 999;
+            background-color: rgba(0, 168, 0, 0.7);
+        }
+
+        .leaflet-mouse-marker {
+            background-color: #fff;
+            cursor: crosshair;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="map" id="map"></div>
+    <div class="menuBar">
+        <input type="button" value="起点" onclick="startMarker()" />
+        <input type="button" value="终点" onclick="endMarker()" />
+        <input type="button" value="分析" onclick="doAnalysis()" />
+        <input type="button" value="清除结果" onclick="clearResult()" />
+        <span style="margin-left: 20px; color: #FFF;">注意，选点时需要选到结点处</span>
+    </div>
+</body>
+
+<script>
+    // 初始化地图
+    var map = new L.rmap.initMap('map', {
+        center: [30.780437, 103.914051],
+        zoom: 17,
+        maxZoom: 21
+    });
+
+    var analysisLayerGroup = L.layerGroup().addTo(map)
+    var pipeLayerGroup = L.layerGroup().addTo(map)
+    var nodeLayerGroup = L.layerGroup().addTo(map)
+
+    initPipe()
+
+    var startPoint, endPoint
+
+    function initPipe() {
+        $.ajax({
+            type: "GET",
+            url: "./data/pipe.json",
+            success: function(data) {
+                // pipeLayerGroup.addLayer(L.geoJSON(data))
+                data.features.forEach(item => {
+                    var polyline = L.polyline(item.geometry.coordinates)
+                    pipeLayerGroup.addLayer(polyline)
+                });
+                initNode()
+            }
+        });
+    }
+
+    function initNode(){
+        $.ajax({
+            type: "GET",
+            url: "./data/node.json",
+            success: function(data) {
+                data.features.forEach(item => {
+                    var circlemarker = L.circleMarker(item.geometry.coordinates,{
+                        radius: 2,
+                        color: '#009818'
+                    })
+                    nodeLayerGroup.addLayer(circlemarker)
+                });
+            }
+        });
+    }
+
+    //标记点1
+    function startMarker() {
+        L.DomUtil.addClass(map._container, 'leaflet-mouse-marker');
+        map.on('click', startClick)
+    }
+
+    //标记点2
+    function endMarker() {
+        L.DomUtil.addClass(map._container, 'leaflet-mouse-marker');
+        map.on('click', endClick)
+    }
+
+    function startClick(e) {
+        L.DomUtil.removeClass(map._container, 'leaflet-mouse-marker');
+        console.log('start')
+        startPoint = e.latlng
+        var marker = L.marker(e.latlng)
+        analysisLayerGroup.addLayer(marker)
+        map.off('click', startClick)
+    }
+
+    function endClick(e) {
+        L.DomUtil.removeClass(map._container, 'leaflet-mouse-marker');
+        console.log('end')
+        endPoint = e.latlng
+        var marker = L.marker(e.latlng)
+        analysisLayerGroup.addLayer(marker)
+        map.off('click', endClick)
+    }
+
+    function clearResult() {
+        analysisLayerGroup.clearLayers()
+    }
+
+    function doAnalysis() {
+        var dataObj = {
+            x1: startPoint.lng,
+            y1: startPoint.lat,
+            x2: endPoint.lng,
+            y2: endPoint.lat
+        }
+        $.ajax({
+            type: "POST",
+            url: "http://192.168.50.100:8885/gisarmory/backend/geometry/analysis_connect",
+            data: JSON.stringify(dataObj),
+            contentType: 'application/json',
+            success: function(result) {
+                var featurecollection = JSON.parse(result.data[0].featurecollection)
+                var resultLayer = L.geoJSON(featurecollection, {
+                    style: function(feature) {
+                        return {
+                            color: '#EEE200',
+                            weight: 5
+                        };
+                    }
+                }).bindPopup(function(layer) {
+                    return layer.feature.properties.flid.toString();
+                });
+                analysisLayerGroup.addLayer(resultLayer)
+            }
+        });
+    }
+</script>
+
+</html>

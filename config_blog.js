@@ -98,7 +98,7 @@ var blogList = [{
 }, {
     id: "GISerSolution",
     label: "我的开源GIS解决方案之路",
-    url: "postGIS-connect/README.md",
-    // href: "https://blog.csdn.net/gisarmory/article/details/109646712"
+    // url: "postGIS-connect/README.md",
+    href: "https://blog.csdn.net/gisarmory/article/details/115340206"
 }];
 

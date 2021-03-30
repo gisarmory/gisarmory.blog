@@ -58,4 +58,8 @@ var sourceList = [{
     id: "PostGISPipeTest",
     label: "PostGIS管网测试库",
     url: "https://github.com/gisarmory/gisarmory.blog/blob/master/postgis-connect/data/postgis_pipetest.bak"
+}, {
+    id: "maputnikGeoserverVectorTiles",
+    label: "maputnik",
+    url: "https://github.com/gisarmory/editor"
 }];

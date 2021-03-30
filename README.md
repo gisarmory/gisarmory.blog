@@ -60,7 +60,9 @@
 
 [一个GISer的使命](GISer-Mission/README.md)
 
+[2021给自己立个Flag](GISer-2021Flag/README.md)
 
+[我的开源GIS解决方案之路](GISer-solution/README.md)
 
 
 

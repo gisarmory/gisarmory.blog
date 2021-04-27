@@ -93,8 +93,8 @@ var blogList = [{
 }, {
     id: "PostGISConnect",
     label: "PostGIS管网连通性分析",
-    url: "postGIS-connect/README.md",
-    // href: "https://blog.csdn.net/gisarmory/article/details/109646712"
+    // url: "postGIS-connect/README.md",
+    href: "https://blog.csdn.net/gisarmory/article/details/116194268"
 }, {
     id: "GISerSolution",
     label: "我的开源GIS解决方案之路",

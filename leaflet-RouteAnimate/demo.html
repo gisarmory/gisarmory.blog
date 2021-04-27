@@ -115,10 +115,11 @@
         iconUrl: '../img/car.png'
     })
     // 动态marker
-    var animatedMarker = L.animatedMarker(routeLine.getLatLngs(), {
-        icon: carIcon,
-        playCall: updateRealLine
-    }).addTo(map)
+var animatedMarker = L.animatedMarker(routeLine.getLatLngs(), {
+    interval: 100,// 默认为100mm
+    icon: carIcon,
+    playCall: updateRealLine
+}).addTo(map)
     var newLatlngs = [routeLine.getLatLngs()[0]]
 
     // 绘制已行走轨迹线（橙色那条）

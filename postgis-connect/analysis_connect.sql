@@ -8,13 +8,12 @@ CREATE OR REPLACE FUNCTION postgres.analysis_connect(
 	starty double precision,
 	endx double precision,
 	endy double precision,
-  differ double precision)
+	differ double precision)
     RETURNS SETOF pipe 
     LANGUAGE 'plpgsql'
     COST 100.0
     VOLATILE     ROWS 1000.0
 AS $function$
-
 
 DECLARE
 
@@ -30,23 +29,20 @@ BEGIN
     execute 'select ST_SRID(the_geom) from '||tbl||'_vertices_pgr where id=1' into v_SRID;
     -- 定义起点坐标
     v_startPoint = 'public.ST_GeomFromText(''point('||startx||' '||starty||')'','||v_SRID||')';
-    -- v_startPoint = 'ST_Transform(public.ST_GeomFromText(''point('||startx||' '||starty||')'',4326),'||v_SRID||')';
-    -- 定义起点坐标
+    -- 定义终点坐标
     v_endPoint = 'public.ST_GeomFromText(''point('||endx||' '||endy||')'','||v_SRID||')';
-    -- v_endPoint = 'ST_Transform(public.ST_GeomFromText(''point('||endx||' '||endy||')'',4326),'||v_SRID||')';
 
     --查询离起点最近的点,differ为容差值
     execute 'select id  from '||tbl||'_vertices_pgr where   
             public.ST_DWithin(the_geom,'||v_startPoint||','||differ||')   
             order by public.ST_Distance(the_geom,'||v_startPoint||') limit 1'  
             into v_startTarget;   
-       
     --查询离终点最近的点  
     execute 'select id  from '||tbl||'_vertices_pgr where   
             public.ST_DWithin(the_geom,'||v_endPoint||','||differ||')   
             order by public.ST_Distance(the_geom,'||v_endPoint||') limit 1'  
-            into v_endSource;   
-   
+            into v_endSource;
+
     --如果没找到最近的点，就返回null   
     if (v_startTarget is null) or (v_endSource is null) then   
         if (v_startTarget is null) THEN
@@ -56,23 +52,20 @@ BEGIN
           raise notice '没有找到终点';
         end if;
         v_startTarget=0; 
-        v_endSource=0; 
-        -- return next;   
+        v_endSource=0;   
     end if ;
-   
+
     RETURN  QUERY 
         execute 'SELECT  b.* 
                 FROM public.pgr_kdijkstraPath(
-                ''SELECT objectid as id, rmap_source as source, rmap_target as target, rmap_length as cost FROM '||tbl||' where shape is not null'','    
+                ''SELECT objectid as id, pgr_source as source, pgr_target as target, pgr_length as cost 
+                FROM '||tbl||' where shape is not null'','    
                 ||v_startTarget||', '||'array['||v_endSource||'] , false, false    
                 ) a, '||tbl||' b    
                 WHERE a.id3=b.objectid
                 ORDER by id1';
 
 END 
-
-
-
 
 
 $function$;

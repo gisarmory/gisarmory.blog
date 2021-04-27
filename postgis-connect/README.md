@@ -11,7 +11,7 @@ CREATE EXTENSION pgrouting;
 
 ### 导入数据
 
-将数据导入到`postgreSQL`数据库，我是从`ArcGIS`直接导入的，导入方式参考https://blog.csdn.net/eternity_xyf/article/details/80168029
+将数据导入到`postgreSQL`数据库，我是从`ArcGIS`直接导入的，导入方式参考[https://blog.csdn.net/eternity_xyf/article/details/80168029](https://blog.csdn.net/eternity_xyf/article/details/80168029)
 
 ### 创建拓扑
 
@@ -36,10 +36,10 @@ ALTER TABLE postgres.pipe ADD COLUMN IF NOT EXISTS pgr_length double precision;
 
 ```sql
 --为pgr_source字段创建索引
-CREATE INDEX IF NOT EXISTS rmap_source_idx ON postgres.pipe("pgr_source")
+CREATE INDEX IF NOT EXISTS pgr_source_idx ON postgres.pipe("pgr_source")
 
 --为pgr_target字段创建索引
-CREATE INDEX IF NOT EXISTS rmap_target_idx ON postgres.pipe("pgr_target")
+CREATE INDEX IF NOT EXISTS pgr_target_idx ON postgres.pipe("pgr_target")
 ```
 
 为权重字段`pgr_length`赋值

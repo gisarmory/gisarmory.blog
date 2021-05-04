@@ -100,5 +100,10 @@ var blogList = [{
     label: "我的开源GIS解决方案之路",
     // url: "postGIS-connect/README.md",
     href: "https://blog.csdn.net/gisarmory/article/details/115340206"
+}, {
+    id: "maputnikGeoserverVectorTiles2",
+    label: "如何不改源码让maputnik支持geoserver",
+    // url: "maputnik-GeoserverVectorTiles/README.md",
+    href: "https://blog.csdn.net/gisarmory/article/details/116401076"
 }];
 

@@ -2,7 +2,7 @@
 
 前段时间分享了[如何让矢量瓦片配图神器maputnik支持 geoserver](http://gisarmory.xyz/blog/index.html?blog=maputnikGeoserverVectorTiles)，文章中的解决方案是，通过修改maputnik源码，在界面上增加tms协议选项，从而让maputnik支持geoserver发布的矢量瓦片。
 
-前两天工作发现，不修改maputnik源码，也能让它支持geoserver矢量瓦片。
+前两天工作时发现，不修改maputnik源码，也能让它支持geoserver矢量瓦片。
 
 **原理如下：**
 
@@ -32,6 +32,7 @@
 
 1. 这次的方案简单灵活，普适性强，后续再遇到类似mapboxgl支持但maputnik不支持的问题，都可以使用这种方式快速解决。
 2. 修改源码的方案对于react框架不熟的同学可能比较吃力，但如果解决了，后续使用就会很方便，一劳永逸。
+3. docker版本的maputnik，无法修改源码，只能使用这次的方案解决。
 
 **总结：**
 

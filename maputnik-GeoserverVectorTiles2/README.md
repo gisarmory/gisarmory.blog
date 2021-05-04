@@ -2,7 +2,7 @@
 
 前段时间分享了[如何让矢量瓦片配图神器maputnik支持 geoserver](http://gisarmory.xyz/blog/index.html?blog=maputnikGeoserverVectorTiles)，文章中的解决方案是，通过修改maputnik源码，在界面上增加tms协议选项，从而让maputnik支持geoserver发布的矢量瓦片。
 
-前两天工作时，又有了新发现，不修改maputnik源码，也能让它支持geoserver矢量瓦片。
+前两天工作发现，不修改maputnik源码，也能让它支持geoserver矢量瓦片。
 
 **原理如下：**
 
@@ -21,16 +21,16 @@
 2. 把style文件下载到本地。
    ![](http://blogimage.gisarmory.xyz/20210504150857.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 3. 打开下载的style文件，在source中找到刚添加的geoserver数据源，手动添加tms协议选项。
-   ![](C:\Users\xiaolei\AppData\Roaming\Typora\typora-user-images\image-20210504121550090.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
+   ![](http://blogimage.gisarmory.xyz/20210504152307.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 4. 重新导入style文件。
-   ![](C:\Users\xiaolei\AppData\Roaming\Typora\typora-user-images\image-20210504121726042.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
-5. 后续添加的geoserver图层就能显示了。
-   ![](C:\Users\xiaolei\AppData\Roaming\Typora\typora-user-images\image-20210504150332187.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
-   ![](C:\Users\xiaolei\AppData\Roaming\Typora\typora-user-images\image-20210504150444734.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
+   ![](http://blogimage.gisarmory.xyz/20210504152323.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
+5. 后续添加的geoserver图层就能正常显示了。
+   ![](http://blogimage.gisarmory.xyz/20210504152339.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
+   ![](http://blogimage.gisarmory.xyz/20210504152350.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
 **和之前修改源码的方案比较：**
 
-1. 这次的方案简单灵活，普适性强，后续再遇到这种mapboxgl支持但maputnik不支持的问题，都可以使用这种方式快速解决。
+1. 这次的方案简单灵活，普适性强，后续再遇到类似mapboxgl支持但maputnik不支持的问题，都可以使用这种方式快速解决。
 2. 修改源码的方案对于react框架不熟的同学可能比较吃力，但如果解决了，后续使用就会很方便，一劳永逸。
 
 **总结：**

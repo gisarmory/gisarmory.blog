@@ -50,6 +50,7 @@
     // 初始化地图
     var map = new L.rmap.initMap('map', {
         center: [30.780437, 103.914051],
+        baseMap: ['GEOQ_PurplishBlue_OL'],
         zoom: 17,
         maxZoom: 21
     });
@@ -109,7 +110,14 @@
         L.DomUtil.removeClass(map._container, 'leaflet-mouse-marker');
         console.log('start')
         startPoint = e.latlng
-        var marker = L.marker(e.latlng)
+        var myIcon = L.icon({
+          iconUrl: '../img/start.png',
+          iconSize: [48, 48],
+          iconAnchor: [24, 48]
+        })
+        var marker = L.marker(e.latlng,{
+          icon: myIcon
+        })
         analysisLayerGroup.addLayer(marker)
         map.off('click', startClick)
     }
@@ -118,7 +126,14 @@
         L.DomUtil.removeClass(map._container, 'leaflet-mouse-marker');
         console.log('end')
         endPoint = e.latlng
-        var marker = L.marker(e.latlng)
+        var myIcon = L.icon({
+          iconUrl: '../img/end.png',
+          iconSize: [48, 48],
+          iconAnchor: [24, 48]
+        })
+        var marker = L.marker(e.latlng,{
+          icon: myIcon
+        })
         analysisLayerGroup.addLayer(marker)
         map.off('click', endClick)
     }

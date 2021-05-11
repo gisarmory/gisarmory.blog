@@ -1,6 +1,6 @@
 # PostGIS管网连通性分析
 
-GIS在管网数据中的很重要的一个应用方向就是”管网空间分析“，其中包括连通性分析、上下游分析、爆管分析等等。下面是我使用`postgis`来实现该“管网连通性分析”的解决方案，分享给大家，以便相互学习。
+GIS在管网数据中的很重要的一个应用方向就是”管网空间分析“，其中包括连通性分析、上下游分析、爆管分析等等。下面是我使用`postgis`来实现“管网连通性分析”的解决方案，分享给大家，以便相互学习。
 
 使用该分析之前确保已添加扩展`postgis`、`pgrouting`
 
@@ -9,11 +9,11 @@ CREATE EXTENSION postgis;
 CREATE EXTENSION pgrouting;
 ```
 
-### 导入数据
+## 导入数据
 
 将数据导入到`postgreSQL`数据库，我是从`ArcGIS`直接导入的，导入方式参考[https://blog.csdn.net/eternity_xyf/article/details/80168029](https://blog.csdn.net/eternity_xyf/article/details/80168029)
 
-### 创建拓扑
+## 创建拓扑
 
 这里我用的管网数据表名为`pipe`
 
@@ -83,21 +83,28 @@ select public.pgr_createTopology('postgres.pipe',0.000001,'shape','objectid','pg
 
 ## 如何使用
 
-1. 调用`analysis_updatetopology()`函数，完成拓扑创建
+调用`analysis_updatetopology()`函数，完成拓扑创建
 
-   ```sql
-   -- 传入表名pipe，创建拓扑
-   select * from analysis_updatetopology('pipe')
-   ```
+```sql
+-- 传入表名pipe，创建拓扑
+select * from analysis_updatetopology('pipe')
+```
 
-2. 从地图选择起点、终点，然后调用`analysis_connect()`函数，得到分析结果
+从地图选择起点、终点，然后调用`analysis_connect()`函数，得到分析结果
 
-   ```sql
-   -- 传入表名、起点坐标、终点坐标、容差值
-   select * from analysis_connect('pipe',103.90893393,30.789659886,103.911700936,30.787850094,0.00001)
-   ```
 
-   
+
+```sql
+-- 传入表名、起点坐标、终点坐标、容差值
+select * from analysis_connect('pipe',103.90893393,30.789659886,103.911700936,30.787850094,0.00001)
+```
+
+
+
+## 总结
+
+1. 连通性分析的核心是利用最短路径分析算法来实现
+2. 进行分析之前需要对管网数据创建拓扑
 
 
 

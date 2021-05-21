@@ -105,5 +105,10 @@ var blogList = [{
     label: "如何不改源码让maputnik支持geoserver",
     // url: "maputnik-GeoserverVectorTiles/README.md",
     href: "https://blog.csdn.net/gisarmory/article/details/116401076"
+}, {
+    id: "GeoServerStyleLabel",
+    label: "geoserver发布的wms标签图层显示不全问题",
+    // url: "maputnik-GeoserverVectorTiles/README.md",
+    href: "https://blog.csdn.net/gisarmory/article/details/117130154"
 }];
 

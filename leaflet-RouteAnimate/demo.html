@@ -83,6 +83,7 @@
         [39.906308, 116.391264],
         [39.916611, 116.390748]
     ];
+    var speedList = [1, 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 4, 4, 5, 5, 4, 4, 4, 3, 2, 2, 1, 1, 1]
     // 轨迹线
     var routeLine = L.polyline(latlngs, {
         weight: 8
@@ -115,11 +116,12 @@
         iconUrl: '../img/car.png'
     })
     // 动态marker
-var animatedMarker = L.animatedMarker(routeLine.getLatLngs(), {
-    interval: 100,// 默认为100mm
-    icon: carIcon,
-    playCall: updateRealLine
-}).addTo(map)
+    var animatedMarker = L.animatedMarker(routeLine.getLatLngs(), {
+        speedList: speedList,
+        interval: 200, // 默认为100mm
+        icon: carIcon,
+        playCall: updateRealLine
+    }).addTo(map)
     var newLatlngs = [routeLine.getLatLngs()[0]]
 
     // 绘制已行走轨迹线（橙色那条）
@@ -128,21 +130,21 @@ var animatedMarker = L.animatedMarker(routeLine.getLatLngs(), {
         realRouteLine.setLatLngs(newLatlngs)
     }
 
-// 开始
-function startClick() {
-    animatedMarker.start();
-}
+    // 开始
+    function startClick() {
+        animatedMarker.start();
+    }
 
-// 暂停
-function pauseClick() {
-    animatedMarker.pause();
-}
+    // 暂停
+    function pauseClick() {
+        animatedMarker.pause();
+    }
 
-// 停止
-function stopClick() {
-    newLatlngs = []
-    animatedMarker.stop();
-}
+    // 停止
+    function stopClick() {
+        newLatlngs = []
+        animatedMarker.stop();
+    }
 </script>
 
 </html>

@@ -71,7 +71,6 @@ var blogList = [{
 }, {
     id: "MapboxGLPolylineDecorator",
     label: "mapboxgl实现带箭头轨迹线",
-    // url: "mapboxgl-PolylineDecorator/README.md",
     href: "https://blog.csdn.net/gisarmory/article/details/112034622"
 }, {
     id: "maputnikSprites",
@@ -85,7 +84,6 @@ var blogList = [{
     id: "LeafletRouteAnimate",
     label: "Leaflet带箭头轨迹以及沿轨迹带方向的动态marker",
     url: "https://blog.csdn.net/gisarmory/article/details/114290334",
-    // href: "https://blog.csdn.net/gisarmory/article/details/112034622"
 }, {
     id: "GISer2021Flag",
     label: "2021给自己立个Flag",
@@ -93,22 +91,18 @@ var blogList = [{
 }, {
     id: "PostGISConnect",
     label: "PostGIS管网连通性分析",
-    // url: "postGIS-connect/README.md",
     href: "https://blog.csdn.net/gisarmory/article/details/116194268"
 }, {
     id: "GISerSolution",
     label: "我的开源GIS解决方案之路",
-    // url: "postGIS-connect/README.md",
     href: "https://blog.csdn.net/gisarmory/article/details/115340206"
 }, {
     id: "maputnikGeoserverVectorTiles2",
     label: "如何不改源码让maputnik支持geoserver",
-    // url: "maputnik-GeoserverVectorTiles/README.md",
     href: "https://blog.csdn.net/gisarmory/article/details/116401076"
 }, {
     id: "GeoServerStyleLabel",
     label: "geoserver发布的wms标签图层显示不全问题",
-    // url: "maputnik-GeoserverVectorTiles/README.md",
     href: "https://blog.csdn.net/gisarmory/article/details/117130154"
 }];
 

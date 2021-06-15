@@ -1,6 +1,6 @@
 # geoserver发布的wms标签图层显示不全问题
 
-最近有客户反馈：在查看地图数据时，本来显示的点位名称，在地图放大时有些不显示了，是不是数据有问题？
+最近遇到个问题，有客户反馈：在查看地图数据时，本来显示的点位名称，在地图放大时有些不显示了，是不是数据有问题？
 
 排查问题后发现，数据是没问题的，可确实出现了客户描述的情况，如下图所示：
 
@@ -52,7 +52,7 @@
 
 
 
-综上，`geoserver`发布的`wms`标签图层显示不全问题已经解决。
+综上，`geoserver`发布的`wms`标签图层显示不全问题已完美解决。
 
 ![](https://blogimage.gisarmory.xyz/2021051105.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
@@ -77,7 +77,7 @@
 
 * * *
 
-原文地址：[http://gisarmory.xyz/blog/index.html?blog=GeoserverStyleLabel](http://gisarmory.xyz/blog/index.html?blog=GeoserverStyleLabel)
+原文地址：[http://gisarmory.xyz/blog/index.html?blog=GeoServerStyleLabel](http://gisarmory.xyz/blog/index.html?blog=GeoServerStyleLabel)
 
 关注《[GIS兵器库](http://gisarmory.xyz/blog/index.html?blog=wechat)》， 第一时间获得更多高质量GIS文章。
 

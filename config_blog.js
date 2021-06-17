@@ -104,5 +104,9 @@ var blogList = [{
     id: "GeoServerStyleLabel",
     label: "geoserver发布的wms标签图层显示不全问题",
     href: "https://blog.csdn.net/gisarmory/article/details/117130154"
+}, {
+    id: "mapboxglMapCorrection",
+    label: "mapboxgl互联网地图纠偏插件（一）",
+    href: "https://blog.csdn.net/gisarmory/article/details/117998699"
 }];
 

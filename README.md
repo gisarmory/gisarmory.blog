@@ -22,9 +22,9 @@
 
 [leaflet-H5时代leaflet中还在用DivIcon？](http://gisarmory.xyz/blog/index.html?blog=diviconError)
 
-[leaflet如何优雅的展示重叠点位的气泡窗口](http://gisarmory.xyz/blog/index.html?blog=LeafletOverlapMarkerPopup)
+[leaflet-如何优雅的展示重叠点位的气泡窗口](http://gisarmory.xyz/blog/index.html?blog=LeafletOverlapMarkerPopup)
 
-[leaflet 带箭头轨迹以及沿轨迹带方向的动态marker](http://gisarmory.xyz/blog/index.html?blog=LeafletRouteAnimate)
+[leaflet-带箭头轨迹以及沿轨迹带方向的动态marker](http://gisarmory.xyz/blog/index.html?blog=LeafletRouteAnimate)
 
 
 
@@ -46,9 +46,11 @@
 
 
 
-[mapboxgl类高德带箭头轨迹线](http://gisarmory.xyz/blog/index.html?blog=MapboxGLPolylineDecorator)
+[mapboxgl-类高德带箭头轨迹线](http://gisarmory.xyz/blog/index.html?blog=MapboxGLPolylineDecorator)
 
 
+
+[mapboxgl-互联网地图纠偏插件（一）](mapboxgl-MapCorrection/README.md)
 
 [geoserver-解决wms标签图层显示不全问题](geoserver-style-label/README.md)
 

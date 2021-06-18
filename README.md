@@ -50,7 +50,7 @@
 
 
 
-[mapboxgl-互联网地图纠偏插件（一）](mapboxgl-MapCorrection/README.md)
+[mapboxgl-互联网地图纠偏插件（一）](mapboxgl-MapCorrection1/README.md)
 
 [geoserver-解决wms标签图层显示不全问题](geoserver-style-label/README.md)
 

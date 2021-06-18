@@ -24,14 +24,14 @@
 
 mapboxgl 和 leaflet 的显示原理不同，mapboxgl 是三维坐标系，使用webgl绘图，增加了一个维度后，多出了很多东西要处理，二维坐标系加载瓦片时，只需要考虑瓦片的 x、y 位置，三维坐标系在此基础上还要考虑倾斜和透视。
 
-webgl 的坐标都是通过变换矩阵来表示的，这一点和leaflet的差别很大。
+webgl 的坐标都是通过位置变换矩阵来表示的，这一点和leaflet的差别很大。
 
-上面的 calculatePosMatrix 方法就是根据瓦片的 x、y、z 编号，计算出瓦片在 webgl 中显示位置的变换矩阵。这里分别将瓦片的平移变换矩阵、缩放变换矩阵和视图+投影变换矩阵进行了相乘，得到了最终的位置变换矩阵。
+上面的 calculatePosMatrix 方法就是根据瓦片的 x、y、z 编号，计算出瓦片在 webgl 中显示的位置变换矩阵。这里分别将瓦片的平移矩阵、缩放矩阵和视图+投影矩阵进行了相乘，得到了最终的位置变换矩阵。
 
 > 看这个方法时我有些疑惑，它是如何根据瓦片的 x、y、z 编号来计算位置变换矩阵的，去研究了xyz协议后，才明白xyz坐标和经纬度坐标是有一套互转公式的，瓦片编号转经纬度时返回的坐标是瓦片左上角的经纬度。详见：[https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames](https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames)
 >
 
-> 关于 webgl 变换矩阵的知识可以参考这篇文章 [https://www.cnblogs.com/charlee44/p/11623502.html](https://www.cnblogs.com/charlee44/p/11623502.html) 或 [《WebGL编程指南》](https://github.com/linghuam/boutique-books/tree/master/b04-%E5%9B%BE%E5%BD%A2%E5%AD%A6%E4%B8%8E%E5%8F%AF%E8%A7%86%E5%8C%96)，我更推荐后者
+> 关于 webgl 变换矩阵的知识可以参考这篇文章 [https://www.cnblogs.com/charlee44/p/11623502.html](https://www.cnblogs.com/charlee44/p/11623502.html) 或 [《WebGL编程指南》](https://github.com/linghuam/boutique-books/tree/master/b04-%E5%9B%BE%E5%BD%A2%E5%AD%A6%E4%B8%8E%E5%8F%AF%E8%A7%86%E5%8C%96)，我更推荐后者，因为后者讲的更系统更容易理解。
 
 不得不说，webgl 的位置变换矩阵计算还是有一些复杂的，所以就想看看 mapboxgl 中有没有内置经纬度坐标和 webgl 坐标互转的方法，查看后发现，只有经纬度坐标、墨卡托坐标和屏幕坐标三者互转的方法，没有 webgl 的。
 
@@ -43,9 +43,9 @@ webgl 的坐标都是通过变换矩阵来表示的，这一点和leaflet的差�
 2. 对瓦片左上角的经纬度进行纠偏，得到 wgs84 坐标的经纬度
 3. 将纠偏前、后的经纬度分别转为屏幕坐标，再将转换后的屏幕坐标相减，得出瓦片屏幕坐标的偏移量
 4. 将瓦片屏幕坐标的偏移量换算成 webgl 坐标的偏移量
-5. 在瓦片的平移变换矩阵中加上刚才计算出的 webgl 坐标偏移量，理论上就能实现对瓦片的纠偏
+5. 在瓦片的平移矩阵中加上刚才计算出的 webgl 坐标偏移量，理论上就能实现对瓦片的纠偏
 
-在实现过程中，将 1、2、3 步搞定以后，因为暂时还没有想好怎么实现第4步，于是就先将第 3 步的结果屏幕坐标偏移量，直接加到了第 5 步的平移变换矩阵中，结果很让人意外。
+在实现过程中，将 1、2、3 步搞定以后，因为暂时还没有想好怎么实现第4步，于是就先将第 3 步的结果屏幕坐标偏移量，直接加到了第 5 步的平移矩阵中，结果很让人意外。
 
 实现代码：
 
@@ -69,7 +69,7 @@ webgl 的坐标都是通过变换矩阵来表示的，这一点和leaflet的差�
 
 哈哈，难道就这么搞定了？
 
-难道平移变换矩阵中的数值都是按屏幕像素来计算的？
+难道平移矩阵中的数值都是按屏幕像素来计算的？
 
 至少目前看来是的。
 
@@ -111,7 +111,7 @@ webgl 的坐标都是通过变换矩阵来表示的，这一点和leaflet的差�
 
 * * *
 
-原文地址：[http://gisarmory.xyz/blog/index.html?blog=mapboxglMapCorrection](http://gisarmory.xyz/blog/index.html?blog=mapboxglMapCorrection)
+原文地址：[http://gisarmory.xyz/blog/index.html?blog=mapboxglMapCorrection1](http://gisarmory.xyz/blog/index.html?blog=mapboxglMapCorrection1)
 
 关注《[GIS兵器库](http://gisarmory.xyz/blog/index.html?blog=wechat)》， 第一时间获得更多高质量GIS文章。
 

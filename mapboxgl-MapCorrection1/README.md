@@ -12,13 +12,13 @@
 
 文件中的 coveringTiles 方法就是用来计算瓦片的 x、y、z 编号的，它会返回当前比例尺和可视范围内的所有瓦片编号。
 
-![](http://blogimage.gisarmory.xyz/20210617192140.png)
+![](http://blogimage.gisarmory.xyz/20210617192140.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
 
 
 根据 x、y、z 瓦片编号请求到互联网地图瓦片后，会在 calculatePosMatrix 方法里计算瓦片显示的屏幕位置。
 
-![](http://blogimage.gisarmory.xyz/20210617192149.png)
+![](http://blogimage.gisarmory.xyz/20210617192149.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
 
 
@@ -49,7 +49,7 @@ webgl 的坐标都是通过位置变换矩阵来表示的，这一点和leaflet�
 
 实现代码：
 
-![](http://blogimage.gisarmory.xyz/20210617192156.png)
+![](http://blogimage.gisarmory.xyz/20210617192156.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
 
 
@@ -57,13 +57,13 @@ webgl 的坐标都是通过位置变换矩阵来表示的，这一点和leaflet�
 
 以天安门国旗为参照，纠偏前
 
-![](http://blogimage.gisarmory.xyz/20210617173332.png)
+![](http://blogimage.gisarmory.xyz/20210617173332.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
 
 
 纠偏后
 
-![](http://blogimage.gisarmory.xyz/20210617173335.png)
+![](http://blogimage.gisarmory.xyz/20210617173335.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
 
 
@@ -77,7 +77,7 @@ webgl 的坐标都是通过位置变换矩阵来表示的，这一点和leaflet�
 
 正当我开心的不要不要时，咦？边上为什么会有空白，瓦片没有请求过来？我接着放大地图，白边越来越大了
 
-![](http://blogimage.gisarmory.xyz/20210617173338.gif)
+![](http://blogimage.gisarmory.xyz/20210617173338.gif?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
 
 
@@ -87,7 +87,7 @@ webgl 的坐标都是通过位置变换矩阵来表示的，这一点和leaflet�
 
 正当我在开心的研究如何向外扩展显示范围时，无意中把地图倾斜了一下，我的妈呀！这是什么鬼
 
-![](http://blogimage.gisarmory.xyz/20210617173342.gif)
+![](http://blogimage.gisarmory.xyz/20210617173342.gif?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
 
 

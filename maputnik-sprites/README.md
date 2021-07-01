@@ -33,13 +33,15 @@ mapbox开源了一个精灵图制作工具 [spritezero](https://github.com/mapbo
 3. 把svg文件放在 `./data/sprites/_svg` 文件夹中，svg文件的名称不要太随意，名称会被写入json配置文件，后续使用时会用到。
     ![](http://blogimage.gisarmory.xyz/20210114121214.png)
 
-4. 在当前目录执行命令，生成精灵图：
+4. 在当前目录执行命令，生成精灵图。注意：执行命令的目录不能错，以上图中的目录结构为例，当前目录是指在`/root`目录下执行命令。
 
     ```
     docker run -it -e FOLDER=_svg -e THEME=sprites -v ${PWD}/data:/data dolomate/spritezero
     ```
-
+    执行时如果报下图中的错误，可以把`./data`目录删除，再重新执行2、3、4步骤。这个错误的原因通常是因为在`.data/`目录或它的子目录中执行生成精灵图的命令造成的。
+    ![](http://blogimage.gisarmory.xyz/20210615125133.jpg)
 5. 生成的精灵图会存放在 `./data/sprites` 文件夹中
+
 
 
 
@@ -66,10 +68,20 @@ mapbox开源了一个精灵图制作工具 [spritezero](https://github.com/mapbo
 
 1. 把生成的精灵图用web服务器发布出来，我用的tomcat。记得解决web服务器的跨域问题，不然调用时会报错。
 
-2. 配置精灵图发布的路径，如下图
-
-  ![](http://blogimage.gisarmory.xyz/20210106175442.png)
-
+2. 配置精灵图发布的路径。这里要注意精灵图的配置路径不需要带后缀名。举个例子：
+精灵图本地存放地址为：
+   
+   ![](http://blogimage.gisarmory.xyz/20210615125118.png)
+   
+   发布后预览地址为：http://localhost:8585/guanwang/sprites/sprites.png
+   
+   ![](http://blogimage.gisarmory.xyz/20210615125110.png)
+   
+   配置到maputnik中的地址不需要带后缀名，最终为：http://localhost:8585/guanwang/sprites/sprites
+   
+   将这个地址配置到maputnik中：
+     ![](http://blogimage.gisarmory.xyz/20210106175442.png)
+   
 3. 选择一个symbol类型的符号，在 Image 选项的下拉框中，会直接显示精灵图中的图片名称，这个图片名称就是前面让大家起名不要太随意的SVG文件名称。
 
    ![](http://blogimage.gisarmory.xyz/20210106175445.png)
@@ -83,9 +95,9 @@ mapbox开源了一个精灵图制作工具 [spritezero](https://github.com/mapbo
 3. mapbox开源了一个精灵图制作工具 spritezero ，生成的精灵图有json配置文件
 4. spritezero 在安装时会报错，原因是用到的一个库太老了
 5. spritezero-docker 是spritezero的docker库，已经解决了安装环境问题
-6. 介绍了如何使用 spritezero-docker 生成精灵图
+6. 介绍了如何使用 spritezero-docker 生成精灵图。注意执行生成命令时所在的目录不能错。
 7. 生成精灵图时，如果出现黑框问题，多半是因为style的写法问题。style需要内嵌到dom元素中
-8. 介绍了如何在 maputnik 中使用生成的精灵图
+8. 介绍了如何在 maputnik 中使用生成的精灵图。注意精灵图的配置地址不需要带后缀名。
 
 
 

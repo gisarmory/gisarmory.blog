@@ -117,7 +117,7 @@ TileLayer继承了GridLayer
 
 * * *
 
-本文会经常更新，请阅读原文：[http://gisarmory.xyz/blog/index.html?blog=leafletMapCorrection，以避免被陈旧、错误的知识误导。
+本文会经常更新，请阅读原文：http://gisarmory.xyz/blog/index.html?blog=leafletMapCorrection，以避免被陈旧、错误的知识误导。
 
 微信搜索《GIS兵器库》或扫描上文的二维码，关注GIS兵器库公众号， 可以第一时间获得GIS文章更新。
 

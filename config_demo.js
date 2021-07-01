@@ -47,6 +47,10 @@ var demoList = [{
     label: "mapboxgl实现带箭头轨迹线",
     url: "mapboxgl-PolylineDecorator/demo.html"
 }, {
+    id: "MapboxGL3DLine",
+    label: "mapboxgl绘制3D线",
+    url: "mapboxgl-3DLine/demo.html"
+}, {
     id: "LeafletRouteAnimate",
     label: "Leaflet带箭头轨迹以及沿轨迹带方向的动态marker",
     url: "leaflet-RouteAnimate/demo.html"

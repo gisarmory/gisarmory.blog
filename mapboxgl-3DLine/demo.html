@@ -46,7 +46,6 @@
 <body>
     <div id="map"></div>
     <script>
-        // mapboxgl.accessToken = 'pk.eyJ1IjoiZXRlcm5pdHkteHlmIiwiYSI6ImNqaDFsdXIxdTA1ODgycXJ5czdjNmF0ZTkifQ.zN7e588TqZOQMWfws-K0Yw';
         mapboxgl.accessToken = 'pk.eyJ1IjoiZXRlcm5pdHkteHV5ZiIsImEiOiJja3FoZTM3bXYwdXIzMnFsa3BwbGN4dXUyIn0.j7OGDXwEpG_MFyuD5DDmYw';
         var map = new mapboxgl.Map({
             container: 'map', // container id
@@ -57,36 +56,6 @@
             pitch: 45
         });
         map.setStyle('mapbox://styles/mapbox/dark-v9');
-
-        // var map = new mapboxgl.Map({
-        //     container: 'map', // container id
-        //     style: {
-        //         "version": 8,
-        //         "sprite": "http://210.12.197.197:7003/mapboxgl/sprite/sprite",
-        //         // "glyphs": "http://210.12.197.197:7003/mapboxgl/font/{fontstack}/{range}.pbf",
-        //         "glyphs": "https://api.mapbox.com/fonts/v1/mapbox/{fontstack}/{range}.pbf",
-        //         "sources": {
-        //             "osm-tiles": {
-        //                 "type": "raster",
-        //                 'tiles': [
-        //                     "http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer/tile/{z}/{y}/{x}"
-        //                 ],
-        //                 'tileSize': 256
-        //             }
-        //         },
-        //         "layers": [{
-        //             "id": "simple-tiles",
-        //             "type": "raster",
-        //             "source": "osm-tiles",
-        //             "minzoom": 0,
-        //             "maxzoom": 22
-        //         }]
-        //     },
-        //     center: [116.46, 39.92], // starting position [lng, lat]
-        //     zoom: 8, // starting zoom
-        //     bearing: -10,
-        //     pitch: 45
-        // });
 
         map.on('load', function() {
             getPolygonJson()

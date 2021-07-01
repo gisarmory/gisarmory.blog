@@ -40,6 +40,13 @@
 
 嗯，效果还不错
 
+在绘制边线缓冲面时，需要注意下面两点：
+
+1. `fill-extrusion-height`设置的值需要比面数据的稍微高出一些，否则显示时会有遮盖问题
+2. `fill-extrusion-base`（底部高度）参数可以设置为与前面绘制面的`fill-extrusion-height`参数一致，如果也采用默认0的话，边线就像一面墙，会感觉很丑
+
+
+
 其实，这里还有个问题，由于这里的边界是按缓冲面的方式绘制，所以在地图缩放的时候边界的宽度不会像线那样按固定像素宽度显示，会出现放大地图的时候边线越来越宽，缩小地图的时候边线变越来越窄的问题
 
 ![image-20210628224822294](https://blogimage.gisarmory.xyz/image-20210628224822294.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)

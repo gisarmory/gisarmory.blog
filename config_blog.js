@@ -75,7 +75,7 @@ var blogList = [{
 }, {
     id: "MapboxGL3DLine",
     label: "mapboxgl绘制3D线",
-    href: "https://blog.csdn.net/gisarmory/article/details/112034622"
+    href: "https://blog.csdn.net/gisarmory/article/details/118389265"
 }, {
     id: "maputnikSprites",
     label: "如何创建 mapbox 精灵图",

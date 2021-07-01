@@ -60,7 +60,7 @@
 
 ![image-20210701134504815](https://blogimage.gisarmory.xyz/image-20210701134504815.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
-由于拿到数据的只有行政区划的`geojson`格式面数据，而缓冲时需要用的是线数据，因此需要对做面转线处理。
+由于拿到数据的只有行政区划的`geojson`格式面数据，而缓冲时需要用的是线数据，因此需要做面转线处理。
 
 ![image-20210701135130168](https://blogimage.gisarmory.xyz/image-20210701135130168.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
@@ -94,7 +94,7 @@
 
 * * *
 
-原文地址：[http://gisarmory.xyz/blog/index.html?blog=MapboxGL3DLine](http://gisarmory.xyz/blog/index.html?blog=MapboxGL3DLine)。
+原文地址：[http://gisarmory.xyz/blog/index.html?blog=MapboxGL3DLine](http://gisarmory.xyz/blog/index.html?blog=MapboxGL3DLine)
 
 
 

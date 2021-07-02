@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <link href="../lib/mapboxgl/mapbox-gl.css" rel="stylesheet" />
+    <script src="../lib/mapboxgl/mapbox-gl.js"></script>
+    <script src="../lib/mapboxgl/turf.min.js"></script>
+    <script src="../lib/jquery.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* 删除mapbox logo */
+        .mapboxgl-ctrl {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZXRlcm5pdHkteHV5ZiIsImEiOiJja3FoZTM3bXYwdXIzMnFsa3BwbGN4dXUyIn0.j7OGDXwEpG_MFyuD5DDmYw';
+        var map = new mapboxgl.Map({
+            container: 'map', // container id
+            style: 'mapbox://styles/mapbox/streets-v11', // style URL
+            center: [116.46, 40.12], // starting position [lng, lat]
+            zoom: 8, // starting zoom
+            bearing: 0,
+            pitch: 45
+        });
+        map.setStyle('mapbox://styles/mapbox/dark-v9');
+
+        map.on('load', function() {
+            getPolygonJson()
+        })
+
+        var colorList = ["#F84E2D", "#1372EC", "#44DEA3", "#FFC544", "#6C44FF"]
+        var attrAndColor = []
+
+        function getPolygonJson() {
+            $.ajax({
+                type: "get",
+                url: "./data/beijing-polygon.json",
+                dataType: "json",
+                success: function(res) {
+                    var beijingPolygon = res
+                    var beijingPolyline = JSON.parse(JSON.stringify(res))
+                    for (var i = 0; i < beijingPolyline.features.length; i++) {
+                        attrAndColor.push(beijingPolyline.features[i].properties.adcode)
+                        attrAndColor.push(colorList[i % 5])
+
+                        beijingPolyline.features[i].geometry.type = 'MultiLineString' //面转线
+                        beijingPolyline.features[i].geometry.coordinates = convertPolygonToPolyline(beijingPolyline.features[
+                            i].geometry.coordinates)
+                    }
+
+                    addPolygon(beijingPolygon)
+                    addPolyline(beijingPolyline)
+                }
+            })
+        }
+
+        // geojson格式MultiPolygon转MultiLineString
+        function convertPolygonToPolyline(MultiPolygon) {
+            var MultiLineString = []
+            MultiPolygon.forEach(Polygon => {
+                Polygon.forEach(LinearRing => {
+                    var LineString = LinearRing
+                    MultiLineString.push(LineString)
+                })
+            });
+            return MultiLineString
+        }
+
+        function addPolygon(geojson) {
+            map.addSource('beijingPolygonSource', {
+                'type': 'geojson',
+                'data': geojson
+            });
+
+            map.addLayer({
+                'id': 'beijingPolygonLayer',
+                'type': 'fill-extrusion',
+                'source': 'beijingPolygonSource',
+                'paint': {
+                    'fill-extrusion-vertical-gradient': true,
+                    'fill-extrusion-color': ['match', ['number', ['get', 'adcode']], ...attrAndColor, '#AAAAAA'],
+                    'fill-extrusion-height': 10000,
+                    'fill-extrusion-base': 0,
+                    'fill-extrusion-opacity': 0.8
+                }
+            });
+        }
+
+        // 各比例尺下地图分辨率，及一个像素代表的地图单位
+        // 该resolutions为EPSG:900913的分辨率，及个比例尺下一个像素代表多少米
+        var resolutions = [
+            156543.03392800014, 78271.516963999937, 39135.758482000092, 19567.879240999919,
+            9783.9396204999593, 4891.9698102499797, 2445.9849051249898, 1222.9924525624949, 611.49622628137968,
+            305.74811314055756, 152.87405657041106, 76.437028285073239, 38.21851414253662, 19.10925707126831,
+            9.5546285356341549, 4.7773142679493699, 2.3886571339746849, 1.1943285668550503, 0.59716428355981721,
+            0.29858214164761665, 0.149291070823808325, 0.0746455354119041625
+        ]
+
+        function addPolyline(geojson) {
+            // 8 ~ 18 级
+            for (var i = 8; i <= 18; i++) {
+                var radius = 2 * resolutions[i + 1] // 2个像素，缓冲后4个像素
+                var lineBuffer = turf.buffer(geojson, radius, {
+                    units: 'meters'
+                });
+                map.addSource('lineBufferSource-' + i, {
+                    'type': 'geojson',
+                    'data': lineBuffer
+                });
+                map.addLayer({
+                    'id': 'lineBufferLayer-' + i,
+                    'type': 'fill-extrusion',
+                    'source': 'lineBufferSource-' + i,
+                    "minzoom": (i - 1),
+                    "maxzoom": (i + 1),
+                    'paint': {
+                        'fill-extrusion-vertical-gradient': true,
+                        'fill-extrusion-color': '#FFFFFF',
+                        'fill-extrusion-height': 10100, // 挤出高度
+                        'fill-extrusion-base': 10000,// 底部的高度。必须小于或等于挤出高度
+                        'fill-extrusion-opacity': 0.8
+                    }
+                });
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -39,6 +39,10 @@ var sourceList = [{
     label: "mapboxgl实现带箭头轨迹线",
     url: "https://github.com/gisarmory/gisarmory.blog/tree/master/mapboxgl-PolylineDecorator/demo.html"
 }, {
+    id: "MapboxGL3DLine",
+    label: "mapboxgl绘制3D线",
+    url: "https://github.com/gisarmory/gisarmory.blog/tree/master/mapboxgl-3DLine/demo.html"
+}, {
     id: "LeafletRouteAnimate",
     label: "Leaflet带箭头轨迹以及沿轨迹带方向的动态marker",
     url: "https://github.com/gisarmory/gisarmory.blog/tree/master/leaflet-RouteAnimate/demo.html"

@@ -112,5 +112,10 @@ var blogList = [{
     id: "mapboxglMapCorrection1",
     label: "mapboxgl互联网地图纠偏插件（一）",
     href: "https://blog.csdn.net/gisarmory/article/details/118018542"
-}];
+}, {
+    id: "mapboxglMapCorrection2",
+    label: "mapboxgl互联网地图纠偏插件（二）",
+    href: "https://blog.csdn.net/gisarmory/article/details/118518376"
+}
+];
 

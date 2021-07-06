@@ -239,7 +239,7 @@ export default class gcj02TileLayer{
                 this.render(gl, this.matrix)
             }
         };
-        img.crossOrigin = true;
+        img.crossOrigin = true;     //允许图片跨域
         img.src = _url;
 
         return tile;

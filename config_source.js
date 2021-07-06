@@ -66,4 +66,9 @@ var sourceList = [{
     id: "maputnikGeoserverVectorTiles",
     label: "maputnik",
     url: "https://github.com/gisarmory/editor"
-}];
+}, {
+    id: "mapboxglMapCorrection2",
+    label: "maputnik",
+    url: "https://github.com/gisarmory/editor"
+}
+];

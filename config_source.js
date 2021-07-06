@@ -68,7 +68,7 @@ var sourceList = [{
     url: "https://github.com/gisarmory/editor"
 }, {
     id: "mapboxglMapCorrection2",
-    label: "maputnik",
-    url: "https://github.com/gisarmory/editor"
+    label: "互联网地图纠偏（二）",
+    url: "https://github.com/gisarmory/gisarmory.blog/blob/master/mapboxgl-MapCorrection2/js/gcj02TileLayer.js"
 }
 ];

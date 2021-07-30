@@ -283,7 +283,9 @@
             for (let i = 0; i < aLength - 1; i++) {
                 var from = turf.point(route.geometry.coordinates[i]);
                 var to = turf.point(route.geometry.coordinates[i + 1]);
-                let lDistance = turf.distance(from, to, units);
+                let lDistance = turf.distance(from, to, {
+                    units:units
+                });
                 if (i == 0) {
                     newroute.geometry.coordinates.push(route.geometry.coordinates[0])
                 }
@@ -301,10 +303,12 @@
             var step = parseInt(distance / splitLength)
             var leftLength = distance - step * splitLength
             var rings = []
-            var route = turf.linestring([from.geometry.coordinates, to.geometry.coordinates])
+            var route = turf.lineString([from.geometry.coordinates, to.geometry.coordinates])
             for (let i = 1; i <= step; i++) {
                 let nlength = i * splitLength
-                let pnt = turf.along(route, nlength, units);
+                let pnt = turf.along(route, nlength, {
+                    units:units
+                });
                 rings.push(pnt.geometry.coordinates)
             }
             if (leftLength > 0) {

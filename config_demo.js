@@ -58,5 +58,9 @@ var demoList = [{
     id: "PostGISConnect",
     label: "为什么PostGIS中对点进行buffer分析得到的是个椭圆",
     url: "postgis-connect/index.html"
+}, {
+    id: "mapboxglMapCorrection2",
+    label: "为什么PostGIS中对点进行buffer分析得到的是个椭圆",
+    url: "mapboxgl-MapCorrection2/GaoDeMap.html"
 }
 ];

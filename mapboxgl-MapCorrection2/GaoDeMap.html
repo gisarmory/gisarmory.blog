@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8' />
+    <title>GaoDeMap</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='../lib/mapboxgl/mapbox-gl.js' ></script>
+    <link href="../lib/mapboxgl/mapbox-gl.css" rel="stylesheet">
+
+    <!-- <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.css' rel='stylesheet' /> -->
+    
+    <!-- <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css" rel="stylesheet"> -->
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 30px;
+            bottom: 0px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='map'></div>
+</body>
+
+<script type="module">
+    import gcj02TileLayer from './js/gcj02TileLayer.js'
+
+    createButton('高德矢量', shiliang)
+    createButton('高德影像', yingxiang)
+
+    var map = new mapboxgl.Map({
+        container: 'map', 
+        // style: 'mapbox://styles/mapbox/light-v10',
+        style: {
+            version:8,
+            sources:{},
+            layers:[]
+        },
+        center: [116.391305, 39.905530], 
+        zoom: 6, 
+        minZoom:3,
+        maxZoom:17.9
+    });
+    
+    map.on('load', function () {
+        shiliang()
+    })
+
+    //wgs84坐标的天安门广场国旗位置
+    var marker = new mapboxgl.Marker().setLngLat([116.391305, 39.905530]).addTo(map);
+
+    function shiliang(){
+        clear()
+
+        //高德矢量
+        map.addLayer(new gcj02TileLayer('gdsl',"//webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}",{
+            subdomains:["1","2","3","4"]
+        }))
+    }
+
+    function yingxiang(){
+        clear()
+
+        //高德影像
+        map.addLayer(new gcj02TileLayer('gdyx',"//webst0{s}.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}",{
+            subdomains:["1","2","3","4"]
+        }))
+        map.addLayer(new gcj02TileLayer('gdyxzj',"//webst0{s}.is.autonavi.com/appmaptile?style=8&x={x}&y={y}&z={z}",{
+            subdomains:["1","2","3","4"],
+            imgLoadRender:false
+        }))
+    }
+
+    function clear(){
+        if(map.getLayer('gdsl')) map.removeLayer('gdsl')
+        if(map.getLayer('gdyx')) map.removeLayer('gdyx')
+        if(map.getLayer('gdyxzj')) map.removeLayer('gdyxzj')
+    }
+
+    function createButton(value, callback){
+        var input = document.createElement('input')
+        input.type = 'button'
+        input.value = value
+        input.onclick = callback
+        document.body.appendChild(input)
+    }
+    
+
+</script>
+
+</html>

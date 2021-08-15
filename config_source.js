@@ -68,7 +68,11 @@ var sourceList = [{
     url: "https://github.com/gisarmory/editor"
 }, {
     id: "mapboxglMapCorrection2",
-    label: "互联网地图纠偏（二）",
+    label: "mapboxgl互联网地图纠偏（二）",
     url: "https://github.com/gisarmory/gisarmory.blog/blob/master/mapboxgl-MapCorrection2/js/gcj02TileLayer.js"
+}, {
+    id: "mapboxglMapCorrection3",
+    label: "mapboxgl互联网地图纠偏（三）",
+    url: "https://github.com/gisarmory/mapboxgl.InternetMapCorrection"
 }
 ];

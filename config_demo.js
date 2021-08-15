@@ -56,11 +56,15 @@ var demoList = [{
     url: "leaflet-RouteAnimate/demo.html"
 }, {
     id: "PostGISConnect",
-    label: "为什么PostGIS中对点进行buffer分析得到的是个椭圆",
+    label: "postgis连通性分析",
     url: "postgis-connect/index.html"
 }, {
     id: "mapboxglMapCorrection2",
-    label: "为什么PostGIS中对点进行buffer分析得到的是个椭圆",
+    label: "mapboxgl互联网地图纠偏插件（二）",
     url: "mapboxgl-MapCorrection2/GaoDeMap.html"
+}, {
+    id: "mapboxglMapCorrection3",
+    label: "mapboxgl互联网地图纠偏插件（三）",
+    href: "http://gisarmory.xyz/mapboxgl.InternetMapCorrection/examples/gcj02TileLayer.html"
 }
 ];

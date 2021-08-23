@@ -73,6 +73,6 @@ var sourceList = [{
 }, {
     id: "mapboxglMapCorrection3",
     label: "mapboxgl互联网地图纠偏（三）",
-    url: "https://gitee.com/gisarmory/mapboxgl.InternetMapCorrection"
+    url: "https://github.com/gisarmory/mapboxgl.InternetMapCorrection"
 }
 ];

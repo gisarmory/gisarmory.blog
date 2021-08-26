@@ -1,27 +1,42 @@
 # 发布 mbtiles 存储的矢量瓦片
 
-之前我们分享过如何[在本地发布OSM矢量瓦片地图](http://gisarmory.xyz/blog/index.html?blog=OSMVectorTiles)，当时生成的矢量瓦片地图存放在 `.mbtiles` 文件中，然后用 tileserver-gl 发布。
+之前我们分享过如何[在本地发布OSM矢量瓦片地图](http://gisarmory.xyz/blog/index.html?blog=OSMVectorTiles)，当时生成的矢量瓦片地图存放在 `.mbtiles` 文件中，然后用 tileserver-gl 软件发布。
 
 > mbtiles 是基于sqllite数据库存储地图瓦片数据的标准规范，一个`.mbtiles`文件就是一个sqllite数据库。
 
-最近遇到个问题，项目上需要将这份矢量瓦片数据部署到客户服务器上并发布，之前的部署结构是，将 jdk、postgres、geoserver、tomcat 都搞成了绿色版，并且可以一键注册成系统服务，部署很方便，
+最近遇到个问题，项目上需要将这份`.mbtiles`矢量瓦片数据部署到客户服务器上并发布。
 
-这次的 tileserver-gl 是nodejs的，按之前的思路，需要将 nodejs 也搞一个绿色版的，并解决注册服务问题。
+之前也分享过[我的开源GIS解决方案](http://gisarmory.xyz/blog/index.html?blog=GISerSolution)，里面将 jdk、postgres、geoserver、tomcat 都搞成了绿色版，并且可以通过批处理脚本实现一键注册成系统服务，这样就形成了一个绿色版的安装包，部署时会很方便。
 
-但之前的技术路线都是java 体系的，自己比较熟悉，nodejs前端开发时用的多，作为后端发服务使用的比较少，印象中没有java稳定。
-所以就想着能不能在现有的体现下搞定 mbtiles 发布的问题。
+上面的架构是偏 java 体系的，而这次发布矢量瓦片用到的 tileserver-gl 是基于 nodejs 开发的，按上面的思路，需要将 nodejs 也搞一个绿色版的，并要能用批处理注册服务。
 
-先尝试了geoserver，geoserver有个mbtiles的扩展插件（链接），支持对mbtiles的读写，
+因为不想把安装包搞的太大，也不想用太多的技术体系，让后期维护变得太复杂，所以就想能不能在现有的技术体系下搞定 .mbtiles 文件发布的问题。
+
+按这个思路，需要去研究有没有相关的geoserver插件，和有没有相关的java软件或项目。
+
+## geoserver插件
+
+先研究了geoserver插件，还真有。
+
+geoserver有个mbtiles的扩展插件（链接），支持对mbtiles的读写。
+
+但尝试后总觉得哪里不对劲。
+
+ .mbtiles 文件中目前存的是处理好的pbf文件，按说插件只需要根据请求参数，返回对应的pbf文件就ok了。
 
 从官网下载插件，安装尝试后发现个问题ss，  
 
 用时能用，完全没有问题，但总觉得怪怪的，mbtiles 目前存的是处理好的pbf文件，我现在只需要有个后台根据前台的请求参数（xyz），返回对应的pbf文件就ok了，
 
-但geoserver的做法是，将mbtiles 中的 pbf 文件作为矢量数据源来使用（类似于shp），然后将这些矢量数据发布成geoserver的图层服务，再将这些图层服务创建成图层组，把图层组发布成矢量瓦片服务，
+但geoserver的做法是，将mbtiles 中的 pbf 文件作为矢量数据源来使用（类似于读取shp文件中的数据），具体为：先将pbf瓦片拼起来，读取拼接后的图层数据，再把图层发布成geoserver的矢量瓦片服务，最后在调用矢量瓦片服务时再将数据处理成pbf文件。
 
-怎么说呢，行是行，就是有一种（举一个恰当的例子）的感觉，还有就是重新挨个发服务有点麻烦
+怎么说呢，这么做和把pbf文件直接扔给前台相比，结果是一样的，但就是感觉它内心戏太足，内耗太严重，还有就是发服务的过程也很麻烦。
 
-不就是读取个现成的数据，返回给前台嘛，搞的这么负责，于是就想看看有没有现成的java项目，
+只能说，这个插件设计的初衷就是用来读取数据，不是用来发布的。
+
+## java项目
+
+再来看看java这边。
 
 在github上搜了一下，还真有，（项目名称、链接），还是个现成的java工程，拉取下来一通尝试，遇到几个问题：只支持png图片，不支持pbf发布的服务是tms类型的，在mapboxgl中调用时需要设置一下，参考之前写的这篇文章java后台返回pbf文件时，设置编码类型为gzip，和（内容类型）
 

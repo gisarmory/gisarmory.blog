@@ -123,7 +123,7 @@ var blogList = [{
 }, {
     id: "OSMMbtiles",
     label: "发布mbtiles存储的矢量瓦片",
-    href: "https://blog.csdn.net/gisarmory/article/details/119718873"
+    href: "https://blog.csdn.net/gisarmory/article/details/120024395"
 }
 ];
 

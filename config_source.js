@@ -74,5 +74,9 @@ var sourceList = [{
     id: "mapboxglMapCorrection3",
     label: "mapboxgl互联网地图纠偏（三）",
     url: "https://github.com/gisarmory/mapboxgl.InternetMapCorrection"
+}, {
+    id: "OSMMbtiles",
+    label: "发布mbtiles存储的矢量瓦片",
+    url: "https://github.com/gisarmory/mbtiles4j"
 }
 ];

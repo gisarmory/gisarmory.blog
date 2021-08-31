@@ -120,6 +120,10 @@ var blogList = [{
     id: "mapboxglMapCorrection3",
     label: "mapboxgl互联网地图纠偏插件（三）",
     href: "https://blog.csdn.net/gisarmory/article/details/119718873"
+}, {
+    id: "OSMMbtiles",
+    label: "发布mbtiles存储的矢量瓦片",
+    href: "https://blog.csdn.net/gisarmory/article/details/119718873"
 }
 ];
 

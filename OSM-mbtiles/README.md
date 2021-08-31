@@ -14,6 +14,8 @@
 
 按这个思路，需要去研究有没有相关的geoserver插件，或是 java 的软件或项目。
 
+剧透一下，最终结果是找了个 java 项目，不想看过程的可以直接跳到末尾看总结。
+
 ## geoserver插件
 
 先研究了geoserver插件，还真有。
@@ -24,17 +26,17 @@ geoserver有个mbtiles的扩展插件（[https://docs.geoserver.org/latest/en/us
 
 首先要说明的是，这个插件是能解决问题的，但就是解决问题的过程有点曲折。
 
- `.mbtiles` 文件中存的是处理好的pbf文件，按说插件只需要根据请求参数，从 sqllite 数据库中查询 pbf 文件，返回给前台就 ok 了。
+ `.mbtiles` 文件中存的是处理好的 `pbf` 文件，按说插件只需要根据请求参数，从 sqllite 数据库中查询 `pbf` 文件，返回给前台就 ok 了。
 
-但 geoserver 不是这么做的，它是将 `.mbtiles` 文件中的 pbf 瓦片作为矢量数据源来使用，类似于读取 .mdb 文件。
+但 geoserver 不是这么做的，它是将 `.mbtiles` 文件中的 `pbf` 瓦片作为矢量数据源来使用，类似于读取 `.mdb` 文件。
 
 具体为：
 
-1. 先将pbf瓦片拼起来，读取拼接后的各图层原始数据
+1. 先将 `pbf` 瓦片拼起来，读取拼接后的各图层原始数据
 2. 把图层原始数据发布成 geoserver 的矢量瓦片服务
-3. 前台调用矢量瓦片服务时，geoserver 把数据处理成 pbf 文件返回给前台
+3. 前台调用矢量瓦片服务时，geoserver 把数据处理成 `pbf` 文件返回给前台
 
-怎么说呢，这么做和把 pbf 文件直接扔给前台相比，结果是一样的，但就是感觉 geoserver 的戏太足，内耗太严重，还有就是发服务的过程也很麻烦。
+怎么说呢，这么做和把 `pbf` 文件直接扔给前台相比，结果是一样的，但就是感觉 geoserver 的戏太足，内耗太严重，还有就是发服务的过程也很麻烦。
 
 只能说，这个插件设计的初衷仅是用来读取原始数据的，不是为了发布数据而生。
 
@@ -42,41 +44,41 @@ geoserver有个mbtiles的扩展插件（[https://docs.geoserver.org/latest/en/us
 
 再看 java 这边。
 
-在github上搜了一下，找到了这个项目：mbtiles4j（[https://github.com/jtreml/mbtiles4j](https://github.com/jtreml/mbtiles4j)）。
+在 github上搜了一下，找到了这个项目：mbtiles4j（[https://github.com/jtreml/mbtiles4j](https://github.com/jtreml/mbtiles4j)）。
 
-是个现成的 java 工程，拉取下来研究了一下，逻辑很简单，就是直接读取 mbtiles 中的瓦片返回给前台，这一点很符合要求，美中不足的是，这个项目是针对栅格瓦片的，默认只支持 .png 文件，不支持 .pbf 。
+是个现成的 java 工程，拉取下来研究了一下，逻辑很简单，就是直接读取 `mbtiles` 中的瓦片返回给前台，这一点很符合要求，美中不足的是，这个项目是针对栅格瓦片的，默认只支持 `.png` 文件，不支持 `.pbf` 。
 
 这个好说，有源码，改改就是了。
 
 改完后发现，前端地图不显示，瓦片请求地址报 404 ，
 
-将请求地址中的瓦片编号和 mbtiles 库中的瓦片编号对了一下，确实没有。
+将请求地址中的瓦片编号和 `mbtiles` 库中的瓦片编号对了一下，确实没有。
 
 为啥呢？
 
-哈哈，这个我有经验，持续关注我们的同学还记不记的，我之前分享过关于 [如何让 maputinik 支持 geoserver ](http://gisarmory.xyz/blog/index.html?blog=maputnikGeoserverVectorTiles2)的问题，里面最关键的一点就是设置 mapboxgl 请求瓦片的模式 scheme，模式包括 xyz 和 tms，默认是用 xyz 。
+哈哈，这个我有经验，持续关注我们的同学还记不记的，我之前分享过关于 [如何让 maputinik 支持 geoserver ](http://gisarmory.xyz/blog/index.html?blog=maputnikGeoserverVectorTiles2)的问题，里面最关键的一点就是设置 mapboxgl 请求瓦片的模式 `scheme`，模式包括 `xyz` 和 `tms`，默认使用 `xyz` 。
 
-难道 openmaptile 生成的这个 mbtiles 文件是按 tms 存储的？试一下就知道了
+难道 openmaptile 生成的这个 `mbtiles` 文件是按 `tms` 存储的？试一下就知道了
 
-果然 ~ 没那么简单，地图还是没有出来，但瓦片可以请求到了，看来确实是tms的。
+果然 ~ 没那么简单，地图还是没有出来，但瓦片可以请求到了，看来确实是 `tms` 的。
 
 但为啥地图还是没有出来呢？
 
-对比了下 tileserver-gl 和 mbtiles4j 的返回参数，发现了问题所在。
+对比了下 tileserver-gl（下图左） 和 mbtiles4j（下图右） 的返回参数，发现了问题所在。
 
-（对比图）
+![](http://blogimage.gisarmory.xyz/20210831180609.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
 pbf 文件是采用 gzip 压缩过的，需要在返回参数中明确告知返回内容的类型是 gzip，而刚才将 mbtiles4j 中的png 改成 pbf 后，没有加这个设置。
 
 加上试试，哈哈，搞定。
 
-（图）
+![](http://blogimage.gisarmory.xyz/20210831180605.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
-这个通了，剩下的就简单了，工程编译成war包，直接扔到tomcat下就可以了。
+这个通了，剩下的就简单了，工程编译成 war 包，直接扔到tomcat下就可以了。
 
 ## 大比例时地图显示
 
-本来以为可以手工了，但浏览地图时发现了另一个问题。
+本来以为可以收工了，但浏览地图时发现了另一个问题。
 
 我的地图只切到了14级，因为在矢量瓦片中，14级包含的内容就已经很细了，所以没有必要再往下切。
 
@@ -92,10 +94,10 @@ pbf 文件是采用 gzip 压缩过的，需要在返回参数中明确告知返�
 
 去翻 tileserver-gl 的地图样式配置，和我自己的配置对比后发现，对数据源设置 `maxzoom` 就可以解决这个问题。
 
-（图）
+![](http://blogimage.gisarmory.xyz/20210831180559.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
 看一下官网的解释，大概意思是，如果你设置maxzoom=14，那么当地图缩放超过14级时，地图仍然会使用14级的瓦片。
-![img](file:///C:/Users/HERO/AppData/Local/Temp/enhtmlclip/Image.png)
+![](http://blogimage.gisarmory.xyz/20210831180556.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
 这个设置正是我要的。
 
@@ -103,9 +105,7 @@ pbf 文件是采用 gzip 压缩过的，需要在返回参数中明确告知返�
 
 ## 源码：
 
-地址：
-
-
+地址：[http://gisarmory.xyz/blog/index.html?source=OSMMbtiles](http://gisarmory.xyz/blog/index.html?source=OSMMbtiles)
 
 ## 总结：
 

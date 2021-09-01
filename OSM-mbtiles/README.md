@@ -2,7 +2,7 @@
 
 之前我们分享过如何 [在本地发布OSM矢量瓦片地图](http://gisarmory.xyz/blog/index.html?blog=OSMVectorTiles)，里面介绍了生成的矢量瓦片会存放在 `.mbtiles` 文件中，然后用 tileserver-gl 软件发布。
 
-> mbtiles 是基于sqllite数据库存储地图瓦片数据的标准规范，`.mbtiles`文件就是实现了这个规范的sqllite数据库。
+> [mbtiles](https://github.com/mapbox/mbtiles-spec) 是基于sqllite数据库存储地图瓦片数据的标准规范，`.mbtiles`文件就是实现了这个规范的sqllite数据库。
 
 最近遇到个相关的问题，项目上需要将这份`.mbtiles`格式的矢量瓦片部署到客户服务器上并发布。
 
@@ -14,7 +14,7 @@
 
 按这个思路，需要去研究有没有相关的geoserver插件，或是 java 的软件或项目。
 
-剧透一下，最终结果是找了个 java 项目，不想看过程的可以直接跳到末尾看总结。
+下面是我研究的具体过程，不想看过程的同学可以直接跳到末尾看总结。
 
 ## geoserver插件
 
@@ -22,21 +22,31 @@
 
 geoserver有个mbtiles的扩展插件（[https://docs.geoserver.org/latest/en/user/community/mbtiles/index.html](https://docs.geoserver.org/latest/en/user/community/mbtiles/index.html)），支持对`.mbtiles`文件的读写。
 
+> geoserver 安装 mbtiles 插件的教程可以参考这篇：[https://blog.csdn.net/dyxcome/article/details/98375453](https://blog.csdn.net/dyxcome/article/details/98375453)
+
 从官网下载插件，安装测试后，发现跟想的有点不一样。
 
-首先要说明的是，这个插件是能解决问题的，但就是解决问题的过程有点曲折。
+geoserver安装完插件后，新建数据源的界面多了两个 mbtiles 相关的选项，如下图，上面的是发布矢量瓦片，下面的是发布栅格瓦片。
+
+![](http://blogimage.gisarmory.xyz/20210901185754.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
+
+我用第二个红框，发布栅格瓦片的选项，发布了下矢量瓦片，会报错。
+
+用第一个红框，发布矢量瓦片的选项，可以走的通，但就是过程有点曲折，需要把 pbf 中的图层再挨个发布一遍。
+
+![](http://blogimage.gisarmory.xyz/20210901185749.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
  `.mbtiles` 文件中存的是处理好的 `pbf` 文件，按说插件只需要根据请求参数，从 sqllite 数据库中查询 `pbf` 文件，返回给前台就 ok 了。
 
 但 geoserver 不是这么做的，它是将 `.mbtiles` 文件中的 `pbf` 瓦片作为矢量数据源来使用，类似于读取 `.mdb` 文件。
 
-具体为：
+可以推理出，geoserver 内部的处理方式大概是：
 
 1. 先将 `pbf` 瓦片拼起来，读取拼接后的各图层原始数据
 2. 把图层原始数据发布成 geoserver 的矢量瓦片服务
 3. 前台调用矢量瓦片服务时，geoserver 把数据处理成 `pbf` 文件返回给前台
 
-怎么说呢，这么做和把 `pbf` 文件直接扔给前台相比，结果是一样的，但就是感觉 geoserver 的戏太足，内耗太严重，还有就是发服务的过程也很麻烦。
+怎么说呢，这么做和把 `pbf` 文件直接扔给前台相比，结果是一样的，但就是感觉 geoserver 的戏太足，内耗太严重，还有就是这个发服务的操作过程也很麻烦。
 
 只能说，这个插件设计的初衷仅是用来读取原始数据的，不是为了发布数据而生。
 
@@ -61,6 +71,10 @@ geoserver有个mbtiles的扩展插件（[https://docs.geoserver.org/latest/en/us
 难道 openmaptile 生成的这个 `mbtiles` 文件是按 `tms` 存储的？试一下就知道了
 
 果然 ~ 没那么简单，地图还是没有出来，但瓦片可以请求到了，看来确实是 `tms` 的。
+
+> 事后简单翻了一下 [mbtiles](https://github.com/mapbox/mbtiles-spec) 规范，里面有明确写到，数据源是以 [tms](https://wiki.osgeo.org/wiki/Tile_Map_Service_Specification) 格式来存储的。
+>
+> 看来还是要多研究标准规范和说明文档。
 
 但为啥地图还是没有出来呢？
 

@@ -5,7 +5,8 @@ var blogList = [{
 }, {
     id: "wechat",
     label: "公众号",
-    url: "menu/wechat.md"
+    // url: "menu/wechat.md",
+    href: "http://blogimage.gisarmory.xyz/20200923063756.png"
 }, {
     id: "github",
     label: "github",

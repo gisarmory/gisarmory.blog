@@ -81,9 +81,9 @@
                 if (dataObj.href) {
                     href = dataObj.href;
                 } else if (dataObj.url) {
-                    href = 'http://gisarmory.xyz/blog/main.html?blog='+urlId;
+                    href = dataObj.url;
                 }
-                setTimeout(() => {
+                setTimeout(function(){
                     window.location.href = href
                 }, 800);
             }

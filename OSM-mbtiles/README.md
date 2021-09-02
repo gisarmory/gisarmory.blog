@@ -86,7 +86,7 @@ pbf 文件是采用 gzip 压缩过的，需要在返回参数中明确告知返�
 
 加上试试，哈哈，搞定。
 
-![](http://blogimage.gisarmory.xyz/20210831180605.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
+![](http://blogimage.gisarmory.xyz/20210902070054.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
 这个通了，剩下的就简单了，工程编译成 war 包，直接扔到tomcat下就可以了。
 

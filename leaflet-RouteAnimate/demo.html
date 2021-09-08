@@ -43,6 +43,7 @@
     <div class="menuBar">
         <input type="button" value="开始" onclick="startClick()" />
         <input type="button" value="暂停" onclick="pauseClick()" />
+        <input type="button" value="加速" onclick="speetUp()" />
         <input type="button" value="停止" onclick="stopClick()" />
     </div>
 </body>
@@ -128,6 +129,11 @@
     function updateRealLine(latlng) {
         newLatlngs.push(latlng)
         realRouteLine.setLatLngs(newLatlngs)
+    }
+
+    // 开始
+    function speetUp() {
+        animatedMarker.setSpeetX(2);
     }
 
     // 开始

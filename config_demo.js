@@ -66,5 +66,9 @@ var demoList = [{
     id: "mapboxglMapCorrection3",
     label: "mapboxgl互联网地图纠偏插件（三）",
     href: "http://gisarmory.xyz/mapboxgl.InternetMapCorrection/examples/gcj02TileLayer.html"
+}, {
+    id: "GISAlgorithm",
+    label: "GIS常用算法",
+    url: "GISAlgorithm/demo.html"
 }
 ];

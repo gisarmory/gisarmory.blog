@@ -2,25 +2,25 @@
 
 [TOC]
 
-作为一个GISer，在日常`WebGIS`开发中，会经常用到的`turf.js`，这是一个地理空间分析的`JavaScript`库，经常搭配各种`GIS JS API`使用，如`leaflet`、`mapboxgl`、`openlayers`等；在后台`Java`开发中，也有个比较强大的GIS库，`geotools`，里面包含构建一个完整的地理信息系统所需要的全部工具类；数据库端常用是`postgis`扩展，需要在`postgres`库中引入使用。
+作为一个GISer，在日常`WebGIS`开发中，会常用到的`turf.js`，这是一个地理空间分析的`JavaScript`库，经常搭配各种`GIS JS API`使用，如`leaflet`、`mapboxgl`、`openlayers`等；在后台`Java`开发中，也有个比较强大的GIS库，`geotools`，里面包含构建一个完整的地理信息系统所需要的全部工具类；数据库端常用是`postgis`扩展，需要在`postgres`库中引入使用。
 
 然而在开发某一些业务系统的时候，有些需求只需要调用某一个GIS算法，简单的几行代码即可完成，没有必要去引用一个GIS类库。
 
-而且有些算法在这些常用的GIS类库中没有对应接口，就比如在下文记录的这几种常用算法中，求垂足、判断线和面的关系，在`turf.js`j就没有对应接口。
+而且有些算法在这些常用的GIS类库中没有对应接口，就比如在下文记录的这几种常用算法中，求垂足、判断线和面的关系，在`turf.js`就没有对应接口。
 
-下面文章中是我总结的一些常用GIS算法，这里统一用`JavaScript`语言实现，代码比较简洁，方便理解其中算法逻辑，也方便在浏览器下预览效果。在具体应用时可以根据具体需求，翻译成`Java`、`C#`、`Python`等语言来使用。
+下面文章中是我总结的一些常用GIS算法，这里统一用`JavaScript`语言实现，因为`JS`代码相对比较简洁，方便理解其中算法逻辑，也方便在浏览器下预览效果。在具体应用时可以根据具体需求，翻译成`Java`、`C#`、`Python`等语言来使用。
 
 文中代码大部分为之前遇到需求时在网上搜索得到，然后自己根据具体需要做了优化修改，通过这篇文章做个总结收集，也方便后续使用时查找。
 
 
 
-## 常用算法
+## 1、常用算法
 
 以下方法中传参的点、线、面都是对应`geojson`格式中`coordinates`，方便统一调用。`geojson`标准参考：https://www.oschina.net/translate/geojson-spec
 
 ![image-20210908154231301](https://blogimage.gisarmory.xyz/image-20210908154231301.png)
 
-### 计算两经纬度点之间的距离(单位：米)
+### 1.1、计算两经纬度点之间的距离
 
 适用场景：测量
 
@@ -46,7 +46,7 @@ function getDistance(p1, p2) {
 
 
 
-### 根据已知线段以及到起点距离（单位：米），求目标点坐标
+### 1.2、根据已知线段以及到起点距离，求目标点坐标
 
 适用场景：封闭管段定位问题点
 
@@ -70,7 +70,7 @@ function getLinePoint(line, dis) {
 
 
 
-### 已知点、线段，求垂足
+### 1.3、已知点、线段，求垂足
 
 垂足可能在线段上，也可能在线段延长线上。
 
@@ -78,7 +78,7 @@ function getLinePoint(line, dis) {
 
 ```js
 /**
-* 求垂足
+* 已知点、线段，求垂足
 * @param line 线段；[[经度,纬度],[经度,纬度]]；例：[[116.01,40.01],[116.52,40.01]]
 * @param p 点；[经度,纬度]；例：[116.35,40.08]
 *
@@ -98,7 +98,7 @@ function getFootPoint(line, p) {
 
 
 
-### 线段上距离目标点最近的点
+### 1.4、线段上距离目标点最近的点
 
 不同于上面求垂足方法，该方法求出的点肯定在线段上。
 
@@ -135,9 +135,9 @@ function getShortestPointInLine(line, p) {
 
 
 
-### 点缓冲
+### 1.5、点缓冲
 
-这里缓冲属于测地线方法，由于这里并没有严格的投影转换体系，所以与标准的测地线缓冲还有些许误差，不过经测试，半径`100KM`内，误差基本可以忽略，具体缓冲类型可看下之前的文章[你真的会用PostGIS中的buffer缓冲吗？](https://blog.csdn.net/gisarmory/article/details/109646712)
+这里缓冲属于测地线方法，由于这里并没有严格的投影转换体系，所以与标准的测地线缓冲还有些许误差，不过经测试，半径`100KM`内，误差基本可以忽略。具体缓冲类型可看下之前的文章[你真的会用PostGIS中的buffer缓冲吗？](https://blog.csdn.net/gisarmory/article/details/109646712)
 
 适用场景：根据点和半径画圆
 
@@ -169,7 +169,7 @@ function bufferPoint(center, radius, vertices) {
 
 
 
-### 点和面关系
+### 1.6、点和面关系
 
 该方法采用射线法思路实现。（了解射线法可参考：https://blog.csdn.net/qq_27161673/article/details/52973866）
 
@@ -260,7 +260,7 @@ function isLeft(point, line) {
 
 
 
-### 线段与线段的关系
+### 1.7、线段与线段的关系
 
 适用场景：判断线和线的关系
 
@@ -315,7 +315,7 @@ function intersectLineAndLine(line1, line2) {
 
 
 
-### 线和面关系
+### 1.8、线和面关系
 
 适用场景：判断线与面的关系
 
@@ -405,7 +405,7 @@ function intersectLineAndRing(line, ring) {
 
 
 
-### geojson 面转线
+### 1.9、geojson 面转线
 
 适用场景：只有`geojson`面数据，获取线的边界
 
@@ -451,7 +451,7 @@ function convertPolygonToPolyline(polygonGeoJson) {
 
 
 
-## 在线示例
+## 2、在线示例
 
 在线示例：[http://gisarmory.xyz/blog/index.html?demo=GISAlgorithm](http://gisarmory.xyz/blog/index.html?demo=GISAlgorithm)
 

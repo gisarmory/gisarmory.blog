@@ -69,6 +69,6 @@ var demoList = [{
 }, {
     id: "GISAlgorithm",
     label: "GIS常用算法",
-    url: "GISAlgorithm/demo.html"
+    url: "http://gisarmory.xyz/GISAlgorithm/demo.html"
 }
 ];

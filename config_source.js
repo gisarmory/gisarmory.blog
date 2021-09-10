@@ -81,6 +81,6 @@ var sourceList = [{
 }, {
     id: "GISAlgorithm",
     label: "GIS常用算法",
-    url: "https://github.com/gisarmory/gisarmory.blog/blob/master/GISAlgorithm/mygeotools.js"
+    url: "https://github.com/gisarmory/GISAlgorithm"
 }
 ];

@@ -44,6 +44,7 @@
         <input type="button" value="开始" onclick="startClick()" />
         <input type="button" value="暂停" onclick="pauseClick()" />
         <input type="button" value="加速" onclick="speetUp()" />
+        <input type="button" value="减速" onclick="speetDown()" />
         <input type="button" value="停止" onclick="stopClick()" />
     </div>
 </body>
@@ -131,9 +132,17 @@
         realRouteLine.setLatLngs(newLatlngs)
     }
 
-    // 开始
+    let speetX = 1 // 默认速度倍数
+    // 加速
     function speetUp() {
-        animatedMarker.setSpeetX(2);
+        speetX = speetX * 2
+        animatedMarker.setSpeetX(speetX);
+    }
+
+    // 减速
+    function speetDown() {
+        speetX = speetX / 2
+        animatedMarker.setSpeetX(speetX);
     }
 
     // 开始

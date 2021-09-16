@@ -63,11 +63,17 @@ leaflet无法像`mapboxgl`似的直接通过样式实现轨迹箭头效果，需
 
 ![](https://blogimage.gisarmory.xyz/2021060102.png)
 
-![](https://blogimage.gisarmory.xyz/2021060101.png)
+![](https://blogimage.gisarmory.xyz/2021060101.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
 解释：示例中小车的默认速度是 **100米/100毫秒**，也就是`options`参数中的**distance/interval**，添加`speedList`参数后的速度也就是**默认速度*speedList[i]**
 
 
+
+-----------------------------2021-09-16更新--------------------------------
+
+添加可加速、减速方法，可调用setSpeetX()，传入默认速度的倍数控制播放速度。
+
+![](https://blogimage.gisarmory.xyz/image-20210916222359164.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
 ## 总结
 

@@ -102,9 +102,9 @@
                     href = dataObj.url;
                 }
                 
-                if(href.indexOf('http') == -1){
-                    href = location.origin + '/' + href
-                }
+                // if(href.indexOf('http') == -1){
+                //     href = location.origin + '/' + href
+                // }
                 
                 var hrefArr = href.split('https://github.com')
                 document.getElementById('toUrl').innerHTML  = href

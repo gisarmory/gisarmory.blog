@@ -78,5 +78,9 @@ var sourceList = [{
     id: "OSMMbtiles",
     label: "发布mbtiles存储的矢量瓦片",
     url: "https://github.com/gisarmory/mbtiles4j"
+}, {
+    id: "GISAlgorithm",
+    label: "GIS常用算法",
+    url: "https://github.com/gisarmory/GISAlgorithm"
 }
 ];

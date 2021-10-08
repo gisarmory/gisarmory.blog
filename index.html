@@ -23,22 +23,31 @@
 
         .content {
             position: absolute;
-            margin-top: 300px;
-            margin-left: calc(50% - 300px);
-            font-size: 36px;
-            font-weight: 1000;
+            margin-top: 200px;
+            margin-left: calc(50% - 400px);
         }
 
         .contentTitle {
-            width: 600px;
+            width: 800px;
             height: 60px;
+            margin-bottom: 50px;
+            font-size: 36px;
+            font-weight: 1000;
             text-align: center;
         }
 
         .contentUrl {
-            width: 600px;
+            width: 800px;
             height: 60px;
-            text-align: center;
+            font-size: 18px;
+            font-weight: 500;
+            text-align: left;
+        }
+        #backUrlContent{
+            display: none;
+        }
+        .contentUrl a{
+            color: #019BDD;
         }
     </style>
 
@@ -48,6 +57,14 @@
     <div class="content">
         <div class="contentTitle">
             <span>微信公众号：GIS兵器库</span>
+        </div>
+        <div class="contentUrl">
+            <span>即将跳转到：</span>
+            <a id="toUrl" href="">http://gisarmory.xyz</a>
+        </div>
+        <div class="contentUrl" id="backUrlContent">
+            <span>备用地址（github镜像）：</span>
+            <a id="backUpUrl">http://gisarmory.xyz</a>
         </div>
         <!-- <div class="contentUrl">
             <span>http://gisarmory.xyz</span>
@@ -74,6 +91,7 @@
     }
 
     function loadUrl(urlId, dataList) {
+
         for (var i = 0; i < dataList.length; i++) {
             var dataObj = dataList[i];
             if (dataObj.id == urlId) {
@@ -82,6 +100,23 @@
                     href = dataObj.href;
                 } else if (dataObj.url) {
                     href = dataObj.url;
+                }
+                
+                // if(href.indexOf('http') == -1){
+                //     href = location.origin + '/' + href
+                // }
+                
+                var hrefArr = href.split('https://github.com')
+                document.getElementById('toUrl').innerHTML  = href
+                document.getElementById('toUrl').href  = href
+                if(hrefArr.length > 1){
+                    var backUrl = 'https://github.com.cnpmjs.org' + hrefArr[1]
+                    document.getElementById('backUpUrl').innerHTML  = backUrl
+                    document.getElementById('backUpUrl').href  = backUrl
+
+                    document.getElementById('backUrlContent').style.display = 'block'
+                }else{
+                    document.getElementById('backUrlContent').style.display = 'none'
                 }
                 setTimeout(function(){
                     window.location.href = href

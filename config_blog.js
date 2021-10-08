@@ -125,6 +125,10 @@ var blogList = [{
     id: "OSMMbtiles",
     label: "发布mbtiles存储的矢量瓦片",
     href: "https://blog.csdn.net/gisarmory/article/details/120024395"
+}, {
+    id: "GISAlgorithm",
+    label: "GIS常用算法",
+    href: "https://blog.csdn.net/gisarmory/article/details/120202973"
 }
 ];
 

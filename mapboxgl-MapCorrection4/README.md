@@ -2,7 +2,7 @@
 
 之前分享了[mapboxgl 互联网地图纠偏插件](http://gisarmory.xyz/blog/index.html?blog=mapboxglMapCorrection3)，插件当时只支持高德地图，我们今天研究一下如何让它支持百度地图。
 
-要支持百度地图，核心在于百度地图的经纬度和瓦片编号的互转算法。
+插件中加载瓦片的原理，经纬度和瓦片编号的互转算法
 
 有了这个算法，就能根据当前窗口显示的经纬度范围，算出应该请求哪些瓦片。
 
@@ -12,13 +12,13 @@
 
 我们之前使用的高德地图瓦片，采用的是和谷歌地图相同的`xyz`编码方式，这种编码方式，瓦片的坐标原点在世界地图的左上角，西经180 º，北纬85 º左右，瓦片编号规则如下图所示
 
-![img](file:///C:/Users/HERO/AppData/Local/Temp/enhtmlclip/Image.jpg)
+![img](http://blogimage.gisarmory.xyz/20211009174121.jpg)
 
-这种编码方式，经纬度和瓦片编号互转的算法是公开的（[Slippy map tilenames](https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames)），我们之前就是用的这个。
+这种编码方式，经纬度和瓦片编号互转的算法是公开的（[Slippy map tilenames](https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames)），插件之前就是用的这个。
 
-百度地图采用的是自己的编码方式，瓦片坐标的原点在本初子午线和赤道的交汇处。
+百度地图采用的是自己的编码方式，瓦片坐标的原点在本初子午线和赤道的交汇处，瓦片编号规则如下图所示：
 
-![img](file:///C:/Users/HERO/AppData/Local/Temp/enhtmlclip/Image(1).jpg)
+![img](http://blogimage.gisarmory.xyz/20211009174118.jpg)
 
 
 
@@ -26,23 +26,45 @@
 
 我们把百度的那部分拿来，加入到我们的纠偏插件中，这样纠偏插件就能支持百度地图了。
 
-（图）
+![image-20211009124929783](http://blogimage.gisarmory.xyz/20211009174115.png)
 
 
 
-这次升级，顺带把平时常用的天地图、OSM和GEOQ也加了进来。
+插件这次除了新增百度地图以外，顺带把平时常用的天地图、OSM和GEOQ也加了进来。
 
-天地图是大地2000坐标系，可以在84坐标地图上直接使用，误差很小。OSM地图直接是84坐标，不需要纠偏。所以它两个直接使用 mapboxgl 的原生接口，
+天地图是大地2000坐标系，可以在84坐标地图上直接使用，误差很小。OSM地图直接是84坐标，不需要纠偏。所以它两个直接使用 mapboxgl 的原生接口。其它地图使用自定义图层。
 
 GeoQ地图瓦片的编码方式和高德相同，改个瓦片请求地址就可以。
 
 把它们都收集一起，爽歪歪。看效果
 
-（图）
-
-最后，mapboxgl还是推荐使用矢量瓦片，展示效果会好很多，上面的栅格瓦片可以作为补充使用。
+![动画3.1](http://blogimage.gisarmory.xyz/20211009174107.gif)
 
 
+
+最后，mapboxgl还是推荐使用矢量瓦片，展示效果会好很多，上面的栅格瓦片可以作为补充使用。本地发布OSM地图矢量瓦片的方式可以参考之前写的文章[OSM地图本地发布-环境搭建](http://gisarmory.xyz/blog/index.html?blog=OSMVectorTiles)、[OSM地图本地发布-如何生成各省市矢量地图](http://gisarmory.xyz/blog/index.html?blog=OSMOpenmaptiles)
+
+
+
+## 地址
+
+在线示例：[http://gisarmory.xyz/blog/index.html?demo=mapboxglMapCorrection4](http://gisarmory.xyz/blog/index.html?demo=mapboxglMapCorrection4)
+
+插件地址：[http://gisarmory.xyz/blog/index.html?source=mapboxglMapCorrection3](http://gisarmory.xyz/blog/index.html?source=mapboxglMapCorrection3)
+
+
+
+
+
+* * *
+
+原文地址：[http://gisarmory.xyz/blog/index.html?blog=mapboxglMapCorrection4](http://gisarmory.xyz/blog/index.html?blog=mapboxglMapCorrection4)
+
+关注《[GIS兵器库](http://gisarmory.xyz/blog/index.html?blog=wechat)》， 只给你网上搜不到的GIS知识技能。
+
+![](http://blogimage.gisarmory.xyz/20200923063756.png)
+
+本文章采用 [知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议 ](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)进行许可。欢迎转载、使用、重新发布，但务必保留文章署名《GIS兵器库》（包含链接：  [http://gisarmory.xyz/blog/](http://gisarmory.xyz/blog/)），不得用于商业目的，基于本文修改后的作品务必以相同的许可发布。
 
 
 

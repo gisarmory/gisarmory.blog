@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8' />
+    <title>gcj02TileLayer</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='../lib/mapboxgl/mapbox-gl.js'></script>
+    <link href='../lib/mapboxgl/mapbox-gl.css' rel='stylesheet' />
+
+    <!-- <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.css' rel='stylesheet' /> -->
+    
+    <!-- <link href="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js"></script> -->
+
+
+<script src='./gcj02TileLayer.js'></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 30px;
+            bottom: 0px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='map'></div>
+    <input type="button" value="高德矢量" onclick="addGaodeMap()" />
+    <input type="button" value="高德影像" onclick="addGaodeYX()" />
+    <input type="button" value="mapbox地图" onclick="clearMap()" />
+</body>
+
+<script >
+
+    mapboxgl.accessToken ='pk.eyJ1IjoiZXRlcm5pdHkteHlmIiwiYSI6ImNqaDFsdXIxdTA1ODgycXJ5czdjNmF0ZTkifQ.zN7e588TqZOQMWfws-K0Yw';
+    var map = new mapboxgl.Map({
+        container: 'map', 
+        style: 'mapbox://styles/mapbox/streets-v11', 
+        center: [116.391305, 39.905530], 
+        zoom: 16,
+        // hash: true
+    });
+
+    map.on('load',function(){
+        addGaodeMap()
+    })
+
+    //高德矢量地图
+    function addGaodeMap(){
+        clearMap()
+        var gaodeMap = new gcj02TileLayer('gaodeLayer',"http://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}",{
+            subdomains:["1","2","3","4"],
+            minzoom:3,
+            maxzoom:18
+        });
+        map.addLayer(gaodeMap)
+    }
+
+    function addGaodeYX(){
+        clearMap()
+        //高德影像(无注记)
+        var gaodeYX = new gcj02TileLayer('gaodeYX',"http://webst0{s}.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}",{
+            subdomains:["1","2","3","4"],
+            minzoom:3,
+            maxzoom:18
+        });
+        map.addLayer(gaodeYX)
+        //高德影像注记
+        var gaodeYXZJ = new gcj02TileLayer('gaodeYXZJ',"http://webst0{s}.is.autonavi.com/appmaptile?style=8&x={x}&y={y}&z={z}",{
+            subdomains:["1","2","3","4"],
+            minzoom:3,
+            maxzoom:18,
+            imgLoadRender:false
+        });
+        map.addLayer(gaodeYXZJ)
+    }
+
+    //参照点，wgs84坐标下的天安门广场国旗位置
+    var marker = new mapboxgl.Marker()
+        .setLngLat([116.391305, 39.905530])
+        .addTo(map);
+
+    function clearMap(){
+        removeLayer('gaodeLayer')
+        removeLayer('gaodeYX')
+        removeLayer('gaodeYXZJ')
+    }
+    function removeLayer(layerId){
+        if(map.getLayer(layerId)){
+            map.removeLayer(layerId)
+        }
+    }
+
+
+</script>
+
+</html>

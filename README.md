@@ -14,6 +14,10 @@ GIS兵器库写文章的原则是，只分享网上搜不到的、没有现成�
 
 [mapboxgl-互联网地图纠偏插件（二）](http://gisarmory.xyz/blog/index.html?blog=mapboxglMapCorrection2)
 
+[mapboxgl-互联网地图纠偏插件（三）](http://gisarmory.xyz/blog/index.html?blog=mapboxglMapCorrection3)
+
+[mapboxgl 纠偏百度地图](http://gisarmory.xyz/blog/index.html?blog=mapboxglMapCorrection4)
+
 [mapboxgl-绘制3D线](http://gisarmory.xyz/blog/index.html?blog=MapboxGL3DLine)
 
 

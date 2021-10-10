@@ -129,6 +129,10 @@ var blogList = [{
     id: "GISAlgorithm",
     label: "GIS常用算法",
     href: "https://blog.csdn.net/gisarmory/article/details/120202973"
+}, {
+    id: "mapboxglMapCorrection4",
+    label: "mapboxgl纠偏百度地图",
+    href: "https://blog.csdn.net/gisarmory/article/details/120683726"
 }
 ];
 

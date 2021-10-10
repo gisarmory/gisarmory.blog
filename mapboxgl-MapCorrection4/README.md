@@ -34,13 +34,13 @@
 
 我们之前集成的高德地图瓦片，采用的就是`谷歌xyz`编码方式，这种编码方式，瓦片的坐标原点在世界地图的左上角，西经180 º北纬85 º左右，瓦片编号规则如下图所示：
 
-![img](http://blogimage.gisarmory.xyz/20211009174121.jpg)
+![](http://blogimage.gisarmory.xyz/20211009174121.jpg)
 
 `谷歌xyz`编码方式的经纬度和瓦片编号互转算法是公开的，详见：[Slippy map tilenames](https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames)，插件之前就是用的这个。
 
 百度地图采用的是自己的`百度XYZ`方式，瓦片坐标的原点在本初子午线和赤道的交汇处，瓦片编号规则如下图所示：
 
-![img](http://blogimage.gisarmory.xyz/20211009174118.jpg)
+![](http://blogimage.gisarmory.xyz/20211009174118.jpg)
 
 
 
@@ -50,7 +50,7 @@
 
 纠偏后效果如下：
 
-![image-20211009124929783](http://blogimage.gisarmory.xyz/20211009174115.png)
+![](http://blogimage.gisarmory.xyz/20211009174115.png?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
 
 
@@ -66,7 +66,7 @@ GeoQ地图瓦片的编码方式和高德相同，改个瓦片请求地址就可�
 
 把它们都收集到一起，看效果，真是爽歪歪
 
-![动画3.1](http://blogimage.gisarmory.xyz/20211009174107.gif)
+![](http://blogimage.gisarmory.xyz/20211009174107.gif?imageView2/0/interlace/1/q/75|watermark/2/text/R0lT5YW15Zmo5bqT/font/5b6u6L2v6ZuF6buR/fontsize/1000/fill/IzgzODM4Mw==/dissolve/80/gravity/SouthEast/dx/10/dy/10|imageslim)
 
 
 

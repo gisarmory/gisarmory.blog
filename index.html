@@ -46,6 +46,9 @@
         #backUrlContent{
             display: none;
         }
+        #helfUrl{
+            display: none;
+        }
         .contentUrl a{
             color: #019BDD;
         }
@@ -58,7 +61,7 @@
         <div class="contentTitle">
             <span>微信公众号：GIS兵器库</span>
         </div>
-        <div class="contentUrl">
+        <div class="contentUrl" id="helfUrl">
             <span>即将跳转到：</span>
             <a id="toUrl" href="">http://gisarmory.xyz</a>
         </div>
@@ -66,9 +69,6 @@
             <span>备用地址（github镜像）：</span>
             <a id="backUpUrl">http://gisarmory.xyz</a>
         </div>
-        <!-- <div class="contentUrl">
-            <span>http://gisarmory.xyz</span>
-        </div> -->
     </div>
 </body>
 
@@ -102,23 +102,22 @@
                     href = dataObj.url;
                 }
                 
-                // if(href.indexOf('http') == -1){
-                //     href = location.origin + '/' + href
-                // }
-                
-                var hrefArr = href.split('https://github.com')
-                document.getElementById('toUrl').innerHTML  = href
-                document.getElementById('toUrl').href  = href
-                if(hrefArr.length > 1){
-                    var backUrl = 'https://github.com.cnpmjs.org' + hrefArr[1]
-                    document.getElementById('backUpUrl').innerHTML  = backUrl
-                    document.getElementById('backUpUrl').href  = backUrl
-
-                    document.getElementById('backUrlContent').style.display = 'block'
-                }else{
-                    document.getElementById('backUrlContent').style.display = 'none'
-                }
                 setTimeout(function(){
+                    //github镜像地址
+                    var hrefArr = href.split('https://github.com')
+                    document.getElementById('toUrl').innerHTML  = href
+                    document.getElementById('toUrl').href  = href
+                    if(hrefArr.length > 1){
+                        var backUrl = 'https://github.com.cnpmjs.org' + hrefArr[1]
+                        document.getElementById('backUpUrl').innerHTML  = backUrl
+                        document.getElementById('backUpUrl').href  = backUrl
+
+                        document.getElementById('backUrlContent').style.display = 'block'
+                    }else{
+                        document.getElementById('backUrlContent').style.display = 'none'
+                    }
+                    //即将跳转地址
+                    document.getElementById('helfUrl').style.display = 'block'
                     window.location.href = href
                 }, 800);
             }

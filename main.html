@@ -85,8 +85,8 @@ function beianClick(){
   }
 
   function doChangeSelect(_this){
-    $(_this).siblings('li').removeClass('active'); // 删除其他兄弟元素的样式
-    $(_this).addClass('active'); // 添加当前元素的样式
+    // $(_this).siblings('li').removeClass('active'); // 删除其他兄弟元素的样式
+    // $(_this).addClass('active'); // 添加当前元素的样式
     var blogid = $(_this).attr("data-id");
     var blogObj = getBlogConfigById(blogid);
     if(blogObj.href){

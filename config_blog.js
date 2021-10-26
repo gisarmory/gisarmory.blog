@@ -133,6 +133,10 @@ var blogList = [{
     id: "mapboxglMapCorrection4",
     label: "mapboxgl纠偏百度地图",
     href: "https://blog.csdn.net/gisarmory/article/details/120683726"
+}, {
+    id: "WechatVectorTile",
+    label: "微信小程序添加外部地图服务数据",
+    href: "https://blog.csdn.net/gisarmory/article/details/120973592"
 }
 ];
 

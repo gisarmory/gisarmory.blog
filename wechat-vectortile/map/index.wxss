@@ -1,0 +1,10 @@
+/* pages/map/index.wxss */
+.page {
+  width: 100%;
+  height: 100%;
+}
+
+.my-map {
+  width: 100%;
+  height: 100%;
+}

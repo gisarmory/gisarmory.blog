@@ -1,0 +1,6 @@
+<!--pages/map/index.wxml-->
+<view class="page">
+  <map class='my-map' longitude='{{longitude}}' latitude='{{latitude}}' markers="{{markers}}" polyline="{{polylines}}"
+    polygons="{{polygons}}" bindregionchange='bindregionchange'>
+  </map>
+</view>

@@ -2,6 +2,10 @@ var blogList = [{
     id: "blogList",
     label: "博客列表",
     url: "README.md"
+},{
+    id: "main",
+    label: "主页",
+    url: "menu/main.md"
 }, {
     id: "wechat",
     label: "公众号",

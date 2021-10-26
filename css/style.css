@@ -110,7 +110,7 @@ li {
 }
 #content #mainContent {
   max-width: 1000px;
-  min-height: calc(100% - 100px);
+  min-height: calc(100% - 120px);
   padding: 0 160px;
   margin: 0 auto;
 }

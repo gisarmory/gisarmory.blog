@@ -141,6 +141,10 @@ var blogList = [{
     id: "WechatVectorTile",
     label: "微信小程序添加外部地图服务数据",
     href: "https://blog.csdn.net/gisarmory/article/details/120973592"
+}, {
+    id: "WechatVectorTile",
+    label: "geoserver 实现百度地图key验证",
+    href: "https://blog.csdn.net/gisarmory/article/details/121148222"
 }
 ];
 

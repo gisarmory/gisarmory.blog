@@ -201,7 +201,7 @@ wmts和tms属于瓦片缓存，归geowebcache管理，geowebcache的网络请求
 }
 ```
 
-geoserver的rest接口说明：https://www.osgeo.cn/geoserver-user-manual/rest/index.html#rest
+geoserver的rest接口说明：[https://www.osgeo.cn/geoserver-user-manual/rest/index.html#rest](https://www.osgeo.cn/geoserver-user-manual/rest/index.html#rest)
 
 我用 Postman 导出了一份儿 java Unirest 的代码，供大家参考：[http://gisarmory.xyz/blog/index.html?source=geosreverAuthkey](http://gisarmory.xyz/blog/index.html?source=geosreverAuthkey)
 

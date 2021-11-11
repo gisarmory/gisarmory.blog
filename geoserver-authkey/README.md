@@ -193,7 +193,7 @@ wmts和tms属于瓦片缓存，归geowebcache管理，geowebcache的网络请求
 
 1、geoserver的rest接口原则上支持xml和json格式的参数，但实际不一定，如果你用其中一种格式没有成功，这时不要吊死在一棵树上，可以换个格式试试。我就遇到了在添加用户时xml格式好使json格式不好使，但在设置权限时xml格式又不好使，json格式好使。
 
-2、设置`角色访问权限`接口的参数和文档介绍的有所不同，这里要注意一下，正确的是下面这种：
+2、`设置角色访问权限`接口的参数和文档介绍的有所不同，这里要注意一下，正确的是下面这种：
 
 ```json
 {
@@ -213,7 +213,7 @@ geoserver的rest接口说明：[https://www.osgeo.cn/geoserver-user-manual/rest/
 2. 地图服务的控制需要结合key验证的方式实现，通过配置geoserver的拦截器和验证规则，可以把key和用户关联起来
 3. geoserver只支持对客户端ip的验证，想要验证应用服务器的ip，需要借助js地图api实现
 
-
+<br><br>
 
 **参考资料：**
 
@@ -225,7 +225,7 @@ geoserver的rest接口说明：[https://www.osgeo.cn/geoserver-user-manual/rest/
 6. https://www.osgeo.cn/geoserver-user-manual/rest/index.html#rest
 7. https://github.com/geoserver/geofence
 
-
+<br><br>
 
 ------
 

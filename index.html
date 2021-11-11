@@ -62,12 +62,13 @@
             <span>微信公众号：GIS兵器库</span>
         </div>
         <div class="contentUrl" id="helfUrl">
-            <span>即将跳转到：</span>
-            <a id="toUrl" href="">http://gisarmory.xyz</a>
+            <span>正在跳转到：</span>
+            <a id="toUrl" href=""></a>
         </div>
         <div class="contentUrl" id="backUrlContent">
-            <span>备用地址（github镜像）：</span>
-            <a id="backUpUrl">http://gisarmory.xyz</a>
+            <span>可能您的所处的网络无法正常访问github，您可以尝试访问下面的 github 镜像地址：</span><br/>
+            <span>镜像一：</span><a id="backUpUrl"></a><br/>
+            <span>镜像二：</span><a id="backUpUrl2"></a>
         </div>
     </div>
 </body>
@@ -103,24 +104,37 @@
                     href = dataObj.url;
                 }
                 
+                //延迟跳转
                 setTimeout(function(){
-                    //github镜像地址
-                    var hrefArr = href.split('https://github.com')
+                    window.location.href = href
+                }, 800);
+                
+                //延迟显示提示
+                setTimeout(function(){
+                    //正在跳转地址
                     document.getElementById('toUrl').innerHTML  = href
                     document.getElementById('toUrl').href  = href
+                    document.getElementById('helfUrl').style.display = 'block'
+                }, 2000);
+                
+                //延迟github镜像提示
+                setTimeout(function(){
+                    var hrefArr = href.split('https://github.com')
                     if(hrefArr.length > 1){
+                        //镜像1
                         var backUrl = 'https://github.com.cnpmjs.org' + hrefArr[1]
                         document.getElementById('backUpUrl').innerHTML  = backUrl
                         document.getElementById('backUpUrl').href  = backUrl
+                        //镜像2
+                        backUrl = 'https://hub.fastgit.org' + hrefArr[1]
+                        document.getElementById('backUpUrl2').innerHTML  = backUrl
+                        document.getElementById('backUpUrl2').href  = backUrl
 
                         document.getElementById('backUrlContent').style.display = 'block'
                     }else{
                         document.getElementById('backUrlContent').style.display = 'none'
                     }
-                    //即将跳转地址
-                    document.getElementById('helfUrl').style.display = 'block'
-                    window.location.href = href
-                }, 800);
+                }, 8000);
             }
         }
     }

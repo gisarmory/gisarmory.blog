@@ -86,5 +86,9 @@ var sourceList = [{
     id: "WechatVectorTile",
     label: "微信小程序添加外部地图服务数据",
     url: "https://github.com/gisarmory/gisarmory.blog/tree/master/wechat-vectortile/map"
+}, {
+    id: "geosreverAuthkey",
+    label: "geoserver 实现百度地图key验证",
+    url: "https://github.com/gisarmory/gisarmory.blog/tree/master/geoserver-authkey/rest"
 }
 ];

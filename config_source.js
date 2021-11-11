@@ -89,6 +89,6 @@ var sourceList = [{
 }, {
     id: "geosreverAuthkey",
     label: "geoserver 实现百度地图key验证",
-    url: "https://github.com/gisarmory/gisarmory.blog/tree/master/geoserver-authkey/rest"
+    url: "https://github.com/gisarmory/gisarmory.blog/blob/master/geoserver-authkey/rest.java"
 }
 ];

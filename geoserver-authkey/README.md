@@ -213,7 +213,7 @@ geoserver的rest接口说明：[https://www.osgeo.cn/geoserver-user-manual/rest/
 2. 地图服务的控制需要结合key验证的方式实现，通过配置geoserver的拦截器和验证规则，可以把key和用户关联起来
 3. geoserver只支持对客户端ip的验证，想要验证应用服务器的ip，需要借助js地图api实现
 
-<br><br>
+<br>
 
 **参考资料：**
 
@@ -225,7 +225,7 @@ geoserver的rest接口说明：[https://www.osgeo.cn/geoserver-user-manual/rest/
 6. https://www.osgeo.cn/geoserver-user-manual/rest/index.html#rest
 7. https://github.com/geoserver/geofence
 
-<br><br>
+
 
 ------
 

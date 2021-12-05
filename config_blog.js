@@ -145,6 +145,10 @@ var blogList = [{
     id: "geosreverAuthkey",
     label: "geoserver 实现百度地图key验证",
     href: "https://blog.csdn.net/gisarmory/article/details/121148222"
+}, {
+    id: "geosreverAuthkey",
+    label: "如何突破GIS二次开发瓶颈",
+    href: "https://blog.csdn.net/gisarmory/article/details/121733703"
 }
 ];
 

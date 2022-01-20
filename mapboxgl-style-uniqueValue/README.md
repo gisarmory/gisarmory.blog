@@ -208,7 +208,7 @@ function getColor(feature){	//feature是geojosn格式的Feature
 
 这种方式的缺点也很明显：图层由一个变成了16个，style 文件会变的很啰嗦，图层管理不太方便。
 
-[在线示例](http://gisarmory.xyz/blog/index.html?demo=mapboxglStyleUniqueValue1)
+[在线示例](http://gisarmory.xyz/blog/index.html?demo=mapboxglStyleUniqueValue5)
 
 
 

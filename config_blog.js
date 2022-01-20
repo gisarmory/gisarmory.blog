@@ -149,6 +149,10 @@ var blogList = [{
     id: "GISerRacer",
     label: "如何突破GIS二次开发瓶颈",
     href: "https://blog.csdn.net/gisarmory/article/details/121733703"
+}, {
+    id: "mapboxglStyleUniqueValue",
+    label: "mapboxgl地图样式-唯一值渲染",
+    href: "https://blog.csdn.net/gisarmory/article/details/121733703"
 }
 ];
 

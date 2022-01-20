@@ -74,5 +74,25 @@ var demoList = [{
     id: "mapboxglMapCorrection4",
     label: "mapboxgl纠偏百度地图",
     url: "http://gisarmory.xyz/mapboxgl.InternetMapCorrection/examples/rasterTileLayer.html"
+}, {
+    id: "mapboxglStyleUniqueValue1",
+    label: "mapboxgl地图样式-唯一值渲染-方式一",
+    url: "mapboxgl-style-uniqueValue/demo/uniqueValue1.html"
+}, {
+    id: "mapboxglStyleUniqueValue2",
+    label: "mapboxgl地图样式-唯一值渲染-方式二",
+    url: "mapboxgl-style-uniqueValue/demo/uniqueValue2.html"
+}, {
+    id: "mapboxglStyleUniqueValue3",
+    label: "mapboxgl地图样式-唯一值渲染-方式三",
+    url: "mapboxgl-style-uniqueValue/demo/uniqueValue3.html"
+}, {
+    id: "mapboxglStyleUniqueValue4",
+    label: "mapboxgl地图样式-唯一值渲染-方式四",
+    url: "mapboxgl-style-uniqueValue/demo/uniqueValue4.html"
+}, {
+    id: "mapboxglStyleUniqueValue5",
+    label: "mapboxgl地图样式-唯一值渲染-方式五",
+    url: "mapboxgl-style-uniqueValue/demo/uniqueValue5.html"
 }
 ];

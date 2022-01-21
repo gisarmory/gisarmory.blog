@@ -140,7 +140,7 @@ function getColor(feature){	//feature是geojosn格式的Feature
 
 1. `["get", "adcode"]` 表达式`get` 从数据中获取 `adcode` 属性的值。
 2. `["%", ["get", "adcode"], 13]` 表达式`%`将 `adcode` 的值除以13并取余数，这里的13代表颜色数组的个数。
-3. `["literal","#00FFCC",...]` 表达式 `literal` 用来声明一个颜色数组，因为在这里中括号被默认是表达式，所以想要定义真正的数组就要用  `literal`  声明一下。
+3. `["literal",["#00FFCC",...]]` 表达式 `literal` 用来声明一个颜色数组，因为在这里中括号被默认是表达式，所以想要定义真正的数组就要用  `literal`  包装一下。
 4. `["at",["%", ["get", "adcode"], 13],["literal","#00FFCC",...]]` 表达式 `at` 是根据求余的值从颜色数组中取颜色。
 5. `["to-color", ["at",["%", ["get", "adcode"], 13],["literal","#00FFCC",...]]]` 表达式 `to-color` 是将字符串转为mapboxgl 的颜色类型，不然会报错。
 

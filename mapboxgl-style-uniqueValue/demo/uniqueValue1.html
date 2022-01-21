@@ -2,11 +2,11 @@
 <html>
 
 <head>
-    <meta charset='utf-8' />
+    <meta charset="utf-8" />
     <title>mapboxgl地图样式-唯一值渲染-方式一</title>
-    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <script src='../../lib/mapboxgl/mapbox-gl.js'></script>
-    <link href='../../lib/mapboxgl/mapbox-gl.css' rel='stylesheet' />
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src="../../lib/mapboxgl/mapbox-gl.js"></script>
+    <link href="../../lib/mapboxgl/mapbox-gl.css" rel="stylesheet" />
     <style>
         body {margin: 0;padding: 0;}
         #map {position: absolute;top: 0px;bottom: 0px;width: 100%;}
@@ -14,7 +14,7 @@
 </head>
 <body>
     <!-- 地图容器 -->
-    <div id='map'></div>
+    <div id="map"></div>
 </body>
 
 <script>
@@ -67,24 +67,24 @@
                 "source": "beijing",
                 "paint":{
                     "fill-color":[
-                        'case',
-                        ['boolean',['==',['get','name'],'怀柔区'],false],'#FFFFCC',
-                        ['boolean',['==',['get','name'],'密云区'],false],'#CCFFFF',
-                        ['boolean',['==',['get','name'],'平谷区'],false],'#FFCCCC',
-                        ['boolean',['==',['get','name'],'通州区'],false],'#FFFF99',
-                        ['boolean',['==',['get','name'],'房山区'],false],'#CCCCFF',
-                        ['boolean',['==',['get','name'],'延庆区'],false],'#FFCC99',
-                        ['boolean',['==',['get','name'],'门头沟区'],false],'#CCFF99',
-                        ['boolean',['==',['get','name'],'大兴区'],false],'#66CCFF',
-                        ['boolean',['==',['get','name'],'顺义区'],false],'#99CCFF',
-                        ['boolean',['==',['get','name'],'海淀区'],false],'#CCCCCC',
-                        ['boolean',['==',['get','name'],'西城区'],false],'#CCFFCC',
-                        ['boolean',['==',['get','name'],'东城区'],false],'#CC99CC',
-                        ['boolean',['==',['get','name'],'朝阳区'],false],'#99CC99',
-                        ['boolean',['==',['get','name'],'石景山区'],false],'#CCCC99',
-                        ['boolean',['==',['get','name'],'昌平区'],false],'#FF9969',
-                        ['boolean',['==',['get','name'],'丰台区'],false],'#999999',
-                        'black'
+                        "case",
+                        ["boolean",["==",["get","name"],"怀柔区"],false],"#FFFFCC",
+                        ["boolean",["==",["get","name"],"密云区"],false],"#CCFFFF",
+                        ["boolean",["==",["get","name"],"平谷区"],false],"#FFCCCC",
+                        ["boolean",["==",["get","name"],"通州区"],false],"#FFFF99",
+                        ["boolean",["==",["get","name"],"房山区"],false],"#CCCCFF",
+                        ["boolean",["==",["get","name"],"延庆区"],false],"#FFCC99",
+                        ["boolean",["==",["get","name"],"门头沟区"],false],"#CCFF99",
+                        ["boolean",["==",["get","name"],"大兴区"],false],"#66CCFF",
+                        ["boolean",["==",["get","name"],"顺义区"],false],"#99CCFF",
+                        ["boolean",["==",["get","name"],"海淀区"],false],"#CCCCCC",
+                        ["boolean",["==",["get","name"],"西城区"],false],"#CCFFCC",
+                        ["boolean",["==",["get","name"],"东城区"],false],"#CC99CC",
+                        ["boolean",["==",["get","name"],"朝阳区"],false],"#99CC99",
+                        ["boolean",["==",["get","name"],"石景山区"],false],"#CCCC99",
+                        ["boolean",["==",["get","name"],"昌平区"],false],"#FF9969",
+                        ["boolean",["==",["get","name"],"丰台区"],false],"#999999",
+                        "black"
                     ]
                 }
             },
@@ -93,11 +93,11 @@
                 "type": "symbol",
                 "source": "beijing",
                 "layout":{
-                    "text-field":['get','name'],
+                    "text-field":["get","name"],
                     "text-font":["Open Sans Regular"]
                 },
                 "paint":{
-                    "text-color":'#FF0000'
+                    "text-color":"#FF0000"
                 }
             }
         ],
@@ -105,7 +105,7 @@
     }
 
     var map = new mapboxgl.Map({
-        container: 'map',   
+        container: "map",   
         center: [116.40, 40.20 ],    
         zoom: 8,    
         style:mapStyle

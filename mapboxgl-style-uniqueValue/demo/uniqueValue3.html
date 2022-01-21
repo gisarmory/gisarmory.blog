@@ -2,11 +2,11 @@
 <html>
 
 <head>
-    <meta charset='utf-8' />
+    <meta charset="utf-8" />
     <title>mapboxgl地图样式-唯一值渲染-方式三</title>
-    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <script src='../../lib/mapboxgl/mapbox-gl.js'></script>
-    <link href='../../lib/mapboxgl/mapbox-gl.css' rel='stylesheet' />
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <script src="../../lib/mapboxgl/mapbox-gl.js"></script>
+    <link href="../../lib/mapboxgl/mapbox-gl.css" rel="stylesheet" />
     <style>
         body {margin: 0;padding: 0;}
         #map {position: absolute;top: 0px;bottom: 0px;width: 100%;}
@@ -14,7 +14,7 @@
 </head>
 <body>
     <!-- 地图容器 -->
-    <div id='map'></div>
+    <div id="map"></div>
 </body>
 
 <script>
@@ -67,11 +67,10 @@
                 "source": "beijing",
                 "paint":{
                     "fill-color":[
-                        'to-color',
-                        [
-                            'at',
-                            ['%', ['get', 'adcode'], 13],
-                            ['literal',['#00FFCC','#CCFFFF','#FFCCCC','#FFFF99','#CCCCFF','#FFCC99','#CCFF99','#66CCFF','#99CCFF','#CCFFCC','#99CC99','#CCCC99','#FF9969']]
+                        "to-color",[
+                            "at",
+                            ["%", ["get", "adcode"], 13],
+                            ["literal",["#00FFCC","#CCFFFF","#FFCCCC","#FFFF99","#CCCCFF","#FFCC99","#CCFF99","#66CCFF","#99CCFF","#CCFFCC","#99CC99","#CCCC99","#FF9969"]]
                         ]
                     ]
                 }
@@ -81,11 +80,11 @@
                 "type": "symbol",
                 "source": "beijing",
                 "layout":{
-                    "text-field":['get','name'],
+                    "text-field":["get","name"],
                     "text-font":["Open Sans Regular"]
                 },
                 "paint":{
-                    "text-color":'#FF0000'
+                    "text-color":"#FF0000"
                 }
             }
         ],
@@ -93,7 +92,7 @@
     }
 
     var map = new mapboxgl.Map({
-        container: 'map',   
+        container: "map",   
         center: [116.40, 40.20 ],    
         zoom: 8,    
         style:mapStyle

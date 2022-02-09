@@ -1,6 +1,6 @@
 # mapboxgl 地图样式 - 重分类渲染
 
-上回，我们在[《mapboxgl 地图样式 - 唯一值渲染》](https://blog.csdn.net/gisarmory/article/details/122605374?spm=1001.2014.3001.5502)中了解到case、match、get等表达式，通过表达式来完成了唯一值渲染。
+上回，我们在[《mapboxgl 地图样式 - 唯一值渲染》](http://gisarmory.xyz/blog/index.html?blog=mapboxglStyleUniqueValue)中了解到case、match、get等表达式，通过表达式来完成了唯一值渲染。
 
 在实际情况下，我们还经常需要进行重分类渲染，将某范围的值重分为一类，并将另一个范围重分为其它类。
 
@@ -165,7 +165,7 @@ step表达式有5个必需参数，并且不能乱序：表达式的名称、输
 
 in表达式的意思是判断要素的属性值name，是否存在于 `"延庆区","怀柔区","密云区","平谷区"` 这里面
 
-match表达式里，先get要素的属性值name，再用match去匹配这个name是否存在于 `["延庆区","怀柔区","密云区","平谷区"]`这个数组里,存在就返回true，不存在就返回默认值false。具体的可以在[《mapboxgl 地图样式 - 唯一值渲染》](https://blog.csdn.net/gisarmory/article/details/122605374?spm=1001.2014.3001.5502)文中了解。
+match表达式里，先get要素的属性值name，再用match去匹配这个name是否存在于 `["延庆区","怀柔区","密云区","平谷区"]`这个数组里,存在就返回true，不存在就返回默认值false。具体的可以在[《mapboxgl 地图样式 - 唯一值渲染》](http://gisarmory.xyz/blog/index.html?blog=mapboxglStyleUniqueValue)文中了解。
 
 两者实现效果和思路是一样的，只在写法上稍有不同，in表达式里，不需要嵌套`get表达式`即可获取到要素的属性值，in表达式里的匹配范围也可以不写成数组，而是直接作为单个的参数写入。
 

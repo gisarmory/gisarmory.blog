@@ -153,6 +153,10 @@ var blogList = [{
     id: "mapboxglStyleUniqueValue",
     label: "mapboxgl地图样式-唯一值渲染",
     href: "https://blog.csdn.net/gisarmory/article/details/122605374"
+}, {
+    id: "mapboxglStyleReclass",
+    label: "mapboxgl地图样式-重分类渲染",
+    href: "https://blog.csdn.net/gisarmory/article/details/122846559"
 }
 ];
 

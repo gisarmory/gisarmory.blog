@@ -94,5 +94,17 @@ var demoList = [{
     id: "mapboxglStyleUniqueValue5",
     label: "mapboxgl地图样式-唯一值渲染-方式五",
     url: "mapboxgl-style-uniqueValue/demo/uniqueValue5.html"
+}, {
+    id: "mapboxglStyleReclass1",
+    label: "mapboxgl地图样式-重分类渲染-方式一",
+    url: "mapboxgl-style-reclass/demo/reclass1.html"
+}, {
+    id: "mapboxglStyleReclass2",
+    label: "mapboxgl地图样式-重分类渲染-方式二",
+    url: "mapboxgl-style-reclass/demo/reclass2.html"
+}, {
+    id: "mapboxglStyleReclass3",
+    label: "mapboxgl地图样式-重分类渲染-方式三",
+    url: "mapboxgl-style-reclass/demo/reclass3.html"
 }
 ];

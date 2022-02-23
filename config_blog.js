@@ -157,6 +157,10 @@ var blogList = [{
     id: "mapboxglStyleReclass",
     label: "mapboxgl地图样式-重分类渲染",
     href: "https://blog.csdn.net/gisarmory/article/details/122846559"
+}, {
+    id: "gis-coordinate-projection",
+    label: "未经投影的地理坐标系如何显示为平面地图",
+    href: "https://blog.csdn.net/gisarmory/article/details/123092051"
 }
 ];
 

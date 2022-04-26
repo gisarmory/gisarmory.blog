@@ -610,7 +610,7 @@ mapboxgl官网提供了一个[海洋深度](https://docs.mapbox.com/mapbox-gl-js
 * * *
 
 
-原文地址：[http://gisarmory.xyz/blog/index.html?blog=mapboxglStyleReclass](http://gisarmory.xyz/blog/index.html?blog=mapboxglStyleReclass)
+原文地址：[http://gisarmory.xyz/blog/index.html?blog=mapboxglStyleInterpolate](http://gisarmory.xyz/blog/index.html?blog=mapboxglStyleInterpolate)
 
 
 

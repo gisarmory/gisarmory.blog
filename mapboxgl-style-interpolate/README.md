@@ -138,7 +138,7 @@ map.addLayer({
 - 密度为`0.8-1`，输出颜色在`'rgb(255, 234, 0)'`和`'rgb(255,0,0)'`之间
 - 密度为`1或大于1`，输出颜色`'rgb(255,0,0)'`
 
-在线示例：http://192.168.50.217:8686/heatmap.html
+在线示例：[http://gisarmory.xyz/blog/index.html?demo=mapboxglStyleInterpolate1](http://gisarmory.xyz/blog/index.html?demo=mapboxglStyleInterpolate1)
 
 > 和使用`interpolate` 表达式对数据进行颜色拉伸渲染对应的另一种渲染方式，是使用`step`表达式对数据进行颜色分类渲染。
 >
@@ -259,7 +259,7 @@ map.addLayer({
 
 ![](http://blogimage.gisarmory.xyz/20220426163432.png)
 
-示例在线地址：http://192.168.50.217:8686/trackSpeed1.html
+示例在线地址：[http://gisarmory.xyz/blog/index.html?demo=mapboxglStyleInterpolate2](http://gisarmory.xyz/blog/index.html?demo=mapboxglStyleInterpolate2)
 
 整体看上去还不错，但放大地图时会发现，颜色是一段一段的，过渡不够平滑，如下图：
 
@@ -359,7 +359,7 @@ allFeatures.map((item,index)=>{
 
 
 
-示例在线地址：http://192.168.50.217:8686/trackSpeed2.html
+示例在线地址：[http://gisarmory.xyz/blog/index.html?demo=mapboxglStyleInterpolate3](http://gisarmory.xyz/blog/index.html?demo=mapboxglStyleInterpolate3)
 
 
 
@@ -606,5 +606,21 @@ mapboxgl官网提供了一个[海洋深度](https://docs.mapbox.com/mapbox-gl-js
 3. 另一类是在地图缩放时对图形属性进行插值，如：随着地图的缩放实现建筑物高度的缓慢变化、图形颜色的平滑切换等效果。
 4. `interpolate`插值工具提供了三种插值方式，线性插值、指数插值、三次贝塞尔曲线插值，它们的区别在于控制插值输出快慢的不同。
 
+<br>
+* * *
 
+
+原文地址：[http://gisarmory.xyz/blog/index.html?blog=mapboxglStyleReclass](http://gisarmory.xyz/blog/index.html?blog=mapboxglStyleReclass)
+
+
+
+欢迎关注《[GIS兵器库](http://gisarmory.xyz/blog/index.html?blog=wechat)》
+
+
+
+![](http://blogimage.gisarmory.xyz/20200923063756.png)
+
+
+
+本文章采用 [知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议 ](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)进行许可。欢迎转载、使用、重新发布，但务必保留文章署名《GIS兵器库》（包含链接： [http://gisarmory.xyz/blog/](http://gisarmory.xyz/blog/)），不得用于商业目的，基于本文修改后的作品务必以相同的许可发布。
 

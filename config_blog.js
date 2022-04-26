@@ -161,6 +161,10 @@ var blogList = [{
     id: "gis-coordinate-projection",
     label: "未经投影的地理坐标系如何显示为平面地图",
     href: "https://blog.csdn.net/gisarmory/article/details/123092051"
+}, {
+    id: "mapboxglStyleInterpolate",
+    label: "mapboxgl中插值表达式的应用场景",
+    href: "https://blog.csdn.net/gisarmory/article/details/122846559"
 }
 ];
 

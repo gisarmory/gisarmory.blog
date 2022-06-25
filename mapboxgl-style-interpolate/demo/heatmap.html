@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8' />
+    <title>热力图</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js"></script>
+    <style>
+        .mapboxgl-ctrl {
+            display: none !important;
+        }
+        body {margin: 0;padding: 0;}
+        #map {position: absolute;top: 0px;bottom: 0px;width: 100%;}
+        #colorBox{
+            position: fixed;
+            bottom: 10px;
+            left: 15px;
+            color: #fff;
+            list-style: none;
+            width: 120px;
+        }
+        #colorBox li{
+            display: flex;
+            justify-content: space-between;
+        }
+        #colorBox li div{
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+<!-- 地图容器 -->
+<div id='map'></div>
+</body>
+
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZGVuZ3NhaWZlbmciLCJhIjoiY2t3b3BzMWNuMDU5YTJ1cmwzcnlnNnlqdSJ9.MW7ecGe1ry4cvLtyC8n7Nw';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        center: [116.40, 40.20 ],
+        zoom: 8,
+        style: 'mapbox://styles/mapbox/light-v10'
+    })
+    map.on('load', () => {
+        map.addSource('park', {
+            type: 'geojson',
+            data: './json/last.json'
+        });
+        map.addLayer({
+            "id": "park",
+            "type": "heatmap",
+            "minzoom": 0,
+            "maxzoom": 24,
+            "source": "park",
+            "paint": {
+                "heatmap-weight": 1,
+                "heatmap-intensity": 1,
+                'heatmap-opacity':0.6,
+                // "heatmap-radius": [     //设置热力图半径，小比例尺时半径小，大比例尺时半径大
+                //     'interpolate',
+                //     ['linear'],
+                //     ['zoom'],
+                //     1,2,
+                //     9,15
+                // ],
+                'heatmap-color': [      //设置热力图颜色为拉伸渲染
+                    'interpolate',
+                    ['linear'],
+                    ['heatmap-density'],
+                    0,'rgba(255,255,255,0)',
+                    0.2,'rgb(0,0,255)',
+                    0.4, 'rgb(117,211,248)',
+                    0.6, 'rgb(0, 255, 0)',
+                    0.8, 'rgb(255, 234, 0)',
+                    1, 'rgb(255,0,0)',
+                ],
+                // 'heatmap-color': [       //设置热力图颜色为分类渲染
+                //     'step',
+                //     ['heatmap-density'],
+                //     'rgba(255,255,255,0)',
+                //     0.2,'rgb(0,0,255)',
+                //     0.4, 'rgb(117,211,248)',
+                //     0.6, 'rgb(0, 255, 0)',
+                //     0.8, 'rgb(255, 234, 0)',
+                //     1, 'rgb(255,0,0)',
+                // ],
+            }
+        });
+    });
+</script>
+
+</html>
+

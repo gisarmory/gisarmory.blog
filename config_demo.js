@@ -106,5 +106,17 @@ var demoList = [{
     id: "mapboxglStyleReclass3",
     label: "mapboxgl地图样式-重分类渲染-方式三",
     url: "mapboxgl-style-reclass/demo/reclass3.html"
+}, {
+    id: "mapboxglStyleInterpolate1",
+    label: "mapboxgl中插值表达式的应用场景-热力图",
+    url: "mapboxgl-style-interpolate/demo/heatmap.html"
+}, {
+    id: "mapboxglStyleInterpolate2",
+    label: "mapboxgl中插值表达式的应用场景-轨迹图1",
+    url: "mapboxgl-style-interpolate/demo/trackSpeed1.html"
+}, {
+    id: "mapboxglStyleInterpolate3",
+    label: "mapboxgl中插值表达式的应用场景-轨迹图2",
+    url: "mapboxgl-style-interpolate/demo/trackSpeed2.html"
 }
 ];

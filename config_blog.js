@@ -165,6 +165,10 @@ var blogList = [{
     id: "mapboxglStyleInterpolate",
     label: "mapboxgl中插值表达式的应用场景",
     href: "https://blog.csdn.net/gisarmory/article/details/124432343"
+}, {
+    id: "mapboxgl-geotiff",
+    label: "mapboxgl加载tiff",
+    href: "https://blog.csdn.net/gisarmory/article/details/127092473"
 }
 ];
 

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title></title>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="../lib/leaflet/leaflet.css" />
+  <script src="../lib/leaflet/leaflet.js"></script>
+  <script src="../lib/mygeotools.js"></script>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    .map {
+      position: absolute;
+      height: 100%;
+      right: 0;
+      left: 0;
+    }
+
+    .menuBar {
+      position: relative;
+      top: 10px;
+      margin: 0 50px;
+      padding: 5px;
+      border-radius: 3px;
+      z-index: 999;
+      background-color: rgba(0, 168, 0, 0.7);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="map" id="map"></div>
+  <div class="menuBar">
+    <input type="button" value="求距离" onclick="getDistanceClick()" />
+    <input type="button" value="求坐标" onclick="getLinePointClick()" />
+    <input type="button" value="求垂足" onclick="getFootPointClick()" />
+    <input type="button" value="求垂距" onclick="getVerticalDistanceClick()" />
+    <input type="button" value="点到线段的最近的点" onclick="getShortestPointInLineClick()" />
+    <input type="button" value="点到线段的最短距离" onclick="getShortestToLinClicke()" />
+    <input type="button" value="点面关系" onclick="pointInPolygonClick()" />
+    <input type="button" value="线线关系" onclick="intersectLineAndLineClick()" />
+    <input type="button" value="线面关系" onclick="intersectLineAndPolygonClick()" />
+    <input type="button" value="点缓冲" onclick="bufferPointClick()" />
+  </div>
+</body>
+
+<script>
+  // 初始化地图
+  var map = L.map('map', {
+    center: [39.994317, 116.480619],
+    zoom: 9,
+    preferCanvas: true // 使用canvas模式渲染矢量图形 
+  });
+  // 添加底图
+  var tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+  var myLayerGroup = L.layerGroup().addTo(map)
+
+  var point1 = {
+    "type": "Point",
+    "coordinates": [116.35, 40.08]
+  }
+  var point2 = {
+    "type": "Point",
+    "coordinates": [116.72, 40.18]
+  }
+  var point3 = {
+    "type": "Point",
+    "coordinates": [116.7, 39.7]
+  }
+  var line1 = {
+    "type": "LineString",
+    "coordinates": [[116.01,40.01],[116.52,40.01]]
+  }
+  var line2 = {
+    "type": "LineString",
+    "coordinates": [[116.33,40.21],[116.36,39.76]]
+  }
+  var line3 = {
+    "type": "LineString",
+    "coordinates": [
+      [116.3, 39.7],
+      [116.4, 40.1]
+    ]
+  }
+  var polygon = {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [116.1, 39.5],
+        [116.1, 40.5],
+        [116.9, 40.5],
+        [116.9, 39.5],
+      ],
+      [
+        [116.3, 39.7],
+        [116.3, 40.3],
+        [116.7, 40.3],
+        [116.7, 39.7],
+      ],
+      [
+        [116.4, 39.8],
+        [116.4, 40.2],
+        [116.6, 40.2],
+        [116.6, 39.8],
+      ]
+    ]
+  }
+
+
+  function showResult(result) {
+    setTimeout(() => {
+      alert(result)
+    }, 1000);
+  }
+
+  function resultPoint(point) {
+    L.circleMarker([point[1], point[0]], {
+      radius: 5,
+      weight: 8,
+      color: '#FF5753'
+    }).addTo(myLayerGroup)
+  }
+
+  /* 计算两经纬度点之间的距离(单位：米) */
+  function getDistanceClick() {
+    myLayerGroup.clearLayers()
+    L.geoJSON(point1).addTo(myLayerGroup)
+    L.geoJSON(point2).addTo(myLayerGroup)
+    var distance = getDistance(point1.coordinates, point2.coordinates)
+
+    showResult(distance)
+  }
+
+  /* 根据两点坐标以及到起点距离（单位：米），求目标点坐标 */
+  function getLinePointClick() {
+    myLayerGroup.clearLayers()
+    myLayerGroup.clearLayers()
+    L.geoJSON(line1).addTo(myLayerGroup)
+    var point = getLinePoint(line1.coordinates, 8500)
+
+    resultPoint(point)
+  }
+
+  // 求垂足
+  function getFootPointClick() {
+    myLayerGroup.clearLayers()
+    L.geoJSON(point1).addTo(myLayerGroup)
+    L.geoJSON(line1).addTo(myLayerGroup)
+    var point = getFootPoint(line1.coordinates, point1.coordinates)
+
+    resultPoint(point)
+  }
+
+  // 求垂距
+  function getVerticalDistanceClick() {
+    myLayerGroup.clearLayers()
+    L.geoJSON(point1).addTo(myLayerGroup)
+    L.geoJSON(line1).addTo(myLayerGroup)
+    var point = getFootPoint(line1.coordinates, point1.coordinates)
+    var distance = getDistance(point1.coordinates, point)
+
+    resultPoint(point)
+    showResult(distance)
+  }
+
+  //点到线段的最近的点
+  function getShortestPointInLineClick() {
+    myLayerGroup.clearLayers()
+    L.geoJSON(point2).addTo(myLayerGroup)
+    L.geoJSON(line1).addTo(myLayerGroup)
+    var point = getShortestPointInLine(line1.coordinates, point2.coordinates)
+
+    resultPoint(point)
+  }
+
+  // 点到线段的最短距离
+  function getShortestToLinClicke() {
+    myLayerGroup.clearLayers()
+    L.geoJSON(point2).addTo(myLayerGroup)
+    L.geoJSON(line1).addTo(myLayerGroup)
+    var point = getShortestPointInLine(line1.coordinates, point2.coordinates)
+    var distance = getDistance(point2.coordinates, point)
+
+    resultPoint(point)
+    showResult(distance)
+  }
+
+  // 点面关系
+  function pointInPolygonClick() {
+    myLayerGroup.clearLayers()
+    L.geoJSON(point1).addTo(myLayerGroup)
+    L.geoJSON(point2).addTo(myLayerGroup)
+    L.geoJSON(point3).addTo(myLayerGroup)
+    L.geoJSON(polygon).addTo(myLayerGroup)
+    // 点面关系，0:多边形外，1：多边形内，2：多边形边上
+    var isContained1 = pointInPolygon(point1.coordinates, polygon.coordinates)
+    var isContained2 = pointInPolygon(point2.coordinates, polygon.coordinates)
+    var isContained3 = pointInPolygon(point3.coordinates, polygon.coordinates)
+
+    showResult('点面关系，0:多边形外，1：多边形内，2：多边形边上 \n' +
+      'point1：' + isContained1 + '，point2：' + isContained2 + '，point3：' + isContained3)
+
+    if (isContained1 > 0) {
+      resultPoint(point1.coordinates)
+    }
+    if (isContained2 > 0) {
+      resultPoint(point2.coordinates)
+    }
+    if (isContained3 > 0) {
+      resultPoint(point3.coordinates)
+    }
+  }
+
+  // 线线关系
+  function intersectLineAndLineClick() {
+    myLayerGroup.clearLayers()
+    L.geoJSON(line1).addTo(myLayerGroup)
+    L.geoJSON(line2).addTo(myLayerGroup)
+    // 线段与线段的关系，0:相离，1：相交，2：相切
+    var intersect = intersectLineAndLine(line1.coordinates, line2.coordinates)
+
+    showResult('线段与线段的关系，0:相离，1：相交，2：相切 \n' + intersect)
+  }
+
+  // 线面关系
+  function intersectLineAndPolygonClick() {
+    myLayerGroup.clearLayers()
+    L.geoJSON(line1).addTo(myLayerGroup)
+    L.geoJSON(line2).addTo(myLayerGroup)
+    L.geoJSON(line3).addTo(myLayerGroup)
+    L.geoJSON(polygon).addTo(myLayerGroup)
+    // 线和面关系，0:相离，1：相交，2：包含，3：内切，4：外切
+    var intersect1 = intersectLineAndPolygon(line1.coordinates, polygon.coordinates)
+    var intersect2 = intersectLineAndPolygon(line2.coordinates, polygon.coordinates)
+    var intersect3 = intersectLineAndPolygon(line3.coordinates, polygon.coordinates)
+
+    showResult('线和面关系，0:相离，1：相交，2：包含，3：内切，4：外切 \n' +
+      'line1：' + intersect1 + '，line2：' + intersect2 + '，line3：' + intersect3)
+  }
+
+  // 点缓冲
+  function bufferPointClick() {
+    myLayerGroup.clearLayers()
+    L.geoJSON(point1).addTo(myLayerGroup)
+    var coords = bufferPoint(point1.coordinates, 50000, 64)
+    var polygonJson = {
+      "type": "Polygon",
+      "coordinates": coords
+    }
+    L.geoJSON(polygonJson).addTo(myLayerGroup)
+  }
+</script>
+
+</html>

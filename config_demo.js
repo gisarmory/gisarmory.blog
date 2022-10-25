@@ -69,7 +69,7 @@ var demoList = [{
 }, {
     id: "GISAlgorithm",
     label: "GIS常用算法",
-    url: "http://gisarmory.xyz/GISAlgorithm/demo.html"
+    url: "GISAlgorithm/demo.html"
 }, {
     id: "mapboxglMapCorrection4",
     label: "mapboxgl纠偏百度地图",
